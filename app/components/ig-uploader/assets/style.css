@@ -5314,3 +5314,26 @@ Copyright (c) 2014 Daniel Eden
     position: relative;
     top:24%;
 }
+/* Native Dialog Element Styles */
+dialog.modal {
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    max-width: 90%;
+    width: 90%;
+    top: 1%;
+}
+
+dialog.modal::backdrop {
+    background-color: rgba(0,0,0,0.5);
+}
+
+dialog.modal .modal-dialog {
+    margin: 0;
+}
+
+dialog.modal .modal-content {
+    border: none;
+    border-radius: 6px;
+}

@@ -1,6 +1,6 @@
 <div class="ig-container">
     <?php foreach ($models as $model): ?>
-        <div class="modal" id="igu-modal-<?php echo $model->id ?>">
+        <dialog class="modal" id="igu-modal-<?php echo $model->id ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -88,15 +88,38 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </dialog>
     <?php endforeach; ?>
 </div>
 <script type="text/javascript">
-    jQuery(function ($) {
-        $('.igu-media-info a').leanModal({
-            closeButton: '.attachment-close',
-            top: '1%',
-            width: '90%'
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const mediaLinks = document.querySelectorAll('.igu-media-info a');
+            
+            mediaLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('href').substring(1);
+                    const dialog = document.getElementById(modalId);
+                    
+                    if (dialog) {
+                        dialog.showModal();
+                        
+                        // Close button handler
+                        const closeBtn = dialog.querySelector('.attachment-close');
+                        if (closeBtn) {
+                            closeBtn.addEventListener('click', () => dialog.close(), { once: true });
+                        }
+                        
+                        // Close on backdrop click
+                        dialog.addEventListener('click', function(e) {
+                            if (e.target === dialog) {
+                                dialog.close();
+                            }
+                        }, { once: true });
+                    }
+                });
+            });
         });
-    })
+    })();
 </script>

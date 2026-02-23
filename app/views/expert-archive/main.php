@@ -101,7 +101,7 @@
                             var inner = $(this).find('.text-shorten-inner').first();
                             //cal inner height
                             if ($(this).innerHeight() < inner.height()) {
-                                var text = $.trim(inner.text());
+                                var text = inner.text().trim();
                                 //height overflow, do something
                                 var height = inner.height();
                                 console.log(height + "-" + $(this).outerHeight());

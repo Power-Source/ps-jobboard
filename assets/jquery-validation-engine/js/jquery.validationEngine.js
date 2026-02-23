@@ -979,9 +979,9 @@
 				case "select-one":
 				case "select-multiple":
 				default:
-					var field_val      = $.trim( field.val()                               );
-					var dv_placeholder = $.trim( field.attr("data-validation-placeholder") );
-					var placeholder    = $.trim( field.attr("placeholder")                 );
+					var field_val      = (field.val() || "").trim();
+					var dv_placeholder = (field.attr("data-validation-placeholder") || "").trim();
+					var placeholder    = (field.attr("placeholder") || "").trim();
 					if (
 						   ( !field_val                                    )
 						|| ( dv_placeholder && field_val == dv_placeholder )
@@ -1591,7 +1591,7 @@
 			 // Because no error was found befor submitting
 			 if(ajaxform) prompt = false;
 			 // Check that there is indded text
-			 if($.trim(promptText)){
+			 if(promptText.trim()){
 				 if (prompt)
 					methods._updatePrompt(field, prompt, promptText, type, ajaxed, options);
 				 else
