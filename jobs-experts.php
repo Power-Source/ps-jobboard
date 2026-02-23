@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PS-Jobboard
  * Plugin URI: https://cp-psource.github.io/ps-jobboard/
- * Description: Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche WordPress-Jobbörse.
+ * Description: Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche Jobbörse.
  * Version: 1.0.0
  * Author: PSOURCE
  * Author URI: https://nerdservice.eimen.net

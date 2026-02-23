@@ -146,7 +146,7 @@ class JE_Expert_Admin_Controller extends IG_Request {
 	}
 
 	function admin_menu() {
-		add_submenu_page( null,
+		add_submenu_page( '',
 			__( 'Experte bearbeiten', 'psjb' ),
 			__( 'Experte bearbeiten', 'psjb' ),
 			'manage_options',

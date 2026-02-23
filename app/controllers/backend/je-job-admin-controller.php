@@ -146,7 +146,7 @@ class JE_Job_Admin_Controller extends IG_Request {
 	}
 
 	function admin_menu() {
-		add_submenu_page( null,
+		add_submenu_page( '',
 			__( 'Job bearbeiten', 'psjb' ),
 			__( 'Job bearbeiten', 'psjb' ),
 			'manage_options',
