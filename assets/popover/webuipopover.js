@@ -101,28 +101,43 @@
         // Security: HTML sanitization function to prevent XSS
         var sanitizeHTML = function(content) {
             if (typeof content !== 'string') return content;
-            var div = document.createElement('div');
-            div.innerHTML = content;
+            
+            // Use DOMParser for safer HTML parsing
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(content, 'text/html');
             
             // Remove script tags
-            var scripts = div.getElementsByTagName('script');
-            while (scripts.length > 0) {
-                scripts[0].parentNode.removeChild(scripts[0]);
-            }
+            var scripts = doc.querySelectorAll('script');
+            scripts.forEach(function(script) {
+                script.remove();
+            });
             
             // Remove event handlers (onclick, onload, etc.)
-            var all = div.getElementsByTagName('*');
-            for (var i = 0; i < all.length; i++) {
-                var attrs = all[i].attributes;
-                for (var j = attrs.length - 1; j >= 0; j--) {
-                    var attrName = attrs[j].name.toLowerCase();
-                    if (attrName.indexOf('on') === 0) {
-                        all[i].removeAttribute(attrs[j].name);
+            var all = doc.querySelectorAll('*');
+            all.forEach(function(element) {
+                var attrs = element.attributes;
+                for (var i = attrs.length - 1; i >= 0; i--) {
+                    var attrName = attrs[i].name.toLowerCase();
+                    if (attrName.indexOf('on') === 0 || attrName === 'javascript:') {
+                        element.removeAttribute(attrs[i].name);
                     }
                 }
-            }
+                // Also sanitize href and src attributes
+                if (element.hasAttribute('href')) {
+                    var href = element.getAttribute('href');
+                    if (href && href.toLowerCase().indexOf('javascript:') === 0) {
+                        element.removeAttribute('href');
+                    }
+                }
+                if (element.hasAttribute('src')) {
+                    var src = element.getAttribute('src');
+                    if (src && src.toLowerCase().indexOf('javascript:') === 0) {
+                        element.removeAttribute('src');
+                    }
+                }
+            });
             
-            return div.innerHTML;
+            return doc.body.innerHTML;
         };
 
         var hideAllPop = function() {
