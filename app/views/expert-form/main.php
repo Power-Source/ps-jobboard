@@ -388,19 +388,11 @@
 
         // Initialize modern form validation after a delay to ensure all editors are loaded
         setTimeout(function() {
-            console.log('Form Validation Init check...');
-            console.log('typeof FormValidator:', typeof FormValidator);
-            console.log('FormValidator:', FormValidator);
-            
             if (typeof FormValidator !== 'undefined') {
                 // Der richtige Selektor: form.form-horizontal (das parent Form element)
                 expertFormValidator = new FormValidator('.form-horizontal', {
                     realTimeValidation: true
                 });
-                console.log('expertFormValidator created:', expertFormValidator);
-                console.log('expertFormValidator.validate:', expertFormValidator.validate);
-            } else {
-                console.warn('FormValidator not loaded!');
             }
         }, 1000);
 
