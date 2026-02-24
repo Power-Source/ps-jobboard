@@ -69,6 +69,11 @@
 
 .hn-container .tab-pane {
     margin: 0 !important;
+    display: none !important;
+}
+
+.hn-container .tab-pane.active {
+    display: block !important;
 }
 
 .hn-container .tab-content {

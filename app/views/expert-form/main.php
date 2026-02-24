@@ -359,11 +359,13 @@
         var tabLinks = tabsContainer.find('.nav-tabs a');
         var tabPanes = tabsContainer.find('.tab-content > div');
         
-        // Add .tab-pane and .active classes for Bootstrap CSS to work
+        // Add .tab-pane class for Bootstrap CSS
         tabPanes.addClass('tab-pane');
+        
+        // Show first tab
         if (tabPanes.length > 0) {
             $(tabPanes[0]).addClass('active');
-            tabLinks.parent().first().addClass('active');
+            tabLinks.eq(0).parent().addClass('active');
         }
         
         // Handle tab clicks
@@ -371,11 +373,11 @@
             e.preventDefault();
             var href = $(this).attr('href');
             
-            // Remove active class from all tabs/panes
+            // Remove active from all
             tabPanes.removeClass('active');
             tabLinks.parent().removeClass('active');
             
-            // Add active class to selected tab/pane
+            // Add active to selected
             $(href).addClass('active');
             $(this).parent().addClass('active');
         });
