@@ -6,6 +6,14 @@
 jQuery(function($) {
   'use strict';
 
+  // Sichere Funktion zum Entfernen von HTML-Tags
+  function stripHTMLTags(html) {
+    if (!html || typeof html !== 'string') return '';
+    const tmp = document.createElement('DIV');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  }
+
   // Enhancements zur FormValidator Library für WordPress-Kompatibilität
   
   /**
@@ -22,7 +30,7 @@ jQuery(function($) {
         if (window.tinymce && window.tinymce.get(editorId)) {
           let content = window.tinymce.get(editorId).getContent();
           // Entferne HTML Tags um mindestens Textlänge zu prüfen
-          return content.replace(/<[^>]*>/g, '');
+          return stripHTMLTags(content);
         }
       }
       
@@ -32,7 +40,7 @@ jQuery(function($) {
         if (editor) {
           let content = editor.getContent();
           // Remove HTML tags for text length validation
-          return content.replace(/<[^>]*>/g, '');
+          return stripHTMLTags(content);
         }
       }
       
@@ -134,7 +142,7 @@ jQuery(function($) {
     // Get content from TinyMCE if available
     if (window.tinymce && window.tinymce.get('biography')) {
       const editor = window.tinymce.get('biography');
-      value = editor.getContent().replace(/<[^>]*>/g, '').trim();
+      value = stripHTMLTags(editor.getContent()).trim();
     } else {
       value = field.value.trim();
     }

@@ -1,6 +1,31 @@
 ;
 (function ($, window, document, undefined) {
-
+    // Security: HTML sanitization function to prevent XSS
+    var sanitizeHTML = function(content) {
+        if (typeof content !== 'string') return content;
+        var div = document.createElement('div');
+        div.innerHTML = content;
+        
+        // Remove script tags
+        var scripts = div.getElementsByTagName('script');
+        while (scripts.length > 0) {
+            scripts[0].parentNode.removeChild(scripts[0]);
+        }
+        
+        // Remove event handlers (onclick, onload, etc.)
+        var all = div.getElementsByTagName('*');
+        for (var i = 0; i < all.length; i++) {
+            var attrs = all[i].attributes;
+            for (var j = attrs.length - 1; j >= 0; j--) {
+                var attrName = attrs[j].name.toLowerCase();
+                if (attrName.indexOf('on') === 0) {
+                    all[i].removeAttribute(attrs[j].name);
+                }
+            }
+        }
+        
+        return div.innerHTML;
+    };
     // Create the defaults once
     var pluginName = 'webuiPopover';
     var pluginClass = 'webui-popover';
@@ -239,7 +264,8 @@
         setTitle: function (title) {
             var $titleEl = this.getTitleElement();
             if (title) {
-                $titleEl.html(title);
+                // Security: Use .text() instead of .html() to prevent XSS
+                $titleEl.text(title);
             } else {
                 $titleEl.remove();
             }
@@ -265,7 +291,8 @@
         },
         setContent: function (content) {
             var $target = this.getTarget();
-            this.getContentElement().html(content);
+            // Security: Sanitize HTML content to prevent XSS
+            this.getContentElement().html(typeof content === 'string' ? sanitizeHTML(content) : content);
             this.$target = $target;
         },
         isAsync: function () {

@@ -98,6 +98,33 @@
             return $element.data('plugin_' + pluginName);
         };
 
+        // Security: HTML sanitization function to prevent XSS
+        var sanitizeHTML = function(content) {
+            if (typeof content !== 'string') return content;
+            var div = document.createElement('div');
+            div.innerHTML = content;
+            
+            // Remove script tags
+            var scripts = div.getElementsByTagName('script');
+            while (scripts.length > 0) {
+                scripts[0].parentNode.removeChild(scripts[0]);
+            }
+            
+            // Remove event handlers (onclick, onload, etc.)
+            var all = div.getElementsByTagName('*');
+            for (var i = 0; i < all.length; i++) {
+                var attrs = all[i].attributes;
+                for (var j = attrs.length - 1; j >= 0; j--) {
+                    var attrName = attrs[j].name.toLowerCase();
+                    if (attrName.indexOf('on') === 0) {
+                        all[i].removeAttribute(attrs[j].name);
+                    }
+                }
+            }
+            
+            return div.innerHTML;
+        };
+
         var hideAllPop = function() {
             var pop = null;
             for (var i = 0; i < _srcElements.length; i++) {
@@ -604,7 +631,8 @@
                     if (this.options.direction === 'rtl' && !$titleEl.hasClass(rtlClass)) {
                         $titleEl.addClass(rtlClass);
                     }
-                    $titleEl.html(title);
+                    // Security: Use .text() instead of .html() to prevent XSS
+                    $titleEl.text(title);
                 } else {
                     $titleEl.remove();
                 }
@@ -665,7 +693,8 @@
                 var $target = this.getTarget();
                 var $ct = this.getContentElement();
                 if (typeof content === 'string') {
-                    $ct.html(content);
+                    // Security: Sanitize HTML content to prevent XSS
+                    $ct.html(sanitizeHTML(content));
                 } else if (content instanceof $) {
                     $ct.html('');
                     //Don't want to clone too many times.
