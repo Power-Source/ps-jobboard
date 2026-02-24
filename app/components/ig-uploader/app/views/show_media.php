@@ -14,9 +14,9 @@
     </div>
     <script type="text/javascript">
         jQuery(function ($) {
-            $('.igu-media-icon').mouseenter(function () {
+            $('.igu-media-icon').on('mouseenter', function () {
                 $(this).find('.igu-media-info').removeClass('hide');
-            }).mouseleave(function () {
+            }).on('mouseleave', function () {
                 $(this).find('.igu-media-info').addClass('hide');
             });
             $('.igu-media-info a').on('click', function (e) {

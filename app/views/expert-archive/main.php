@@ -91,9 +91,9 @@
             <script type="text/javascript">
                 jQuery(window).on("load", function () {
                     jQuery(document).ready(function ($) {
-                        $('.meta_holder').mouseenter(function () {
+                        $('.meta_holder').on('mouseenter', function () {
                             $(this).find('.jbp_pro_meta').css('visibility', 'visible');
-                        }).mouseleave(function () {
+                        }).on('mouseleave', function () {
                             $(this).find('.jbp_pro_meta').css('visibility', 'hidden');
                         });
 

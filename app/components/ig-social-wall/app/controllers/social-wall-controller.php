@@ -65,8 +65,6 @@ class Social_Wall_Controller extends IG_Request
     public function display($parent, $attributes, $element)
     {
         wp_enqueue_style('jbp-social');
-        wp_enqueue_script('webuipopover');
-        wp_enqueue_style('webuipopover');
         wp_enqueue_script('jquery-ui-tooltip');
         $models = array();
         $socials = explode(',', $parent->$attributes);

@@ -268,7 +268,7 @@ class JE_Job_Demo_Data
         </form>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
-                $('#job-demo-data').submit(function () {
+                $('#job-demo-data').on('submit', function () {
                     var interval = '';
                     $.ajax({
                         type: 'POST',

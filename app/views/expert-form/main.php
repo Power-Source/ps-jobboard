@@ -129,7 +129,10 @@
                             <?php $form->text('contact_email', array(
                                 'attributes' => array(
                                     'class' => 'form-control',
-                                    'placeholder' => __("ॠDeine Kontakt-E-Mail", 'psjb'),
+.hn-container .nav-tabs {
+    margin: 0!important;
+    display: inline-block;
+}                                    'placeholder' => __("Deine Kontakt-E-Mail", 'psjb'),
                                     'required' => true,
                                     'style' => 'border: none; padding: 0; box-shadow: none;',
                                     'type' => 'email'
@@ -354,19 +357,31 @@
 
 <script type="text/javascript">
     jQuery(function ($) {
-        // Initialize tabs
-        if ($.fn.tabs) {
-            $("#expert-content-tabs").tabs({
-                active: 0,
-                activate: function (event, ui) {
-                    ui.newTab.addClass('active');
-                    ui.oldTab.removeClass('active');
-                },
-                create: function (event, ui) {
-                    ui.tab.addClass('active');
-                }
-            });
+        // Initialize tabs (vanilla JS, no jQuery UI)
+        var tabsContainer = $('#expert-content-tabs');
+        var tabLinks = tabsContainer.find('.nav-tabs a');
+        var tabPanes = tabsContainer.find('.tab-content > div');
+        
+        // Add .tab-pane and .active classes for Bootstrap CSS to work
+        tabPanes.addClass('tab-pane');
+        if (tabPanes.length > 0) {
+            $(tabPanes[0]).addClass('active');
+            tabLinks.parent().first().addClass('active');
         }
+        
+        // Handle tab clicks
+        tabLinks.on('click', function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            
+            // Remove active class from all tabs/panes
+            tabPanes.removeClass('active');
+            tabLinks.parent().removeClass('active');
+            
+            // Add active class to selected tab/pane
+            $(href).addClass('active');
+            $(this).parent().addClass('active');
+        });
 
         // Get form and expert validator
         var form = $(".form-horizontal");
@@ -374,12 +389,21 @@
 
         // Initialize modern form validation after a delay to ensure all editors are loaded
         setTimeout(function() {
+            console.log('Form Validation Init check...');
+            console.log('typeof FormValidator:', typeof FormValidator);
+            console.log('FormValidator:', FormValidator);
+            
             if (typeof FormValidator !== 'undefined') {
-                expertFormValidator = new FormValidator('.jobs-expert-form form', {
+                // Der richtige Selektor: form.form-horizontal (das parent Form element)
+                expertFormValidator = new FormValidator('.form-horizontal', {
                     realTimeValidation: true
                 });
+                console.log('expertFormValidator created:', expertFormValidator);
+                console.log('expertFormValidator.validate:', expertFormValidator.validate);
+            } else {
+                console.warn('FormValidator not loaded!');
             }
-        }, 500);
+        }, 1000);
 
         // Handle button clicks for save/publish
         $('.je-expert-submit').on('click', function (e) {

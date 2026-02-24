@@ -48,7 +48,7 @@
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-        $('.frm-delete').submit(function () {
+        $('.frm-delete').on('submit', function () {
             if (confirm('<?php echo esc_js(__('Bist Du sicher?','psjb') )?>')) {
 
             } else {

@@ -179,6 +179,8 @@ class JE_Expert_Admin_Controller extends IG_Request {
 
 	function edit_expert() {
 		wp_enqueue_style( 'jbp_admin' );
+		wp_enqueue_script( 'jobs-form-validation' );
+		wp_enqueue_script( 'jobs-form-init' );
 		$id = je()->get( 'id', 0 );
 		if ( isset( je()->global['expert_model'] ) ) {
 			$model = je()->global['expert_model'];
@@ -197,6 +199,8 @@ class JE_Expert_Admin_Controller extends IG_Request {
 
 	function add_new_expert() {
 		wp_enqueue_style( 'jbp_admin' );
+		wp_enqueue_script( 'jobs-form-validation' );
+		wp_enqueue_script( 'jobs-form-init' );
 		if ( isset( je()->global['expert_model'] ) ) {
 			$model = je()->global['expert_model'];
 		} else {

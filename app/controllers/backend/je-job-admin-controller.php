@@ -211,6 +211,8 @@ class JE_Job_Admin_Controller extends IG_Request {
 		wp_enqueue_script( 'jbp_select2' );
 		wp_enqueue_style( 'jbp_select2' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jobs-form-validation' );
+		wp_enqueue_script( 'jobs-form-init' );
 		$id = je()->get( 'id', 0 );
 		if ( isset( je()->global['job_model'] ) ) {
 			$model = je()->global['job_model'];
@@ -230,6 +232,8 @@ class JE_Job_Admin_Controller extends IG_Request {
 		wp_enqueue_script( 'jbp_select2' );
 		wp_enqueue_style( 'jbp_select2' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jobs-form-validation' );
+		wp_enqueue_script( 'jobs-form-init' );
 
 		wp_enqueue_media();
 

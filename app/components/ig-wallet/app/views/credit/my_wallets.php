@@ -72,7 +72,20 @@
 </div>
 <script>
     jQuery(function ($) {
-        $("#tabs").tabs();
+        // Initialize tabs (vanilla JS, no jQuery UI)
+        var tabsContainer = $("#tabs");
+        var tabLinks = tabsContainer.find('a[href^="#"]');
+        var tabPanes = tabsContainer.find('[id]');
+        tabPanes.hide();
+        if (tabPanes.length > 0) {
+            $(tabPanes[0]).show();
+        }
+        tabLinks.on('click', function(e) {
+            e.preventDefault();
+            var target = $(this).attr('href');
+            tabPanes.hide();
+            $(target).show();
+        });
         $('.log-cats button').on('click', function () {
             var cat = $(this).data('category');
 

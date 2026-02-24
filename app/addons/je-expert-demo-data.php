@@ -338,7 +338,7 @@ class JE_Expert_Demo_Data {
 		</form>
 		<script type="text/javascript">
 			jQuery(document).ready(function ($) {
-				$('#expert-demo-data').submit(function () {
+				$('#expert-demo-data').on('submit', function () {
 					var interval = '';
 					$.ajax({
 						type: 'POST',

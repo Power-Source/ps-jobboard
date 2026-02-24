@@ -148,16 +148,17 @@ class Jobs_Experts {
 				break;
 			case 'expert':
 				wp_enqueue_style( 'expert-single-shortcode' );
-				wp_enqueue_script( 'jquery-ui-tabs' );
+
 				wp_enqueue_script( 'jobs-main' );
 				break;
 			case 'expert-form':
 				wp_enqueue_style( 'expert-form-shortcode' );
-				wp_enqueue_script( 'jobs-main' );
-				wp_enqueue_script( 'jquery-ui-tabs' );
-				wp_enqueue_script( 'jquery-frame-transport' );
+			wp_enqueue_script( 'jobs-main' );
+			wp_enqueue_script( 'jquery-frame-transport' );
 			wp_enqueue_style( 'jobs-form-validation' );
-			wp_enqueue_script( 'jobs-form-validation' );			wp_enqueue_script( 'jobs-form-init' );				break;
+			wp_enqueue_script( 'jobs-form-validation' );
+			wp_enqueue_script( 'jobs-form-init' );
+			break;
 			case 'landing':
 				wp_enqueue_style( 'jobs-list-shortcode' );
 				wp_enqueue_style( 'expert-list-shortcode' );
@@ -175,6 +176,12 @@ class Jobs_Experts {
 		wp_enqueue_script( 'jquery' );
 		wp_register_script( 'jobs-uploader', $this->plugin_url . 'assets/uploader.js', array( 'jquery' ), $this->version );
 		wp_enqueue_script( 'jobs-uploader' );
+
+		// Modern Form Validation - registrieren VOR is_admin check 
+		$min = $this->dev == true ? null : '.min';
+		wp_register_style( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.css', array(), $this->version );
+		wp_register_script( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.js', array(), $this->version, true );
+		wp_register_script( 'jobs-form-init', $this->plugin_url . 'assets/form-init.js', array( 'jquery', 'jobs-form-validation' ), $this->version, true );
 
 		if ( is_admin() ) {
 			wp_enqueue_style( 'jbp_admin', $this->plugin_url . 'assets/css/admin.css', array( 'ig-packed' ), $this->version );
@@ -213,8 +220,6 @@ class Jobs_Experts {
 			wp_register_style( 'jobs-contact', $this->plugin_url . 'assets/contact' . $min . '.css', array( 'jobs-main' ), $this->version );
 			wp_register_style( 'jobs-landing-shortcode', $this->plugin_url . 'assets/landing' . $min . '.css', array( 'jobs-main' ), $this->version );
 			wp_register_style( 'job-plus-widgets', $this->plugin_url . 'assets/widget' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_script( 'webuipopover', $this->plugin_url . 'assets/popover/webuipopover.js', array( 'jquery' ) );
-			wp_register_style( 'webuipopover', $this->plugin_url . 'assets/popover/webuipopover.css' );
 
 			//js
 			wp_register_script( 'jobs-main', $this->plugin_url . 'assets/main.js', array(
@@ -223,9 +228,6 @@ class Jobs_Experts {
 			), $this->version );
 			wp_localize_script( 'jobs-main', 'jeL10n', $aryArgs );
 
-			// Modern Form Validation (jQuery Validation Engine ersetzt)
-			wp_register_script( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.js', array(), $this->version, true );
-		wp_register_script( 'jobs-form-init', $this->plugin_url . 'assets/form-init.js', array( 'jquery', 'jobs-form-validation' ), $this->version, true );
 			wp_register_script( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.min.js' );
 			wp_register_style( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.css' );
 

@@ -34,8 +34,6 @@ if (!class_exists('IG_Social_Wall')) {
         function scripts()
         {
             wp_register_style('jbp-social', $this->plugin_url . 'assets/style.css');
-            wp_register_script('webuipopover', $this->plugin_url . 'assets/popover/webuipopover.js', array('jquery'));
-            wp_register_style('webuipopover', $this->plugin_url . 'assets/popover/webuipopover.css');
         }
 
         function loader($class)

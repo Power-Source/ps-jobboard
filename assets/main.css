@@ -63,7 +63,8 @@
 }
 
 .hn-container .nav-tabs {
-    margin: 0 !important;
+    margin: 0!important;
+    display: inline-block;
 }
 
 .hn-container .tab-pane {

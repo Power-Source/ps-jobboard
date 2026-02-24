@@ -137,35 +137,88 @@ class JE_Advanced_Search {
 		add_action( 'wp_footer', array( &$this, 'form_template' ) );
 
 		wp_enqueue_style( 'jobs-advanced-search' );
-		wp_enqueue_style( 'webuipopover' );
-		wp_enqueue_script( 'webuipopover' );
-		$translation_array = array(
-			'title' => __( 'Erweitertes Suchformular', 'psjb' ),
-		);
-		wp_localize_script( 'jobs-main', 'job_search_form', $translation_array );
 		?>
         <button type="button" class="btn btn-link job-advance-search pro-advance-search">
 			<?php _e( 'Erweiterte Suche', 'psjb' ) ?>
         </button>
+        <div id="expert-search-modal" class="advanced-search-modal" style="display:none;">
+            <div class="advanced-search-modal-content">
+                <div class="advanced-search-modal-header">
+                    <h3><?php _e( 'Erweitertes Suchformular', 'psjb' ) ?></h3>
+                    <button type="button" class="close-search-modal">&times;</button>
+                </div>
+                <div class="advanced-search-modal-body" id="expert-search-container-wrapper"></div>
+            </div>
+        </div>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
-                $('.pro-advance-search').webuiPopover({
-                    title: job_search_form.title,
-                    content: function () {
-                        var content = $('<div class="ig-container"></div>');
-                        var html = $('#expert-search-container').html();
-                        content.html(html);
-                        return content;
+                var $modal = $('#expert-search-modal');
+                var $btnOpen = $('.pro-advance-search');
+                
+                $btnOpen.on('click', function () {
+                    var html = $('#expert-search-container').html();
+                    $modal.find('#expert-search-container-wrapper').html(html);
+                    $modal.show();
+                });
+                
+                $(document).on('click', '.close-search-modal, .cancel_search_form', function () {
+                    if ($(this).closest($modal).length || $(this).hasClass('cancel_search_form')) {
+                        $modal.hide().find('#expert-search-container-wrapper').html('');
                     }
                 });
-                $('body').on('click', '.cancel_search_form', function () {
-                    $('.job-advance-search').webuiPopover('hide');
+                
+                $modal.on('click', function (e) {
+                    if ($(e.target).is($modal)) {
+                        $modal.hide().find('#expert-search-container-wrapper').html('');
+                    }
                 });
             })
         </script>
         <style>
-            .post-type-archive-jbp_pro .webui-popover {
-                width: 40% !important;
+            #expert-search-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 1050;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .advanced-search-modal-content {
+                background: white;
+                border-radius: 4px;
+                width: 90%;
+                max-width: 600px;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+            .advanced-search-modal-header {
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .advanced-search-modal-header h3 {
+                margin: 0;
+                font-size: 18px;
+            }
+            .close-search-modal {
+                background: none;
+                border: none;
+                font-size: 28px;
+                cursor: pointer;
+                color: #999;
+            }
+            .close-search-modal:hover {
+                color: #333;
+            }
+            .advanced-search-modal-body {
+                padding: 20px;
             }
         </style>
 		<?php
@@ -436,12 +489,6 @@ INNER JOIN ' . $wpdb->prefix . 'postmeta max_price ON max_price.post_id = posts.
 		wp_enqueue_style( 'jbp_ion_slider_flat' );
 
 		wp_enqueue_style( 'jobs-advanced-search' );
-		wp_enqueue_style( 'webuipopover' );
-		wp_enqueue_script( 'webuipopover' );
-		$translation_array = array(
-			'title' => __( 'Advance Search Form', 'psjb' ),
-		);
-		wp_localize_script( 'jobs-main', 'job_search_form', $translation_array );
 		global $wpdb;
 		$range_max = $wpdb->get_var( "select meta_value from " . $wpdb->postmeta . " where meta_key='_jbp_job_budget_max' ORDER BY ABS(meta_value) DESC LIMIT 1; " );;
 		if ( $range_max < 1000 ) {
@@ -465,76 +512,139 @@ INNER JOIN ' . $wpdb->prefix . 'postmeta max_price ON max_price.post_id = posts.
 			$pos = 'postfix';
 		}
 		?>
-        <button type="button" class="btn btn-link job-advance-search"><?php _e( 'Advanced Search', 'psjb' ) ?>
+        <button type="button" class="btn btn-link job-advance-search">
+            <?php _e( 'Advanced Search', 'psjb' ) ?>
         </button>
+        <div id="job-search-modal" class="advanced-search-modal" style="display:none;">
+            <div class="advanced-search-modal-content">
+                <div class="advanced-search-modal-header">
+                    <h3><?php _e( 'Advanced Search Form', 'psjb' ) ?></h3>
+                    <button type="button" class="close-search-modal">&times;</button>
+                </div>
+                <div class="advanced-search-modal-body" id="job-search-container-wrapper"></div>
+            </div>
+        </div>
         <script type="text/javascript">
             jQuery(function ($) {
+                var $modal = $('#job-search-modal');
+                var $btnOpen = $('.job-advance-search:last');
+                var $slider = null;
                 var price_data = {
-                    from:<?php echo $job_min_price ?>,
-                    to:<?php echo $job_max_price ?>
+                    from: <?php echo $job_min_price ?>,
+                    to: <?php echo $job_max_price ?>
                 };
-                $('.job-advance-search').webuiPopover({
-                    title: job_search_form.title,
-                    content: function () {
-                        var content = $('<div class="ig-container"></div>');
-                        var html = $('#job-search-container').html();
-                        content.html(html);
-                        return content;
-                    }
-                }).on('shown.webui.popover', function () {
-                    var pop = $(this).data('plugin_webuiPopover');
-                    var holder = pop.$target;
-                    var form = holder.find('form').first();
-                    var element = form.find('input.job-price-range').first();
-                    if (element.hasClass('turn') == false) {
-                        element.ionRangeSlider({
-                            min: <?php echo je()->settings()->job_min_search_budget ?>,
-                            max: '<?php echo $range_max + 100 ?>',
-                            type: "double",
-                            '<?php echo $pos ?>': "<?php echo JobsExperts_Helper::format_currency( je()->settings()->currency, false ) ?>",
-                            maxPostfix: "+",
-                            prettify: false,
-                            hasGrid: true,
-                            from: price_data.from,
-                            to: price_data.to,
-                            gridMargin: 7,
-                            onChange: function (obj) {      // callback is called on every slider change
-                                price_data = {
-                                    from: obj.from,
-                                    to: obj.to
-                                };
-                                form.find('input[name="min_price"]').val(price_data.from);
-                                form.find('input[name="max_price"]').val(price_data.to);
+                
+                $btnOpen.on('click', function () {
+                    var html = $('#job-search-container').html();
+                    $modal.find('#job-search-container-wrapper').html(html);
+                    $modal.show();
+                    
+                    // Initialize slider after content is shown
+                    setTimeout(function() {
+                        var form = $modal.find('form').first();
+                        var element = form.find('input.job-price-range').first();
+                        
+                        if (element.length && !element.hasClass('turn')) {
+                            element.ionRangeSlider({
+                                min: <?php echo je()->settings()->job_min_search_budget ?>,
+                                max: '<?php echo $range_max + 100 ?>',
+                                type: "double",
+                                '<?php echo $pos ?>': "<?php echo JobsExperts_Helper::format_currency( je()->settings()->currency, false ) ?>",
+                                maxPostfix: "+",
+                                prettify: false,
+                                hasGrid: true,
+                                from: price_data.from,
+                                to: price_data.to,
+                                gridMargin: 7,
+                                onChange: function (obj) {
+                                    price_data = {
+                                        from: obj.from,
+                                        to: obj.to
+                                    };
+                                    form.find('input[name="min_price"]').val(price_data.from);
+                                    form.find('input[name="max_price"]').val(price_data.to);
+                                }
+                            });
+                            element.addClass('turn');
+                            $slider = element.data("ionRangeSlider");
+                        } else if (element.length && element.hasClass('turn')) {
+                            var from = form.find('input[name="min_price"]').val();
+                            var to = form.find('input[name="max_price"]').val();
+
+                            if (from.length == 0) {
+                                from = price_data.from;
                             }
-                        });
-                        element.addClass('turn');
-                        window.slider = element.data("ionRangeSlider");
-                    } else {
-                        var from = form.find('input[name="min_price"]').val();
-                        var to = form.find('input[name="max_price"]').val();
-
-                        if (from.length == 0) {
-                            from = price_data.from;
+                            if (to.length == 0) {
+                                to = price_data.to;
+                            }
+                            if ($slider) {
+                                $slider.update({
+                                    from: from,
+                                    to: to
+                                });
+                            }
                         }
-                        if (to.length == 0) {
-                            to = price_data.to;
-                        }
-                        window.slider.update({
-                            from: from,
-                            to: to
-                        });
-                    }
-                })
-                $('body').on('click', '.cancel_search_form', function () {
-                    $('.job-advance-search').webuiPopover('hide');
+                    }, 50);
                 });
-
-
+                
+                $(document).on('click', '.close-search-modal, .cancel_search_form', function (e) {
+                    if ($(this).closest($modal).length || $(this).hasClass('cancel_search_form')) {
+                        $modal.hide().find('#job-search-container-wrapper').html('');
+                    }
+                });
+                
+                $modal.on('click', function (e) {
+                    if ($(e.target).is($modal)) {
+                        $modal.hide().find('#job-search-container-wrapper').html('');
+                    }
+                });
             })
         </script>
         <style>
-            .post-type-archive-jbp_job .webui-popover {
-                width: 40% !important;
+            #job-search-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 1050;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .advanced-search-modal-content {
+                background: white;
+                border-radius: 4px;
+                width: 90%;
+                max-width: 600px;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+            .advanced-search-modal-header {
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .advanced-search-modal-header h3 {
+                margin: 0;
+                font-size: 18px;
+            }
+            .close-search-modal {
+                background: none;
+                border: none;
+                font-size: 28px;
+                cursor: pointer;
+                color: #999;
+            }
+            .close-search-modal:hover {
+                color: #333;
+            }
+            .advanced-search-modal-body {
+                padding: 20px;
             }
         </style>
 		<?php

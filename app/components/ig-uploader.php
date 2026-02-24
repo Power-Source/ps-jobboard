@@ -41,8 +41,6 @@ if (!class_exists('IG_Uploader')) {
         function scripts()
         {
             wp_register_style('igu-uploader', $this->plugin_url . 'assets/style.css');
-            wp_register_script('webuipopover', $this->plugin_url . 'assets/popover/webuipopover.js', array('jquery'));
-            wp_register_style('webuipopover', $this->plugin_url . 'assets/popover/webuipopover.css');
 
             wp_register_script('jquery-frame-transport', $this->plugin_url . 'assets/iframe-transport/jquery.iframe-transport.js');
             wp_register_script('igu-uploader', $this->plugin_url . 'assets/uploader.js');

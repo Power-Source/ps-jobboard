@@ -7,18 +7,19 @@
 class FormValidator {
   constructor(formSelector, options = {}) {
     this.form = document.querySelector(formSelector);
-    if (!this.form) return;
-    
     this.options = {
       showErrors: true,
       realTimeValidation: true,
-      submitButton: this.form.querySelector('button[type="submit"]'),
+      submitButton: this.form ? this.form.querySelector('button[type="submit"]') : null,
       onBeforeSubmit: options.onBeforeSubmit || null,
       ...options
     };
 
     this.errorContainers = new Map();
-    this.init();
+    
+    if (this.form) {
+      this.init();
+    }
   }
 
   /**
@@ -86,6 +87,8 @@ class FormValidator {
   };
 
   init() {
+    if (!this.form) return;
+    
     this.setupFields();
     
     // Real-time Validierung
@@ -101,6 +104,8 @@ class FormValidator {
   }
 
   setupFields() {
+    if (!this.form) return;
+    
     this.form.querySelectorAll('[required], [data-validate]').forEach(field => {
       const errorContainer = document.createElement('span');
       errorContainer.className = 'help-block m-b-none validation-error';
@@ -218,6 +223,11 @@ class FormValidator {
    * Validiere gesamte Form
    */
   validate() {
+    if (!this.form) {
+      console.warn('FormValidator: Form element not found for validation');
+      return true;
+    }
+    
     let isValid = true;
     
     this.form.querySelectorAll('[required], [data-validate]').forEach(field => {
@@ -233,6 +243,10 @@ class FormValidator {
    * Form Submit Handler
    */
   async handleSubmit(e) {
+    if (!this.form) {
+      return true;
+    }
+    
     if (!this.validate()) {
       e.preventDefault();
       return false;
@@ -251,6 +265,8 @@ class FormValidator {
    * Löscht Fehler und setzt Form zurück
    */
   clearErrors() {
+    if (!this.form) return;
+    
     this.errorContainers.forEach((container, field) => {
       field.classList.remove('is-invalid');
       container.innerHTML = '';

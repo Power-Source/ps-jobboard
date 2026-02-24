@@ -240,7 +240,7 @@
                         </div>
                         <script type="text/javascript">
                             jQuery(document).ready(function ($) {
-                                $('.frm-delete').submit(function () {
+                                $('.frm-delete').on('submit', function () {
                                     if (confirm('<?php echo esc_js( __( 'Bist Du sicher?', 'psjb' ) ) ?>')) {
 
                                     } else {
@@ -258,15 +258,30 @@
     </div>
     <script type="text/javascript">
         jQuery(function ($) {
-            $("#expert-content-tabs").tabs({
-                active: 0,
-                activate: function (event, ui) {
-                    ui.newTab.addClass('active');
-                    ui.oldTab.removeClass('active');
-                },
-                create: function (event, ui) {
-                    ui.tab.addClass('active');
-                }
+            // Initialize tabs (vanilla JS, no jQuery UI)
+            var tabsContainer = $('#expert-content-tabs');
+            var tabLinks = tabsContainer.find('.nav-tabs a');
+            var tabPanes = tabsContainer.find('.tab-content > div');
+            
+            // Show first tab by default
+            tabPanes.hide();
+            if (tabPanes.length > 0) {
+                $(tabPanes[0]).show();
+                tabLinks.parent().first().addClass('active');
+            }
+            
+            // Handle tab clicks
+            tabLinks.on('click', function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                
+                // Hide all tabs and remove active class
+                tabPanes.hide();
+                tabLinks.parent().removeClass('active');
+                
+                // Show selected tab and add active class
+                $(href).show();
+                $(this).parent().addClass('active');
             });
         })
     </script>
