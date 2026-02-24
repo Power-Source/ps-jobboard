@@ -129,10 +129,7 @@
                             <?php $form->text('contact_email', array(
                                 'attributes' => array(
                                     'class' => 'form-control',
-.hn-container .nav-tabs {
-    margin: 0!important;
-    display: inline-block;
-}                                    'placeholder' => __("Deine Kontakt-E-Mail", 'psjb'),
+                                    'placeholder' => __("Deine Kontakt-E-Mail", 'psjb'),
                                     'required' => true,
                                     'style' => 'border: none; padding: 0; box-shadow: none;',
                                     'type' => 'email'
