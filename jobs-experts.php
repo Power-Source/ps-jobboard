@@ -156,10 +156,8 @@ class Jobs_Experts {
 				wp_enqueue_script( 'jobs-main' );
 				wp_enqueue_script( 'jquery-ui-tabs' );
 				wp_enqueue_script( 'jquery-frame-transport' );
-				wp_enqueue_style( 'jobs-validation' );
-				wp_enqueue_script( 'jobs-validation' );
-				wp_enqueue_script( 'jobs-validation-en' );
-				break;
+			wp_enqueue_style( 'jobs-form-validation' );
+			wp_enqueue_script( 'jobs-form-validation' );			wp_enqueue_script( 'jobs-form-init' );				break;
 			case 'landing':
 				wp_enqueue_style( 'jobs-list-shortcode' );
 				wp_enqueue_style( 'expert-list-shortcode' );
@@ -225,9 +223,9 @@ class Jobs_Experts {
 			), $this->version );
 			wp_localize_script( 'jobs-main', 'jeL10n', $aryArgs );
 
-			wp_register_script( 'jobs-validation', $this->plugin_url . 'assets/jquery-validation-engine/js/jquery.validationEngine.js', array( 'jquery' ), $this->version, true );
-			wp_register_script( 'jobs-validation-en', $this->plugin_url . 'assets/jquery-validation-engine/js/languages/jquery.validationEngine-en.js', array( 'jquery' ), $this->version, true );
-			wp_register_style( 'jobs-validation', $this->plugin_url . 'assets/jquery-validation-engine/css/validationEngine.jquery.css', array(), $this->version );
+			// Modern Form Validation (jQuery Validation Engine ersetzt)
+			wp_register_script( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.js', array(), $this->version, true );
+		wp_register_script( 'jobs-form-init', $this->plugin_url . 'assets/form-init.js', array( 'jquery', 'jobs-form-validation' ), $this->version, true );
 			wp_register_script( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.min.js' );
 			wp_register_style( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.css' );
 

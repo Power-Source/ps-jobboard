@@ -37,14 +37,14 @@ class JE_Unified_Admin_Controller extends IG_Request {
 	 * Register main Jobboard menu
 	 */
 	public function register_menu() {
-		// Main menu page
+		// Main menu page with WordPress Dashicon
 		add_menu_page(
 			__( 'Jobboard', 'psjb' ),
 			__( 'Jobboard', 'psjb' ),
 			'manage_options',
 			'je-jobboard',
 			array( &$this, 'render_main_page' ),
-			'dashicons-briefcase',
+			'dashicons-building',
 			25
 		);
 

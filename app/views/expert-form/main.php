@@ -56,15 +56,17 @@
                                 <h2 style="margin-top: 0;">
                                     <?php $form->text('first_name', array(
                                         'attributes' => array(
-                                            'class' => 'form-control inline-edit-name validate[required]',
-                                            'placeholder' => __("Vorname", 'psjb'),
+                                            'class' => 'form-control inline-edit-name',
+                                            'placeholder' => __("ॠVorname", 'psjb'),
+                                            'required' => true,
                                             'style' => 'display: inline-block; width: 48%; margin-right: 2%;'
                                         )
                                     )); ?>
                                     <?php $form->text('last_name', array(
                                         'attributes' => array(
-                                            'class' => 'form-control inline-edit-name validate[required]',
-                                            'placeholder' => __("Nachname", 'psjb'),
+                                            'class' => 'form-control inline-edit-name',
+                                            'placeholder' => __("ॠNachname", 'psjb'),
+                                            'required' => true,
                                             'style' => 'display: inline-block; width: 50%;'
                                         )
                                     )); ?>
@@ -126,8 +128,9 @@
                         <div class="col-md-8 col-xs-8 col-sm-8">
                             <?php $form->text('contact_email', array(
                                 'attributes' => array(
-                                    'class' => 'form-control validate[required,custom[email]]',
-                                    'placeholder' => __("Deine Kontakt-E-Mail", 'psjb'),
+                                    'class' => 'form-control',
+                                    'placeholder' => __("ॠDeine Kontakt-E-Mail", 'psjb'),
+                                    'required' => true,
                                     'style' => 'border: none; padding: 0; box-shadow: none;',
                                     'type' => 'email'
                                 )
@@ -198,7 +201,7 @@
                                                 'quicktags' => false,
                                                 'wpautop' => true,
                                                 'drag_drop_upload' => false,
-                                                'editor_class' => 'validate[required,minSize[200]]',
+                                                'editor_class' => '',
                                                 'tinymce' => array(
                                                     'toolbar1' => 'formatselect,bold,italic,underline,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_adv',
                                                     'toolbar2' => 'forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo',
@@ -265,10 +268,12 @@
                                             <?php
                                             $form->text_area('biography', array(
                                                 'attributes' => array(
-                                                    'class' => 'form-control validate[required,minSize[200]]',
+                                                    'class' => 'form-control',
                                                     'placeholder' => __("Erzähle uns von dir...", 'psjb'),
                                                     'rows' => 12,
                                                     'id' => 'biography-editor',
+                                                    'required' => true,
+                                                    'minlength' => 200,
                                                     'style' => 'min-height: 200px;'
                                                 )
                                             ));
@@ -363,38 +368,56 @@
             });
         }
 
-        // Manual form validation and submission - NO ValidationEngine auto attach
+        // Get form and expert validator
         var form = $(".form-horizontal");
+        var expertFormValidator = null;
 
-        // Handle button clicks
+        // Initialize modern form validation after a delay to ensure all editors are loaded
+        setTimeout(function() {
+            if (typeof FormValidator !== 'undefined') {
+                expertFormValidator = new FormValidator('.jobs-expert-form form', {
+                    realTimeValidation: true
+                });
+            }
+        }, 500);
+
+        // Handle button clicks for save/publish
         $('.je-expert-submit').on('click', function (e) {
             e.preventDefault();
             var button = $(this);
             var status = button.attr('value'); // 'draft', 'pending', or 'publish'
-            
-            // Bei "Entwurf speichern" KEINE Validierung - direkt speichern
+
+            // Draft saves without validation
             if (status === 'draft') {
                 submitExpertForm(form, status, button);
             } else {
-                // Bei "Veröffentlichen" oder "Zur Überprüfung": Validieren MANUELL nur die wichtigsten Felder
-                var validationPassed = validateMainFormFields(form);
-                if (validationPassed) {
+                // Publish/Pending requires validation
+                // Use modern FormValidator if available, fallback to custom validation
+                if (expertFormValidator && expertFormValidator.validate()) {
                     submitExpertForm(form, status, button);
+                } else if (expertFormValidator) {
+                    // Errors already displayed by FormValidator
+                } else {
+                    // Fallback validation if FormValidator not loaded yet
+                    if (validateMainFormFields(form)) {
+                        submitExpertForm(form, status, button);
+                    }
                 }
             }
         });
-        
-        // MANUAL VALIDATION - only check required main form fields, NOT inline forms
+
+        /**
+         * Fallback Validation - for use if FormValidator lib doesn't load
+         */
         function validateMainFormFields(form) {
             var isValid = true;
             var errors = [];
-            
+
             // Check biography field (TinyMCE)
             if (typeof tinyMCE !== 'undefined') {
-                var bioEditor = tinyMCE.get('expert_biography');
+                var bioEditor = tinyMCE.get('biography');
                 if (bioEditor) {
                     var bioContent = bioEditor.getContent().trim();
-                    // Entferne HTML Tags um reine Text-Länge zu prüfen
                     var plainText = bioContent.replace(/<[^>]*>/g, '').trim();
                     if (plainText.length === 0) {
                         errors.push('<?php echo esc_js(__("Die Biografie ist erforderlich")) ?>');
@@ -405,15 +428,13 @@
                     }
                 }
             }
-            
-            // Check other required fields with validate[required] class
-            // Filter out fields in inline containers by checking they're direct children of form
-            form.find('input[class*="validate[required]"], textarea[class*="validate[required]"], select[class*="validate[required]"]').each(function() {
-                // Skip if this field is inside an inline form container
+
+            // Check required fields
+            form.find('input[required], textarea[required], select[required]').each(function() {
                 if ($(this).closest('.skill-form-container, .social-form-container, .avatar-upload-form, .uploader-form-container').length > 0) {
-                    return; // Skip this field
+                    return;
                 }
-                
+
                 var field = $(this);
                 var value = field.val().trim();
                 if (value === '') {
@@ -422,33 +443,33 @@
                     isValid = false;
                 }
             });
-            
+
             if (!isValid) {
                 alert(errors.join('\n'));
             }
-            
+
             return isValid;
         }
-        
+
+        /**
+         * Submit form via AJAX
+         */
         function submitExpertForm(form, status, button) {
             var originalButtonText = button.text();
             button.addClass('disabled').text('<?php echo esc_js(__("wird verarbeitet...")) ?>');
-            
+
             var formData = form.serialize() + '&status=' + status;
-            
+
             $.ajax({
                 type: 'POST',
                 url: form.attr('action') || window.location.href,
                 data: formData,
                 beforeSend: function() {
-                    // TinyMCE-Content vor Submit speichern
                     if (typeof tinyMCE !== 'undefined') {
                         tinyMCE.triggerSave();
                     }
                 },
                 success: function(response) {
-                    
-                    // Parse response if it's a string
                     var data = response;
                     if (typeof response === 'string') {
                         try {
@@ -457,14 +478,11 @@
                             data = null;
                         }
                     }
-                    
-                    // Check if we got a success response
+
                     if (data && data.success === true) {
                         if (status === 'draft') {
                             button.removeClass('disabled').text(originalButtonText);
-                            // Kein Alert - Form bleibt erhalten
                         } else {
-                            // Redirect to the URL from response
                             if (data.data && data.data.redirect_url) {
                                 window.location.href = data.data.redirect_url;
                             } else {
@@ -473,8 +491,6 @@
                         }
                     } else if (data && data.success === false) {
                         button.removeClass('disabled').text(originalButtonText);
-                        
-                        // Zeige Fehler im Alert
                         var errorMsg = '<?php echo esc_js(__("Validierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.")) ?>';
                         if (data.data && data.data.errors) {
                             errorMsg += '\n\nFehler:\n';
@@ -486,7 +502,6 @@
                         }
                         alert(errorMsg);
                     } else {
-                        // Fallback für non-JSON responses
                         window.location.reload();
                     }
                 },
@@ -498,3 +513,4 @@
         }
     });
 </script>
+

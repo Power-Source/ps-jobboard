@@ -2,7 +2,7 @@
     <form class="can-edit-form form-horizontal" style="width: 100%;">
         <div class="form-group">
             <div class="col-lg-12">
-                <textarea name="tagline" class="form-control input-sm validate[required]"
+                <textarea name="tagline" class="form-control input-sm" required
                           style="height: 150px"><?php echo $model->short_description ?></textarea>
             </div>
             <div class="clearfix"></div>

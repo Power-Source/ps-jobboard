@@ -1,0 +1,31 @@
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>Jobboard Menu Icon</title>
+  <desc>Jobboard Dashboard Icon - Jobs & Experts Management</desc>
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="gradient">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Main briefcase/dashboard shape -->
+  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+    <!-- Background rounded rectangle (dashboard container) -->
+    <rect x="2" y="4" width="16" height="14" rx="1.5" fill="#f5f5f5" stroke="#a0a5aa" stroke-width="1.2"/>
+    
+    <!-- Grid pattern (dashboard elements) -->
+    <!-- Top left square -->
+    <rect x="4" y="6" width="4" height="4" rx="0.5" fill="#4A90E2" opacity="0.8"/>
+    
+    <!-- Top right square -->
+    <rect x="10" y="6" width="4" height="4" rx="0.5" fill="#7B68EE" opacity="0.8"/>
+    
+    <!-- Bottom left rectangle (Jobs) -->
+    <rect x="4" y="12" width="4" height="4" rx="0.5" fill="#50C878" opacity="0.8"/>
+    
+    <!-- Bottom right rectangle (Experts) -->
+    <rect x="10" y="12" width="4" height="4" rx="0.5" fill="#FF6B6B" opacity="0.8"/>
+    
+    <!-- Briefcase handle accent (top) -->
+    <path d="M 7 3 Q 7 2 8 2 L 12 2 Q 13 2 13 3" fill="none" stroke="#a0a5aa" stroke-width="1" stroke-linecap="round"/>
+  </g>
+</svg>

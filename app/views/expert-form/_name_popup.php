@@ -5,7 +5,7 @@
 
             <div class="col-lg-9">
                 <input type="text" id="first_name" name="first_name"
-                       class="form-control input-sm validate[required]" value="<?php echo $model->first_name ?>">
+                       class="form-control input-sm" required value="<?php echo $model->first_name ?>">
             </div>
             <div class="clearfix"></div>
         </div>
@@ -13,7 +13,7 @@
             <label class="col-md-3 control-label"><?php _e("Nachname", 'psjb') ?></label>
 
             <div class="col-lg-9">
-                <input type="text" name="last_name" class="form-control input-sm validate[required]" value="<?php echo $model->last_name ?>">
+                <input type="text" name="last_name" class="form-control input-sm" required value="<?php echo $model->last_name ?>">
             </div>
             <div class="clearfix"></div>
         </div>

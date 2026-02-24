@@ -2,7 +2,7 @@
     <form class="can-edit-form form-horizontal" style="width: 100%;">
         <div class="form-group">
             <div class="col-lg-12">
-                <textarea name="biography" class="form-control input-sm validate[required]" style="height: 150px"><?php echo $model->biography ?></textarea>
+                <textarea name="biography" class="form-control input-sm" required minlength="200" style="height: 150px"><?php echo $model->biography ?></textarea>
             </div>
             <div class="clearfix"></div>
         </div>
