@@ -37,6 +37,15 @@ if (!class_exists('IG_Wallet')) {
 
         function admin_menu()
         {
+            $parent_slug = 'je-jobboard';
+
+            if (isset($GLOBALS['admin_page_hooks'][$parent_slug])) {
+                add_submenu_page($parent_slug, __('Guthabenpakete', $this->domain), __('Guthabenpakete', $this->domain), 'manage_options', 'ig-credit-plans', array($this->controller, 'main'));
+                add_submenu_page($parent_slug, __("Regeln", $this->domain), __("Regeln", $this->domain), 'manage_options', 'ig-credit-rules', array($this->controller, 'rules'));
+                add_submenu_page($parent_slug, __("Einstellungen", $this->domain), __("Einstellungen", $this->domain), 'manage_options', 'ig-credits-setting', array($this->controller, 'settings'));
+                return;
+            }
+
             add_menu_page(__('Guthabenpakete', $this->domain), __('Guthabenpakete', $this->domain), 'manage_options', 'ig-credit-plans', array($this->controller, 'main'), 'dashicons-products', 35);
             add_submenu_page('ig-credit-plans', __("Regeln", $this->domain), __("Regeln", $this->domain), 'manage_options', 'ig-credit-rules', array($this->controller, 'rules'));
             add_submenu_page('ig-credit-plans', __("Einstellungen", $this->domain), __("Einstellungen", $this->domain), 'manage_options', 'ig-credits-setting', array($this->controller, 'settings'));
