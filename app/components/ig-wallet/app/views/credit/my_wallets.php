@@ -4,7 +4,7 @@
             <li><a href="#my-wallets"><?php _e("Guthaben", 'psjb') ?></a></li>
             <li><a href="#purcharse-history"><?php _e("Kaufverlauf", 'psjb') ?></a></li>
         </ul>
-        <div class="tab-content" style="padding: 0 10px">
+        <div class="tab-content" style="clear: both; padding: 12px 10px 0 10px;">
             <div id="my-wallets">
                 <h3><?php _e("Guthabensaldo", 'psjb') ?></h3>
 
@@ -74,15 +74,22 @@
     jQuery(function ($) {
         // Initialize tabs (vanilla JS, no jQuery UI)
         var tabsContainer = $("#tabs");
-        var tabLinks = tabsContainer.find('a[href^="#"]');
-        var tabPanes = tabsContainer.find('[id]');
+        var tabLinks = tabsContainer.find('.nav-tabs a[href^="#"]');
+        var tabPanes = tabsContainer.find('.tab-content > div');
+
         tabPanes.hide();
+        tabLinks.parent('li').removeClass('active');
         if (tabPanes.length > 0) {
             $(tabPanes[0]).show();
+            tabLinks.first().parent('li').addClass('active');
         }
+
         tabLinks.on('click', function(e) {
             e.preventDefault();
             var target = $(this).attr('href');
+
+            tabLinks.parent('li').removeClass('active');
+            $(this).parent('li').addClass('active');
             tabPanes.hide();
             $(target).show();
         });
