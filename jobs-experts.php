@@ -6,6 +6,7 @@
  * Version: 1.0.0
  * Author: PSOURCE
  * Author URI: https://nerdservice.eimen.net
+ * ClassicPress: 2.6.0
  * Text Domain: psjb
  * Domain Path: languages
  * Network: false
@@ -136,7 +137,9 @@ class Jobs_Experts {
 				wp_enqueue_style( 'jobs-form-shortcode' );
 				wp_enqueue_script( 'jobs-select2' );
 				wp_enqueue_style( 'jobs-select2' );
-				wp_enqueue_script( 'jquery-ui-datepicker' );
+				wp_enqueue_script( 'jbp-flatpickr' );
+				wp_enqueue_script( 'jbp-flatpickr-de' );
+				wp_enqueue_style( 'jbp-flatpickr' );
 				break;
 			case 'contact':
 				wp_enqueue_style( 'jobs-contact' );
@@ -176,6 +179,11 @@ class Jobs_Experts {
 		wp_enqueue_script( 'jquery' );
 		wp_register_script( 'jobs-uploader', $this->plugin_url . 'assets/uploader.js', array( 'jquery' ), $this->version );
 		wp_enqueue_script( 'jobs-uploader' );
+
+		// Flatpickr - moderner Vanilla-JS Datepicker (ersetzt jQuery UI)
+		wp_register_script( 'jbp-flatpickr', $this->plugin_url . 'assets/vendors/flatpickr/flatpickr.min.js', array(), $this->version, true );
+		wp_register_script( 'jbp-flatpickr-de', $this->plugin_url . 'assets/vendors/flatpickr/l10n/de.js', array('jbp-flatpickr'), $this->version, true );
+		wp_register_style( 'jbp-flatpickr', $this->plugin_url . 'assets/vendors/flatpickr/flatpickr.min.css', array(), $this->version );
 
 		// Modern Form Validation - registrieren VOR is_admin check 
 		$min = $this->dev == true ? null : '.min';

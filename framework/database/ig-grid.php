@@ -10,7 +10,7 @@ if (!class_exists('IG_Grid')) {
         protected $per_page;
         protected $edit_page_url;
 
-        public function __construct($model, $per_page = 20, $edit_page_url)
+        public function __construct($model, $per_page = 20, $edit_page_url = '')
         {
             $this->model = $model;
             $this->post_type = $model->get_table();
@@ -49,7 +49,7 @@ if (!class_exists('IG_Grid')) {
             // security check!
             if (isset($_POST['_wpnonce']) && !empty($_POST['_wpnonce'])) {
 
-                $nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
+                $nonce = isset($_POST['_wpnonce']) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : '';
                 $action = 'bulk-' . $this->_args['plural'];
 
                 if (!wp_verify_nonce($nonce, $action))
@@ -113,7 +113,10 @@ if (!class_exists('IG_Grid')) {
                             );
                             echo '</th>';
                         } elseif ($column_name == 'ig_action') {
-                            $td = '<td><a class="btn btn-sm btn-default" href="' . $this->edit_page_url . '&id=' . $rec->id . '">' . __('Edit', 'ig_framework') . '</a> | <a  data-model="' . @array_pop(explode('\\', get_class($this->model))) . '" class="btn btn-sm btn-danger ig-delete-btn" href="#' . $rec->id . '">' . __('Delete', 'ig_framework') . '</a> </td>';
+                            $model_class = get_class($this->model);
+                            $model_parts = explode('\\', $model_class);
+                            $model_name = array_pop($model_parts);
+                            $td = '<td><a class="btn btn-sm btn-default" href="' . $this->edit_page_url . '&id=' . $rec->id . '">' . __('Edit', 'ig_framework') . '</a> | <a  data-model="' . $model_name . '" class="btn btn-sm btn-danger ig-delete-btn" href="#' . $rec->id . '">' . __('Delete', 'ig_framework') . '</a> </td>';
                             echo $td;
                         } else {
                             //Style attributes for each col

@@ -256,13 +256,14 @@
 </div>
 <script type="text/javascript">
     jQuery(function ($) {
-        $(".datepicker").datepicker({
-            "dateFormat": "yy-mm-dd",
-            minDate: "<?php echo date('Y-m-d') ?>",
-            beforeShow: function (input, inst) {
-                inst.dpDiv.wrap('<div class="ig-container"></div>');
-            }
-        });
+        if (typeof flatpickr !== 'undefined') {
+            flatpickr('.datepicker', {
+                dateFormat: 'Y-m-d',
+                minDate: '<?php echo date('Y-m-d') ?>',
+                locale: typeof flatpickr.l10ns !== 'undefined' && flatpickr.l10ns.de ? flatpickr.l10ns.de : 'default',
+                allowInput: true
+            });
+        }
         $('#jbp_skill_tag').select2({
             tags: <?php echo json_encode(get_terms('jbp_skills_tag', array('fields'=>'names', 'get' => 'all' ) ) ); ?>,
             placeholder: "<?php esc_attr_e('Füge ein Tag hinzu und trenne es durch Kommas', 'psjb'); ?>",

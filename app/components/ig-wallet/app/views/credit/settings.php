@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2><?php _e("Settings", 'psjb') ?></h2>
+    <h2><?php _e("Einstellungen", 'psjb') ?></h2>
     <br/>
     <?php $data = array_combine(wp_list_pluck(get_pages(), 'ID'), wp_list_pluck(get_pages(), 'post_title')); ?>
     <div class="ig-container">
@@ -15,12 +15,12 @@
                     class="nav nav-tabs tabs-left col-md-2 no-padding hidden-sm hidden-xs">
                     <li <?php echo je()->get('tab', 'general') == 'general' ? 'class="active"' : null ?>>
                         <a href="<?php echo admin_url('admin.php?page=ig-credits-setting') ?>">
-                            <i class="glyphicon glyphicon-cog"></i> <?php _e('General Settings', 'psjb') ?>
+                            <i class="glyphicon glyphicon-cog"></i> <?php _e('Allgemeine Einstellungen', 'psjb') ?>
                         </a>
                     </li>
                     <li <?php echo je()->get('tab') == 'give_credit' ? 'class="active"' : null ?>>
                         <a href="<?php echo admin_url('admin.php?page=ig-credits-setting&tab=give_credit') ?>">
-                            <i class="fa fa-bank"></i> <?php _e('Send Credits', 'psjb') ?>
+                            <i class="fa fa-bank"></i> <?php _e('Guthaben senden', 'psjb') ?>
                         </a>
                     </li>
                 </ul>
@@ -46,15 +46,15 @@
                 },
                 url: '<?php echo admin_url('admin-ajax.php') ?>',
                 beforeSend: function () {
-                    that.attr('disabled', 'disabled').text('<?php echo esc_js(__('Creating...','psjb')) ?>');
+                    that.attr('disabled', 'disabled').text('<?php echo esc_js(__('Erstelle...','psjb')) ?>');
                 },
                 success: function (data) {
                     var element = that.parent().parent().find('select').first();
-                    $.get('<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>', function (html) {
+                    $.get(window.location.href, function (html) {
                         html = $(html);
                         var clone = html.find('select[name="' + element.attr('name') + '"]');
                         element.replaceWith(clone);
-                        that.removeAttr('disabled').text('<?php echo esc_js(__('Create Page','psjb')) ?>');
+                        that.removeAttr('disabled').text('<?php echo esc_js(__('Seite erstellen','psjb')) ?>');
                     });
                 }
             })

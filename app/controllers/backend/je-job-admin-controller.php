@@ -56,7 +56,9 @@ class JE_Job_Admin_Controller extends IG_Request {
 	}
 
 	public function show_job_meta() {
-		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jbp-flatpickr' );
+		wp_enqueue_script( 'jbp-flatpickr-de' );
+		wp_enqueue_style( 'jbp-flatpickr' );
 		$id    = get_the_ID();
 		$model = JE_Job_Model::model()->find( $id );
 		$form  = new IG_Active_Form( $model );
@@ -133,13 +135,14 @@ class JE_Job_Admin_Controller extends IG_Request {
 		</table>
 		<script type="text/javascript">
 			jQuery(function ($) {
-				$(".datepicker").datepicker({
-					"dateFormat": "yy-mm-dd",
-					minDate: "<?php echo date( 'Y-m-d' ) ?>",
-					beforeShow: function (input, inst) {
-						inst.dpDiv.wrap('<div class="ig-container"></div>');
-					}
-				});
+				if (typeof flatpickr !== 'undefined') {
+					flatpickr('.datepicker', {
+						dateFormat: 'Y-m-d',
+						minDate: '<?php echo date( 'Y-m-d' ) ?>',
+						locale: typeof flatpickr.l10ns !== 'undefined' && flatpickr.l10ns.de ? flatpickr.l10ns.de : 'default',
+						allowInput: true
+					});
+				}
 			})
 		</script>
 		<?php
@@ -210,7 +213,9 @@ class JE_Job_Admin_Controller extends IG_Request {
 		wp_enqueue_style( 'jbp_admin' );
 		wp_enqueue_script( 'jbp_select2' );
 		wp_enqueue_style( 'jbp_select2' );
-		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jbp-flatpickr' );
+		wp_enqueue_script( 'jbp-flatpickr-de' );
+		wp_enqueue_style( 'jbp-flatpickr' );
 		wp_enqueue_script( 'jobs-form-validation' );
 		wp_enqueue_script( 'jobs-form-init' );
 		$id = je()->get( 'id', 0 );
@@ -231,7 +236,9 @@ class JE_Job_Admin_Controller extends IG_Request {
 		wp_enqueue_style( 'jbp_admin' );
 		wp_enqueue_script( 'jbp_select2' );
 		wp_enqueue_style( 'jbp_select2' );
-		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jbp-flatpickr' );
+		wp_enqueue_script( 'jbp-flatpickr-de' );
+		wp_enqueue_style( 'jbp-flatpickr' );
 		wp_enqueue_script( 'jobs-form-validation' );
 		wp_enqueue_script( 'jobs-form-init' );
 

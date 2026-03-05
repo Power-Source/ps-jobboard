@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2><?php _e("Credit Rules", 'psjb') ?></h2><br/>
+    <h2><?php _e("Guthaben-Regeln", 'psjb') ?></h2><br/>
 
     <div class="ig-container">
         <?php

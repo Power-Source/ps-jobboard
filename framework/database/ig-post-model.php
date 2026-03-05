@@ -10,6 +10,8 @@ if ( ! class_exists( 'IG_Post_Model' ) ) {
 	class IG_Post_Model extends IG_Model {
 		private static $_models = array();
 
+		public $id;
+
 		public $wp_post;
 
 		/**

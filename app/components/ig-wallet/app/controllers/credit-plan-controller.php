@@ -160,12 +160,20 @@ class Credit_Plan_Controller extends IG_Request {
 	}
 
 	function btn_shortcode( $atts ) {
+		// Sichere URL-Generierung mit Fallback
+		$wallet_page_id = ig_wallet()->settings()->my_wallet_page;
+		$default_url = home_url( '/my-wallet/' );
+		
+		if ( $wallet_page_id && get_post_status( $wallet_page_id ) === 'publish' ) {
+			$default_url = get_permalink( $wallet_page_id );
+		}
+		
 		extract( shortcode_atts( array(
 			'text'     => __( 'Meine Jobboardguthaben', 'psjb' ),
 			'view'     => 'both', //loggedin, loggedout, both
 			'class'    => je()->settings()->theme,
 			'template' => '',
-			'url'      => get_permalink( ig_wallet()->settings()->my_wallet_page )
+			'url'      => $default_url
 		), $atts ) );
 
 		if ( ! $this->can_view( $view ) ) {

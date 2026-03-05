@@ -1,8 +1,8 @@
 <div class="ig-container">
     <div id="tabs">
         <ul class="nav nav-tabs">
-            <li><a href="#my-wallets"><?php _e("Wallets", 'psjb') ?></a></li>
-            <li><a href="#purcharse-history"><?php _e("Purchase History", 'psjb') ?></a></li>
+            <li><a href="#my-wallets"><?php _e("Guthaben", 'psjb') ?></a></li>
+            <li><a href="#purcharse-history"><?php _e("Kaufverlauf", 'psjb') ?></a></li>
         </ul>
         <div class="tab-content" style="padding: 0 10px">
             <div id="my-wallets">
@@ -89,7 +89,7 @@
         $('.log-cats button').on('click', function () {
             var cat = $(this).data('category');
 
-            if (cat == '<?php echo sanitize_title(__('All','psjb')) ?>') {
+            if (cat == '<?php echo sanitize_title(__('Alle','psjb')) ?>') {
                 $('#purchase-log-table').find('tr').show();
             } else {
                 var trs = $('#purchase-log-table tbody').find('tr');

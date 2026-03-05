@@ -120,7 +120,9 @@ if ( ! class_exists( 'GUMP' ) ) {
 		 */
 		public static function xss_clean( array $data ) {
 			foreach ( $data as $k => $v ) {
-				$data[ $k ] = filter_var( $v, FILTER_SANITIZE_STRING );
+				if ( is_scalar( $v ) ) {
+					$data[ $k ] = strip_tags( (string) $v );
+				}
 			}
 
 			return $data;
@@ -256,8 +258,6 @@ if ( ! class_exists( 'GUMP' ) ) {
 		 * @return array
 		 */
 		public function sanitize( array $input, $fields = null, $utf8_encode = true ) {
-			$magic_quotes = (bool) get_magic_quotes_gpc();
-
 			if ( is_null( $fields ) ) {
 				$fields = array_keys( $input );
 			}
@@ -271,10 +271,6 @@ if ( ! class_exists( 'GUMP' ) ) {
 					$value = $input[ $field ];
 
 					if ( is_string( $value ) ) {
-						if ( $magic_quotes === true ) {
-							$value = stripslashes( $value );
-						}
-
 						if ( strpos( $value, "\r" ) !== false ) {
 							$value = trim( $value );
 						}
@@ -287,7 +283,7 @@ if ( ! class_exists( 'GUMP' ) ) {
 							}
 						}
 
-						$value = filter_var( $value, FILTER_SANITIZE_STRING );
+						$value = strip_tags( $value );
 					}
 
 					$return[ $field ] = $value;
@@ -674,7 +670,7 @@ if ( ! class_exists( 'GUMP' ) ) {
 		 * @return string
 		 */
 		protected function filter_sanitize_string( $value, $params = null ) {
-			return filter_var( $value, FILTER_SANITIZE_STRING );
+			return strip_tags( (string) $value );
 		}
 
 		/**

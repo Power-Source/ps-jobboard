@@ -10,45 +10,45 @@ title: "PS Job-Board"
   <a href="https://github.com/cp-psource/ps-jobboard/releases" style="color:#38c2bb;">📝 Download</a>
 </div>
 
-## PS Job-Board brings a high-end jobs board to WordPress.
+## PS Job-Board bringt eine professionelle Jobbörse zu WordPress.
 
-Originally built to manage our popular WPMU DEV [Jobs & Pros](http://premium.wpmudev.org/wordpress-development/), each feature has been tested and concept proven by real users and true experts. 
+Ursprünglich gebaut, um die beliebte [Jobs & Pros](http://premium.wpmudev.org/wordpress-development/) Plattform zu verwalten – jede Funktion wurde von echten Nutzern und Experten getestet und bewährt. 
 
 ![expert-info](https://premium.wpmudev.org/wp-content/uploads/2014/10/expert-info.jpg)
 
- Let Experts list their skills with amazing graphic elements.
+ Lasse Experten ihre Fähigkeiten mit beeindruckenden grafischen Elementen präsentieren.
 
-### Post a Job
+### Einen Job veröffentlichen
 
-Post projects from an intuitive, responsive front-end interface. Describe your project, share a budget, set a deadline and attach spec files. Create a site where quality professionals come looking to work with you on your next big project.
+Veröffentliche Projekte über eine intuitive, responsive Front-End-Oberfläche. Beschreibe Dein Projekt, gib ein Budget an, setze eine Deadline und hänge Spezifikationsdateien an. Erstelle eine Webseite, auf der qualifizierte Fachleute gerne mit Dir an Deinem nächsten großen Projekt arbeiten.
 
  
 
-### Showcase Your Skills
+### Deine Fähigkeiten präsentieren
 
 It's everything you need to show your skills. Share an avatar, bio, contact information, example work and link to social profiles. Hand-pick the perfect person based on experience, portfolio, and recommendations from others.
 
 ![add-expert](https://premium.wpmudev.org/wp-content/uploads/2014/10/add-expert.jpg)
 
- Simple front end interface editing for a real connecting people.
+ Einfache Front-End-Bearbeitung für echte Menschenverbindungen.
 
 ### Fits Every Theme
 
-From animated graphics to modern icons, each feature comes with an equally compelling design element that can be adjusted to integrate beautifully into every theme. Adjust colors, listing layout and position elements exactly where you want them. 
+Von animierten Grafiken bis zu modernen Icons – jede Funktion kommt mit überzeugenden Design-Elementen, die sich wunderbar an jedes Theme anpassen lassen. Passe Farben, Listing-Layout und Element-Positionen genau nach Deinen Vorstellungen an. 
 
 ![advanced-search](https://premium.wpmudev.org/wp-content/uploads/2014/10/advanced-search-1.jpg)
 
- Give users a better experience and streamline navigation with advanced search.
+ Gib Deinen Nutzern ein besseres Erlebnis und optimiere die Navigation mit erweiterten Suchfunktionen.
 
 ### Killer Navigation
 
-PS Job-Board comes packaged with an advanced search module, project specific categories and skill tags making it super easy to navigate. Search thousands of listings quickly to find jobs that fit your skill set and pay you what you're worth.
+PS Job-Board kommt mit einem Advanced-Search-Modul, projektspezifischen Kategorien und Skill-Tags für mühelose Navigation. Durchsuche tausende Einträge schnell und finde Jobs, die zu Deinen Fähigkeiten passen und Deine Zeit wert sind.
 
- Help get things done with PS Job-Board – easy from the front to the back.
+Unterstütze Dein Team mit PS Job-Board – einfach von vorne bis hinten umzusetzen.
 
-## Usage
+## Verwendung
 
-### To Get Started:
+### Erste Schritte:
 
 Start by reading [Installing plugins](https://wpmudev.com/docs/using-wordpress/installing-wordpress-plugins/) section in our comprehensive [WordPress and WordPress Multisite Manual](https://premium.wpmudev.org/wpmu-manual/) if you are new to WordPress.
 
@@ -63,7 +63,7 @@ Once installed and activated, you'll see 2 new menu items in your dashboard; _J
 
 ![Jobs and Experts menus](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-menu.png)
 
-### Getting Started
+### Erste Schritte
 
 Let's take a look at the Getting Started page by going directly to the _Jobs_ menu or _Jobs > Getting Started_. You'll see a welcome page with some helpful links to get started. 
 
@@ -85,9 +85,9 @@ Let's take a look at the Getting Started page by going directly to the _Jobs_ m
 
 Let's take a look at the virtual page for the Job Listings.
 
-##### Virtual page for Jobs Listings
+##### Virtuelle Seite für Job-Listings
 
-Here you can change the title and content for the Jobs Listings section in the front-end. 
+Hier kannst Du den Titel und Inhalt für den Job-Listings-Bereich im Front-End ändern. 
 
 ![Jobs and Experts - Jobs Listings virtual page](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Jobs-Listings-virtual-page.png)
 
@@ -107,86 +107,76 @@ Similar to the previous section, here you change the title and content for the E
 
 ![Jobs and Experts - Virtual page for Experts Listing - Publish](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Virtual-page-Publish.png)
 
-### Configuring the Settings
+### Einstellungen konfigurieren
 
-Let's have a look through the settings page. Click on _Jobs > Settings_. 
+Schau Dir die Einstellungsseite an. Klicke auf _Jobs > Einstellungen_. 
 
 ![Jobs and Experts - Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Settings-Menu.png)
 
- Here's you'll see a sub-menu where you can select to configure various aspects of the plugin, as follows:
+ Hier siehst Du ein Untermenü, in dem Du verschiedene Aspekte des Plugins konfigurieren kannst:
 
-*   General Settings
-*   Jobs Settings
-*   Experts Settings
+*   Allgemeine Einstellungen
+*   Job-Einstellungen
+*   Experten-Einstellungen
 
 ![Jobs and Experts - General Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-General-Settings-Menu.png)
 
- Let's begin with the _General Settings_, we'll go through the sub-sections available there.
+ Beginnen wir mit den _Allgemeinen Einstellungen_ und gehen durch die verfügbaren Abschnitte.
 
-##### General Options
+##### Allgemeine Optionen
 
 ![Jobs and Experts - General Options](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-General-Options.png)
 
  In this sub-section, you'll have the option to select from a number of _Icon Colors_. These are the icons used to display the various options in the site's front-end. The options are as follows:
 
-*   Dark Icons, for light button backgrounds
+*   Dunkle Icons – für helle Button-Hintergründe
 
 ![Jobs and Experts - Icons - Dark](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Icons-Dark.png)
 
-*   Bright Icons, for dark button backgrounds
+*   Helle Icons – für dunkle Button-Hintergründe
 
 ![Jobs and Experts - Icons - Bright](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Icons-Bright.png)
 
-*   No Icons - to remove icons from buttons
+*   Keine Icons – um Icons aus Buttons zu entfernen
 
 ![Jobs and Experts - Icons - None](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Icons-None.png)
 
-##### Addons
+##### Erweiterungen
 
-You'll also see an Addons section where you can activate and deactivate various addons included with the plugin. 
+Du wirst auch einen Erweiterungs-Bereich sehen, in dem Du verschiedene im Plugin enthaltene Erweiterungen aktivieren und deaktivieren kannst. 
 
 ![Jobs and Experts - Add-ons](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Add-ons.png)
 
- The list of Addons currently includes the following:
+ Die Liste der aktuell verfügbaren Erweiterungen umfasst folgende:
 
-Advanced Search
+**Advanced Search** – Erweiterte Suchform für Job- und Experten-Listings
 
-Add advanced search form for jobs and experts listing page
+**Advanced Textarea** – WYSIWYG-Editor für Job-/Experten-Detail-Felder mit Sicherheitsfilterung
 
-Advanced textarea
+**Custom Layout** – Dynamisches Layout für Job- und Experten-Listings
 
-Use WYSIWYG for jobs/experts detail field, the value will be filtered by kses for security
+**Expert Demo Data** – Erstelle zufällige Experten-Datensätze zu Testzwecken
 
-Custom layout
-
-Dynamic layout for jobs/experts listing page
-
-Expert Demo Data
-
-Create random expert records, for testing purposes.
-
-Job Demo Data
-
-Create random job records, for testing purposes.
+**Job Demo Data** – Erstelle zufällige Job-Datensätze zu Testzwecken
 
 Simply click the _Activate_ link for each Addon you'd like to use. Be sure to click the _Save Change_s button to save all the changes you make to this section. 
 
 ![Jobs and Experts - General Options - Save Changes button](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-General-Options-Save-Changes-button.png)
 
-##### Jobs Settings
+##### Job-Einstellungen
 
 Here, you will find settings for the Jobs section. 
 
 ![Jobs and Experts - Jobs Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Jobs-Settings-Menu.png)
 
- Let's go through the Job options. 
+ Gehen wir durch die Job-Optionen. 
 
 ![Jobs and Experts - Jobs Settings](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Jobs-Settings.png)
 
-##### Experts Settings
+##### Experten-Einstellungen
 
 ![Jobs and Experts - Experts Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Experts-Settings-Menu.png)
 
- Here, you configure the options for Experts. Let's check out the settings for this. 
+ Hier konfigurierst Du die Optionen für Experten. Schau uns die Einstellungen dafür an. 
 
 ![Jobs and Experts - Experts Settings](https://premium.wpmudev.org/wp-content/uploads/2014/09/Jobs-and-Experts-Experts-Settings.png)

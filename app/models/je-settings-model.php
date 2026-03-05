@@ -35,6 +35,7 @@ class JE_Settings_Model extends IG_Option_Model
 
     public $expert_max_records;
     public $expert_per_page;
+	public $expert_budget_range;
     public $expert_new_expert_status;
     public $expert_allow_draft;
     public $expert_sample_size;

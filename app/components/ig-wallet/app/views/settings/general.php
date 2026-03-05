@@ -2,7 +2,7 @@
 <?php $form = new IG_Active_Form($model);
 $form->open(array("attributes" => array("class" => "form-horizontal"))); ?>
     <div class="form-group <?php echo $model->has_error("my_wallet_page") ? "has-error" : null ?>">
-        <?php $form->label("my_wallet_page", array("text" => "My Wallet Page", "attributes" => array("class" => "col-lg-2 control-label"))) ?>
+        <?php $form->label("my_wallet_page", array("text" => "Meine Wallet-Seite", "attributes" => array("class" => "col-lg-2 control-label"))) ?>
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-md-6">
@@ -20,7 +20,7 @@ $form->open(array("attributes" => array("class" => "form-horizontal"))); ?>
         <div class="clearfix"></div>
     </div>
     <div class="form-group <?php echo $model->has_error("plans_page") ? "has-error" : null ?>">
-        <?php $form->label("plans_page", array("text" => "Plans Page", "attributes" => array("class" => "col-lg-2 control-label"))) ?>
+        <?php $form->label("plans_page", array("text" => "Pakete-Seite", "attributes" => array("class" => "col-lg-2 control-label"))) ?>
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-md-6">
@@ -42,7 +42,7 @@ $form->open(array("attributes" => array("class" => "form-horizontal"))); ?>
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
             <button type="submit" name="je_credit_setting_save" value="1" class="btn btn-primary">
-                <?php _e("Save Changes", 'psjb') ?>
+                <?php _e("Änderungen speichern", 'psjb') ?>
             </button>
         </div>
     </div>
@@ -63,7 +63,7 @@ $form->open(array("attributes" => array("class" => "form-horizontal"))); ?>
                 },
                 success: function (data) {
                     var element = that.parent().parent().find('select').first();
-                    $.get('<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>', function (html) {
+                    $.get(window.location.href, function (html) {
                         html = $(html);
                         var clone = html.find('select[name="' + element.attr('name') + '"]');
                         element.replaceWith(clone);

@@ -258,24 +258,19 @@ $lang       = str_replace( '_', '-', $lang );
 ?>
 <script type="text/javascript">
 	jQuery(function ($) {
-		$(".datepicker").datepicker({
-			"dateFormat": "yy-mm-dd",
-			minDate: "<?php echo date('Y-m-d') ?>",
-			beforeShow: function (input, inst) {
-				inst.dpDiv.wrap('<div class="ig-container"></div>');
-			},
-			closeText: jeL10n.closeText,
-			currentText: jeL10n.currentText,
-			monthNames: jeL10n.monthNames,
-			monthNamesShort: jeL10n.monthNamesShort,
-			dayNames: jeL10n.dayNames,
-			dayNamesShort: jeL10n.dayNamesShort,
-			dayNamesMin: jeL10n.dayNamesMin,
-			//dateFormat: jeL10n.dateFormat,
-			firstDay: jeL10n.firstDay,
-			isRTL: jeL10n.isRTL,
-		});
-		$(".datepicker").datepicker( $.datepicker.regional[ "fr" ] );
+		// Flatpickr - moderner Vanilla-JS Datepicker (ersetzt jQuery UI)
+		if (typeof flatpickr !== 'undefined') {
+			flatpickr('.datepicker', {
+				dateFormat: 'Y-m-d',
+				minDate: '<?php echo date('Y-m-d') ?>',
+				locale: typeof flatpickr.l10ns !== 'undefined' && flatpickr.l10ns.de ? flatpickr.l10ns.de : 'default',
+				allowInput: true,
+				disableMobile: false
+			});
+		} else {
+			console.warn('Flatpickr is not loaded.');
+		}
+		
 		$('#jbp_skill_tag').select2({
 			tags: <?php echo json_encode(get_terms('jbp_skills_tag', array('fields'=>'names', 'get' => 'all' ) ) ); ?>,
 			placeholder: "<?php esc_attr_e('Füge ein Tag hinzu und trenne es durch Kommas','psjb'); ?>",
