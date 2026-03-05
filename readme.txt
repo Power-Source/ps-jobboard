@@ -1,4 +1,4 @@
-=== PS Job-Board ===
+=== PS JobBoard ===
 Contributors: DerNerd (PSOURCE)
 Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
 Requires at least: 4.9
@@ -102,5 +102,5 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 Für Support und weitere Informationen besuche:
 - [GitHub Issues](https://github.com/Power-Source/ps-jobboard/issues)
 - [GitHub Discussions](https://github.com/Power-Source/ps-jobboard/discussions)
-- [Dokumentation](https://github.com/Power-Source/ps-jobboard/docs)
+- [Dokumentation](https://cp-psource.github.io/ps-jobboard/)
 
