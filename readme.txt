@@ -4,7 +4,7 @@ Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
 Requires at least: 4.9
 Tested up to: 6.4
 ClassicPress: 2.6.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,6 +78,14 @@ Ja! Mit der MarketPress Integration kannst Du Guthabenpakete anbieten und das Pl
 Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Passe Farben, Icons und Layouts an Deine Marke an.
 
 == ChangeLog ==
+
+= 1.0.1 =
+
+* 🧭 Admin-Menü überarbeitet und Jobboard-Navigation vereinheitlicht
+* 💳 Wallet-Einstellungen in die zentralen Plugin-Einstellungen integriert
+* 🗓️ Datepicker auf Flatpickr umgestellt (jQuery UI entfernt)
+* 🌐 Wallet-Bereiche auf Deutsch lokalisiert und Textdomain vereinheitlicht
+* 🔧 Diverse Bugfixes (Wallet-Weiterleitungen, CORS bei Seitenerstellung, Tab-Layout)
 
 = 1.0.0 =
 

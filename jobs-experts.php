@@ -3,7 +3,7 @@
  * Plugin Name: PS-Jobboard
  * Plugin URI: https://cp-psource.github.io/ps-jobboard/
  * Description: Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche Jobbörse.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: PSOURCE
  * Author URI: https://nerdservice.eimen.net
  * ClassicPress: 2.6.0
@@ -13,41 +13,16 @@
  * License: GPLv2 or later
  */
 
+// Core bootstrap
+require_once( dirname( __FILE__ ) . '/framework/loader.php' );
+require_once( dirname( __FILE__ ) . '/Helper.php' );
 
-//some shorthand function needed
-function get_max_file_upload() {
-	$max_upload   = (int) ( ini_get( 'upload_max_filesize' ) );
-	$max_post     = (int) ( ini_get( 'post_max_size' ) );
-	$memory_limit = (int) ( ini_get( 'memory_limit' ) );
-	$upload_mb    = min( $max_upload, $max_post, $memory_limit );
-
-	return $upload_mb;
-}
-
-function jbp_format_bytes( $bytes, $precision = 2 ) {
-
-	if ( $bytes >= 1073741824 ) {
-		$bytes = number_format( $bytes / 1073741824, 2 ) . ' GB';
-	} elseif ( $bytes >= 1048576 ) {
-		$bytes = number_format( $bytes / 1048576, 2 ) . ' MB';
-	} elseif ( $bytes >= 1024 ) {
-		$bytes = number_format( $bytes / 1024, 2 ) . ' KB';
-	} elseif ( $bytes > 1 ) {
-		$bytes = $bytes . ' bytes';
-	} elseif ( $bytes == 1 ) {
-		$bytes = $bytes . ' byte';
-	} else {
-		$bytes = '0 bytes';
-	}
-
-	return $bytes;
-}
-
-function jbp_filter_text( $text ) {
-	$allowed_tags = wp_kses_allowed_html( 'post' );
-
-	return wp_kses( $text, $allowed_tags );
-}
+// Main class modules
+require_once( dirname( __FILE__ ) . '/app/components/je-utils.php' );
+require_once( dirname( __FILE__ ) . '/app/components/je-assets-module.php' );
+require_once( dirname( __FILE__ ) . '/app/components/je-bootstrap-module.php' );
+require_once( dirname( __FILE__ ) . '/app/components/je-permissions-module.php' );
+require_once( dirname( __FILE__ ) . '/app/components/je-loader-module.php' );
 
 //add action to load language
 /*add_action( 'plugins_loaded', 'jbp_load_languages' );
@@ -55,20 +30,23 @@ function jbp_load_languages() {
 	load_plugin_textdomain( 'psjb', false, plugin_basename( je()->plugin_path . 'languages/' ) );
 }*/
 
-///
-require_once( dirname( __FILE__ ) . '/framework/loader.php' );
-require_once( dirname( __FILE__ ) . '/Helper.php' );
+// Third-party
 if ( ! class_exists( 'SmartDOMDocument' ) ) {
 	include_once( dirname( __FILE__ ) . '/vendors/SmartDOMDocument.class.php' );
 }
 
 class Jobs_Experts {
+	use JE_Assets_Module;
+	use JE_Bootstrap_Module;
+	use JE_Permissions_Module;
+	use JE_Loader_Module;
+
 	public $plugin_url;
 	public $plugin_path;
 	public $domain;
 	public $prefix;
 
-	public $version = "1.0.0";
+	public $version = "1.0.1";
 	public $db_version = "1.0";
 
 	public $global = array();
@@ -116,130 +94,6 @@ class Jobs_Experts {
 			$sql = "UPDATE " . $wpdb->posts . " SET post_type='iup_media' WHERE post_type='jbp_media';";
 			$wpdb->query( $sql );
 			update_option( $this->prefix . 'db_version', $this->db_version );
-		}
-	}
-
-
-	function load_script( $scenario = '' ) {
-		switch ( $scenario ) {
-			case 'buttons':
-				wp_enqueue_style( 'jobs-buttons-shortcode' );
-				break;
-			case 'jobs':
-				wp_enqueue_script( 'jobs-main' );
-				wp_enqueue_style( 'jobs-list-shortcode' );
-				break;
-			case 'job':
-				wp_enqueue_style( 'jobs-single-shortcode' );
-				break;
-			case 'job-form':
-				wp_enqueue_script( 'jobs-main' );
-				wp_enqueue_style( 'jobs-form-shortcode' );
-				wp_enqueue_script( 'jobs-select2' );
-				wp_enqueue_style( 'jobs-select2' );
-				wp_enqueue_script( 'jbp-flatpickr' );
-				wp_enqueue_script( 'jbp-flatpickr-de' );
-				wp_enqueue_style( 'jbp-flatpickr' );
-				break;
-			case 'contact':
-				wp_enqueue_style( 'jobs-contact' );
-				break;
-			case 'experts':
-				wp_enqueue_script( 'jobs-main' );
-				wp_enqueue_style( 'expert-list-shortcode' );
-				wp_enqueue_script( 'jobs-main' );
-				break;
-			case 'expert':
-				wp_enqueue_style( 'expert-single-shortcode' );
-
-				wp_enqueue_script( 'jobs-main' );
-				break;
-			case 'expert-form':
-				wp_enqueue_style( 'expert-form-shortcode' );
-			wp_enqueue_script( 'jobs-main' );
-			wp_enqueue_script( 'jquery-frame-transport' );
-			wp_enqueue_style( 'jobs-form-validation' );
-			wp_enqueue_script( 'jobs-form-validation' );
-			wp_enqueue_script( 'jobs-form-init' );
-			break;
-			case 'landing':
-				wp_enqueue_style( 'jobs-list-shortcode' );
-				wp_enqueue_style( 'expert-list-shortcode' );
-				wp_enqueue_style( 'jobs-landing-shortcode' );
-				wp_enqueue_script( 'jobs-main' );
-				break;
-			case 'widget':
-				wp_enqueue_style( 'job-plus-widgets' );
-				break;
-		}
-	}
-
-
-	function scripts() {
-		wp_enqueue_script( 'jquery' );
-		wp_register_script( 'jobs-uploader', $this->plugin_url . 'assets/uploader.js', array( 'jquery' ), $this->version );
-		wp_enqueue_script( 'jobs-uploader' );
-
-		// Flatpickr - moderner Vanilla-JS Datepicker (ersetzt jQuery UI)
-		wp_register_script( 'jbp-flatpickr', $this->plugin_url . 'assets/vendors/flatpickr/flatpickr.min.js', array(), $this->version, true );
-		wp_register_script( 'jbp-flatpickr-de', $this->plugin_url . 'assets/vendors/flatpickr/l10n/de.js', array('jbp-flatpickr'), $this->version, true );
-		wp_register_style( 'jbp-flatpickr', $this->plugin_url . 'assets/vendors/flatpickr/flatpickr.min.css', array(), $this->version );
-
-		// Modern Form Validation - registrieren VOR is_admin check 
-		$min = $this->dev == true ? null : '.min';
-		wp_register_style( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.css', array(), $this->version );
-		wp_register_script( 'jobs-form-validation', $this->plugin_url . 'assets/form-validation.js', array(), $this->version, true );
-		wp_register_script( 'jobs-form-init', $this->plugin_url . 'assets/form-init.js', array( 'jquery', 'jobs-form-validation' ), $this->version, true );
-
-		if ( is_admin() ) {
-			wp_enqueue_style( 'jbp_admin', $this->plugin_url . 'assets/css/admin.css', array( 'ig-packed' ), $this->version );
-			wp_register_style( 'jbp_select2', $this->plugin_url . 'assets/select2/select2.css', array( 'ig-packed' ), $this->version );
-			wp_register_script( 'jbp_select2', $this->plugin_url . 'assets/select2/select2.min.js', array( 'jquery' ), $this->version );
-		} else {
-
-			global $wp_locale;
-			$aryArgs = array(
-				'closeText'       => __( 'Erledigt', 'psjb' ),
-				'currentText'     => __( 'Heute', 'psjb' ),
-				'monthNames'      => $this->strip_array_indices( $wp_locale->month ),
-				'monthNamesShort' => $this->strip_array_indices( $wp_locale->month_abbrev ),
-				'monthStatus'     => __( 'Zeige einen anderen Monat', 'psjb' ),
-				'dayNames'        => $this->strip_array_indices( $wp_locale->weekday ),
-				'dayNamesShort'   => $this->strip_array_indices( $wp_locale->weekday_abbrev ),
-				'dayNamesMin'     => $this->strip_array_indices( $wp_locale->weekday_initial ),
-				// set the date format to match the WP general date settings
-				'dateFormat'      => $this->date_format_php_to_js( get_option( 'date_format' ) ),
-				// get the start of week from WP general setting
-				'firstDay'        => get_option( 'start_of_week' ),
-				// is Right to left language? default is false
-				'isRTL'           => false,
-			);
-
-			$min = $this->dev == true ? null : '.min';
-			//style
-			wp_register_style( 'jobs-main', $this->plugin_url . 'assets/main' . $min . '.css', array( 'ig-packed' ), $this->version );
-			wp_register_style( 'jobs-buttons-shortcode', $this->plugin_url . 'assets/buttons' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'jobs-single-shortcode', $this->plugin_url . 'assets/jobs-single' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'jobs-form-shortcode', $this->plugin_url . 'assets/jobs-form' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'expert-form-shortcode', $this->plugin_url . 'assets/expert-form' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'expert-single-shortcode', $this->plugin_url . 'assets/expert-single' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'jobs-list-shortcode', $this->plugin_url . 'assets/jobs-list' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'expert-list-shortcode', $this->plugin_url . 'assets/expert-list' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'jobs-contact', $this->plugin_url . 'assets/contact' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'jobs-landing-shortcode', $this->plugin_url . 'assets/landing' . $min . '.css', array( 'jobs-main' ), $this->version );
-			wp_register_style( 'job-plus-widgets', $this->plugin_url . 'assets/widget' . $min . '.css', array( 'jobs-main' ), $this->version );
-
-			//js
-			wp_register_script( 'jobs-main', $this->plugin_url . 'assets/main.js', array(
-				'jquery',
-				'ig-packed'
-			), $this->version );
-			wp_localize_script( 'jobs-main', 'jeL10n', $aryArgs );
-
-			wp_register_script( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.min.js' );
-			wp_register_style( 'jobs-select2', $this->plugin_url . 'assets/select2/select2.css' );
-
-			wp_register_script( 'jobs-noty', $this->plugin_url . 'assets/vendors/noty/packaged/jquery.noty.packaged.min.js', array(), $this->version, true );
 		}
 	}
 
@@ -382,172 +236,12 @@ class Jobs_Experts {
 		}
 	}
 
-	function dispatch() {
-		//load post type
-		new JE_Custom_Content();
-		add_action( 'wp_loaded', array( &$this, 'init_pages' ) );
-		//uploader
-		include_once( $this->plugin_path . 'app/components/ig-uploader.php' );
-		ig_uploader()->init_uploader( $this->can_upload(), $this->domain );
-		//social-walll
-		include_once( $this->plugin_path . 'app/components/ig-social-wall.php' );
-		include_once( $this->plugin_path . 'app/components/ig-skill.php' );
-		if ( is_admin() ) {
-			// Use new unified admin controller
-			$this->global['admin'] = new JE_Unified_Admin_Controller();
-			new JE_Settings_Controller();
-		} else {
-			//load router
-			$router = new JE_Router();
-		}
-		//include_once($this->plugin_path . 'app/components/je-fields-table.php');
-		//load shortcode
-		$buttons     = new JE_Buttons_Shortcode_Controller();
-		$job_archive = new JE_Job_Archive_Shortcode_Controller;
-		$job_single  = new JE_Job_Single_Shortcode_Controller();
-		$job_form    = new JE_Job_Form_Shortcode_Controller();
-		$my_job      = new JE_My_Job_Shortcode_Controller();
-
-		$expert_archive = new JE_Expert_Archive_Shortcode_Controller();
-		$expert_single  = new JE_Expert_Single_Shortcode_Controller();
-		$my_expert      = new JE_My_Expert_Shortcode_Controller();
-		$expert_form    = new JE_Expert_Form_Shortcode_Controller();
-		$expert_search  = new JE_Expert_Search_Shortcode_Controller();
-
-		$contact = new JE_Contact_Shortcode_Controller();
-		$landing = new JE_Landing_Shortcode_Controller();
-		$shared  = new JE_Shared_Controller();
-
-		//GDPR
-		new JE_GDPR_Controller();
-		//load addon
-		//load add on
-		$addons = $this->settings()->plugins;
-		if ( ! is_array( $addons ) ) {
-			$addons = array();
-		}
-
-		foreach ( $addons as $addon ) {
-			if ( file_exists( $addon ) && $addon != $this->plugin_path . 'app/addons/je-message.php' ) {
-				include_once $addon;
-			}
-		}
-	}
-
-	function init_pages() {
-		$this->pages = new JE_Page_Factory();
-		$this->pages->init();
-	}
-
-	function init_widget() {
-		//widget
-		register_widget( 'JE_Job_Add_Widget_Controller' );
-		register_widget( 'JE_Job_Recent_Widget_Controller' );
-		register_widget( 'JE_Job_Search_Widget_Controller' );
-		register_widget( 'JE_Expert_Add_Widget_Controller' );
-	}
-
-	function can_upload() {
-		if ( ! is_user_logged_in() ) {
-			return false;
-		}
-
-		if ( current_user_can( 'upload_files' ) ) {
-			return true;
-		}
-
-		$allowed = $this->settings()->allow_attachment;
-		if ( ! is_array( $allowed ) ) {
-			$allowed = array();
-		}
-		$allowed = array_filter( $allowed );
-		$user    = new WP_User( get_current_user_id() );
-		foreach ( $user->roles as $role ) {
-			if ( in_array( $role, $allowed ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	function can_upload_avatar() {
-		if ( ! is_user_logged_in() ) {
-			return false;
-		}
-
-		if ( current_user_can( 'upload_files' ) ) {
-			return true;
-		}
-
-		$allowed = $this->settings()->allow_avatar;
-		if ( ! is_array( $allowed ) ) {
-			$allowed = array();
-		}
-		$allowed = array_filter( $allowed );
-		$user    = new WP_User( get_current_user_id() );
-		foreach ( $user->roles as $role ) {
-			if ( in_array( $role, $allowed ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	function autoload( $class ) {
-		$filename = str_replace( '_', '-', strtolower( $class ) ) . '.php';
-		if ( strstr( $filename, '-controller.php' ) ) {
-			//looking in the controllers folder and sub folders to get this class
-			$files = $this->listFolderFiles( $this->plugin_path . 'app/controllers' );
-			foreach ( $files as $file ) {
-				if ( strcmp( $filename, pathinfo( $file, PATHINFO_BASENAME ) ) === 0 ) {
-					include_once $file;
-					break;
-				}
-			}
-		} elseif ( strstr( $filename, '-model.php' ) ) {
-			$files = $this->listFolderFiles( $this->plugin_path . 'app/models' );
-
-			foreach ( $files as $file ) {
-				if ( strcmp( $filename, pathinfo( $file, PATHINFO_BASENAME ) ) === 0 ) {
-					include_once $file;
-					break;
-				}
-			}
-		} elseif ( file_exists( $this->plugin_path . 'app/' . $filename ) ) {
-			include_once $this->plugin_path . 'app/' . $filename;
-		} elseif ( file_exists( $this->plugin_path . 'app/components/' . $filename ) ) {
-			include_once $this->plugin_path . 'app/components/' . $filename;
-		}
-	}
-
 	public static function get_instance() {
 		if ( ! self::$_instance instanceof Jobs_Experts ) {
 			self::$_instance = new Jobs_Experts();
 		}
 
 		return self::$_instance;
-	}
-
-	function listFolderFiles( $dir ) {
-		$ffs  = scandir( $dir );
-		$i    = 0;
-		$list = array();
-		foreach ( $ffs as $ff ) {
-			if ( $ff != '.' && $ff != '..' ) {
-				if ( strlen( $ff ) >= 5 ) {
-					if ( substr( $ff, - 4 ) == '.php' ) {
-						$list[] = $dir . '/' . $ff;
-					}
-				}
-				if ( is_dir( $dir . '/' . $ff ) ) {
-					$list = array_merge( $list, $this->listFolderFiles( $dir . '/' . $ff ) );
-				}
-			}
-		}
-
-		return $list;
 	}
 
 	function get_avatar_url( $get_avatar ) {
