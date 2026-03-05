@@ -13,20 +13,20 @@
                 <ul id="jbp_setting_nav"
                     style="margin-top: 0;padding-top: 0;margin-right: -1px;z-index:9;padding-right: 0"
                     class="nav nav-tabs tabs-left col-md-2 no-padding hidden-sm hidden-xs">
-                    <li <?php echo je()->get('tab', 'general') == 'general' ? 'class="active"' : null ?>>
-                        <a href="<?php echo admin_url('admin.php?page=ig-credits-setting') ?>">
+                    <li <?php echo je()->get('subtab', 'general') == 'general' ? 'class="active"' : null ?>>
+                        <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_settings') ?>">
                             <i class="glyphicon glyphicon-cog"></i> <?php _e('Allgemeine Einstellungen', 'psjb') ?>
                         </a>
                     </li>
-                    <li <?php echo je()->get('tab') == 'give_credit' ? 'class="active"' : null ?>>
-                        <a href="<?php echo admin_url('admin.php?page=ig-credits-setting&tab=give_credit') ?>">
+                    <li <?php echo je()->get('subtab') == 'give_credit' ? 'class="active"' : null ?>>
+                        <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_settings&subtab=give_credit') ?>">
                             <i class="fa fa-bank"></i> <?php _e('Guthaben senden', 'psjb') ?>
                         </a>
                     </li>
                 </ul>
                 <div class="tab-content col-md-10">
                     <div class="jbp-setting-content tab-pane active">
-                        <?php do_action('je_credit_settings_content_' . je()->get('tab', 'general')) ?>
+                        <?php do_action('je_credit_settings_content_' . je()->get('subtab', 'general')) ?>
                     </div>
                 </div>
             </div>

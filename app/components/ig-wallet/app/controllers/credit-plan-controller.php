@@ -119,7 +119,7 @@ class Credit_Plan_Controller extends IG_Request {
 			switch ( $_POST['type'] ) {
 				case 'wallet_page':
 					$new_id = wp_insert_post( apply_filters( 'je_create_my_wallet_page', array(
-						'post_title'     => __( "Meine Jobboardguthaben", 'psjb' ),
+						'post_title'     => __( "Jobboardguthaben", 'psjb' ),
 						'post_content'   => "$shortcodes [jbp-my-wallet]",
 						'post_status'    => 'publish',
 						'post_type'      => 'page',
@@ -169,7 +169,7 @@ class Credit_Plan_Controller extends IG_Request {
 		}
 		
 		extract( shortcode_atts( array(
-			'text'     => __( 'Meine Jobboardguthaben', 'psjb' ),
+			'text'     => __( 'Jobboardguthaben', 'psjb' ),
 			'view'     => 'both', //loggedin, loggedout, both
 			'class'    => je()->settings()->theme,
 			'template' => '',
@@ -245,7 +245,7 @@ class Credit_Plan_Controller extends IG_Request {
 		if ( is_object( $model ) ) {
 			Credit_Plan_Model::delete_plan( je()->post( 'id' ) );
 			$this->set_flash( 'plan_save', sprintf( __( "Paket <strong>%s</strong> wurde gelöscht!", 'psjb' ), $model->title ) );
-			$this->redirect( admin_url( 'admin.php?page=ig-credit-plans' ) );
+			$this->redirect( admin_url( 'admin.php?page=je-jobboard-settings&tab=wallet_plans' ) );
 		}
 	}
 
@@ -267,7 +267,7 @@ class Credit_Plan_Controller extends IG_Request {
 			$model->add_plan( $model->title, $model->description, $model->cost, $model->credits, $model->sale_price, $model->product_id, $model->append_credits_info );
 
 			$this->set_flash( 'plan_save', sprintf( __( "Paket <strong>%s</strong> wurde gespeichert!", 'psjb' ), $model->title ) );
-			$this->redirect( admin_url( 'admin.php?page=ig-credit-plans' ) );
+			$this->redirect( admin_url( 'admin.php?page=je-jobboard-settings&tab=wallet_plans' ) );
 		}
 		ig_wallet()->global['model'] = $model;
 	}

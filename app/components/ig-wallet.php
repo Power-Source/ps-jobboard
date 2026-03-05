@@ -30,6 +30,7 @@ if (!class_exists('IG_Wallet')) {
             add_action('wp_enqueue_scripts', array(&$this, 'scripts'));
             add_action('admin_enqueue_scripts', array(&$this, 'scripts'));
             add_action('admin_menu', array(&$this, 'admin_menu'));
+            add_action('admin_init', array(&$this, 'redirect_legacy_urls'));
             //add_filter('menu_order', array(&$this, 'menu_order'));
             //$this->custom_post_type();
             $this->controller = new Credit_Plan_Controller();
@@ -39,33 +40,87 @@ if (!class_exists('IG_Wallet')) {
         {
             $parent_slug = 'je-jobboard';
 
-            if (isset($GLOBALS['admin_page_hooks'][$parent_slug])) {
-                add_submenu_page($parent_slug, __('Guthabenpakete', $this->domain), __('Guthabenpakete', $this->domain), 'manage_options', 'ig-credit-plans', array($this->controller, 'main'));
-                add_submenu_page($parent_slug, __("Regeln", $this->domain), __("Regeln", $this->domain), 'manage_options', 'ig-credit-rules', array($this->controller, 'rules'));
-                add_submenu_page($parent_slug, __("Einstellungen", $this->domain), __("Einstellungen", $this->domain), 'manage_options', 'ig-credits-setting', array($this->controller, 'settings'));
-                return;
-            }
-
-            add_menu_page(__('Guthabenpakete', $this->domain), __('Guthabenpakete', $this->domain), 'manage_options', 'ig-credit-plans', array($this->controller, 'main'), 'dashicons-products', 35);
-            add_submenu_page('ig-credit-plans', __("Regeln", $this->domain), __("Regeln", $this->domain), 'manage_options', 'ig-credit-rules', array($this->controller, 'rules'));
-            add_submenu_page('ig-credit-plans', __("Einstellungen", $this->domain), __("Einstellungen", $this->domain), 'manage_options', 'ig-credits-setting', array($this->controller, 'settings'));
-            //add_submenu_page('ig-credit-plans', __("Getting Start", $this->domain), __("Getting Start", $this->domain), 'manage_options', 'ig-credit-getting-start', array($this->controller, 'getting_start'));
+        // Integration in Jobboard-Einstellungen wenn Jobboard-Menü existiert
+        if (isset($GLOBALS['admin_page_hooks'][$parent_slug])) {
+            // Statt separaten Menü-Seiten: Integration über Hooks in das Settings-System
+            add_action('jbp_setting_menu', array(&$this, 'wallet_menu_tabs'));
+            add_action('je_settings_content_wallet_plans', array($this->controller, 'main'));
+            add_action('je_settings_content_wallet_rules', array($this->controller, 'rules'));
+            add_action('je_settings_content_wallet_settings', array($this->controller, 'settings'));
+            return;
         }
 
-        function menu_order($menu_order)
-        {
-            global $submenu;
+        // Fallback: Separates Menü nur wenn Jobboard-Menü nicht existiert
+        add_menu_page(__('Guthabenpakete', $this->domain), __('Guthabenpakete', $this->domain), 'manage_options', 'ig-credit-plans', array($this->controller, 'main'), 'dashicons-products', 35);
+        add_submenu_page('ig-credit-plans', __("Regeln", $this->domain), __("Regeln", $this->domain), 'manage_options', 'ig-credit-rules', array($this->controller, 'rules'));
+        add_submenu_page('ig-credit-plans', __("Einstellungen", $this->domain), __("Einstellungen", $this->domain), 'manage_options', 'ig-credits-setting', array($this->controller, 'settings'));
+        //add_submenu_page('ig-credit-plans', __("Getting Start", $this->domain), __("Getting Start", $this->domain), 'manage_options', 'ig-credit-getting-start', array($this->controller, 'getting_start'));
+    }
 
-            if (isset($submenu['ig-credit-plans'])) {
-                $nav = $submenu['ig-credit-plans'];
-                //get the last
-                $start = array_pop($nav);
-                $nav = array_merge(array($start), $nav);
-                $submenu['ig-credit-plans'] = $nav;
-            }
+    /**
+     * Fügt Wallet-Tabs zum Jobboard-Einstellungen-Menü hinzu
+     */
+    function wallet_menu_tabs()
+    {
+        ?>
+        <li <?php echo je()->get('tab') == 'wallet_plans' ? 'class="active"' : null ?>>
+            <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_plans') ?>">
+                <i class="dashicons dashicons-products"></i> <?php _e('Guthabenpakete', $this->domain) ?>
+            </a>
+        </li>
+        <li <?php echo je()->get('tab') == 'wallet_rules' ? 'class="active"' : null ?>>
+            <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_rules') ?>">
+                <i class="dashicons dashicons-admin-settings"></i> <?php _e('Guthaben-Regeln', $this->domain) ?>
+            </a>
+        </li>
+        <li <?php echo je()->get('tab') == 'wallet_settings' ? 'class="active"' : null ?>>
+            <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_settings') ?>">
+                <i class="dashicons dashicons-admin-generic"></i> <?php _e('Wallet-Einstellungen', $this->domain) ?>
+            </a>
+        </li>
+        <?php
+    }
 
-            return $menu_order;
+    /**
+     * Leitet alte Wallet-URLs zu den neuen integrierten Tabs um (Backwards Compatibility)
+     */
+    function redirect_legacy_urls()
+    {
+        if (!is_admin()) {
+            return;
         }
+
+        $page = isset($_GET['page']) ? $_GET['page'] : '';
+        
+        // Redirect alte URLs zu neuen Tab-URLs
+        if ($page == 'ig-credit-plans') {
+            wp_redirect(admin_url('admin.php?page=je-jobboard-settings&tab=wallet_plans'));
+            exit;
+        }
+        if ($page == 'ig-credit-rules') {
+            wp_redirect(admin_url('admin.php?page=je-jobboard-settings&tab=wallet_rules'));
+            exit;
+        }
+        if ($page == 'ig-credits-setting') {
+            wp_redirect(admin_url('admin.php?page=je-jobboard-settings&tab=wallet_settings'));
+            exit;
+        }
+    }
+
+    function menu_order($menu_order)
+    {
+        global $submenu;
+
+        if (isset($submenu['ig-credit-plans'])) {
+            $nav = $submenu['ig-credit-plans'];
+            //get the last
+            $start = array_pop($nav);
+            $nav = array_merge(array($start), $nav);
+            $submenu['ig-credit-plans'] = $nav;
+        }
+
+        return $menu_order;
+    }
 
         function custom_post_type()
         {

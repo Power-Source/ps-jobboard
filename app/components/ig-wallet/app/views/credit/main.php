@@ -42,8 +42,7 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"
-                                               href="<?php echo admin_url(add_query_arg('id', $row->product_id, 'admin.php?page=ig-credit-plans')) ?>">
-                                                <?php _e("Bearbeiten") ?></a>
+                                           href="<?php echo admin_url(add_query_arg('id', $row->product_id, 'admin.php?page=je-jobboard-settings&tab=wallet_plans')) ?>">
 
                                             <form style="display: inline;" method="post">
                                                 <?php wp_nonce_field('je_delete_plan', 'je_delete_plan_nonce') ?>
@@ -145,7 +144,7 @@
                                 <button type="submit" name="je_credit_submit"
                                         value="<?php echo wp_create_nonce('ig_wallet_save_plan') ?>"
                                         class="btn btn-primary"><?php _e("Speichern", 'psjb') ?></button>
-                                <a href="<?php echo admin_url('admin.php?page=ig-credit-plans') ?>"
+                                <a href="<?php echo admin_url('admin.php?page=je-jobboard-settings&tab=wallet_plans') ?>"
                                    class="btn btn-default"><?php _e("Formular zurücksetzen", 'psjb') ?></a>
                             </div>
                             <div class="clearfix"></div>
