@@ -4,7 +4,7 @@ Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
 Requires at least: 4.9
 Tested up to: 6.4
 ClassicPress: 2.6.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,6 +78,13 @@ Ja! Mit der MarketPress Integration kannst Du Guthabenpakete anbieten und das Pl
 Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Passe Farben, Icons und Layouts an Deine Marke an.
 
 == ChangeLog ==
+
+= 1.0.2 =
+
+* Fix: Profile-Panel AJAX stabilisiert (Assets/Styles/Skripte werden in Tabs konsistent geladen)
+* Fix: Abstürze bei Job/Experten-Formularen im Profil-Panel behoben (null/array Guards)
+* Fix: Kompatibilitätsprobleme bei der JS-Ausgabe im Profil-Panel behoben
+* Verbesserte Robustheit bei Job-/Experten-Archivansichten (defensive Fallbacks)
 
 = 1.0.1 =
 

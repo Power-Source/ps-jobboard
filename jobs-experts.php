@@ -3,7 +3,7 @@
  * Plugin Name: PS-Jobboard
  * Plugin URI: https://cp-psource.github.io/ps-jobboard/
  * Description: Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche Jobbörse.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: PSOURCE
  * Author URI: https://nerdservice.eimen.net
  * ClassicPress: 2.6.0
@@ -46,7 +46,7 @@ class Jobs_Experts {
 	public $domain;
 	public $prefix;
 
-	public $version = "1.0.1";
+	public $version = "1.0.2";
 	public $db_version = "1.0";
 
 	public $global = array();
