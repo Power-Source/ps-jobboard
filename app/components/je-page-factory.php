@@ -30,7 +30,7 @@ class JE_Page_Factory
         $this->expert_obj = get_post_type_object('jbp_pro');
         //prepared content
         $this->warning = __("<!-- Du kannst diese Seite, den Titel und den Slug bearbeiten, aber es erfordert als Minimum den richtigen Seiten-Shortcode, um zu funktionieren. Du kannst die ursprüngliche Standardseite neu erstellen, indem Du diese löschst. -->\n", 'psjb') . PHP_EOL;
-        $this->buttons = '<p style="text-align: center">[jbp-job-browse-btn][jbp-expert-browse-btn][jbp-job-post-btn][jbp-expert-post-btn][jbp-my-job-btn][jbp-expert-profile-btn]</p>' . PHP_EOL;
+        $this->buttons = '<p style="text-align: center">[jbp-landing-btn][jbp-job-browse-btn][jbp-expert-browse-btn][jbp-job-post-btn][jbp-expert-post-btn][jbp-my-job-btn][jbp-expert-profile-btn]</p>' . PHP_EOL;
     }
 
     public function init()

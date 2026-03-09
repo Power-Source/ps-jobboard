@@ -33,6 +33,7 @@ trait JE_Bootstrap_Module {
 		$contact = new JE_Contact_Shortcode_Controller();
 		$landing = new JE_Landing_Shortcode_Controller();
 		$shared  = new JE_Shared_Controller();
+		$profile_panel = new JE_Profile_Panel_Shortcode_Controller();
 
 		new JE_GDPR_Controller();
 

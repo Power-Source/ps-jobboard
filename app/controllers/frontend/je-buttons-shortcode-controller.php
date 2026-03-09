@@ -8,6 +8,7 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
     public function  __construct()
     {
         $buttons = array(
+            'jbp-landing-btn' => 'landing_page',
             'jbp-expert-post-btn' => 'expert_add',
             'jbp-job-post-btn' => 'job_add',
             'jbp-job-browse-btn' => 'job_list',
@@ -104,6 +105,36 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
 		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'add_new_job'), esc_html($text));
 
         return apply_filters('jbp_job_post_btn_output', $ob);
+    }
+
+    /**
+     * This shortcode renders the Jobboard landing page button
+     */
+    function landing_page($atts)
+    {
+        je()->load_script('buttons');
+        $page_module = je()->pages;
+        extract(shortcode_atts(array(
+            'text' => __('Startseite', 'psjb'),
+            'view' => 'both',
+            'class' => je()->settings()->theme,
+            'template' => '',
+            'url' => get_permalink($page_module->page(JE_Page_Factory::LANDING_PAGE))
+        ), $atts));
+
+        if (!$this->can_view($view)) {
+            return '';
+        }
+
+        if (!empty($template) && locate_template($template)) {
+            return $this->custom_template($template);
+        }
+
+        $ob = sprintf('<a class="jbp-shortcode-button jbp-landing %s" href="%s">
+			%s
+		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'landing_page'), esc_html($text));
+
+        return apply_filters('jbp_landing_btn_output', $ob);
     }
 
     /**
