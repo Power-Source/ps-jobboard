@@ -11,6 +11,35 @@ class JE_Job_Form_Shortcode_Controller extends IG_Request {
 		}
 	}
 
+	protected function is_profile_jobboard_context() {
+		$tab = isset( $_REQUEST['tab'] ) ? sanitize_key( wp_unslash( $_REQUEST['tab'] ) ) : '';
+
+		return $tab === 'jobboard';
+	}
+
+	protected function get_profile_jobboard_url( $section = 'landing' ) {
+		$profile_page_id = (int) get_option( 'cpccom_profile_page' );
+		if ( ! $profile_page_id ) {
+			return '';
+		}
+
+		$profile_url = get_permalink( $profile_page_id );
+		if ( ! $profile_url ) {
+			return '';
+		}
+
+		$user_id = isset( $_REQUEST['user_id'] ) ? absint( wp_unslash( $_REQUEST['user_id'] ) ) : get_current_user_id();
+
+		return add_query_arg(
+			array(
+				'user_id'    => $user_id,
+				'tab'        => 'jobboard',
+				'je_section' => $section,
+			),
+			$profile_url
+		);
+	}
+
 	function process() {
 		if ( ! wp_verify_nonce( je()->post( '_wpnonce' ), 'je_job_form' ) ) {
 			return;
@@ -30,6 +59,11 @@ class JE_Job_Form_Shortcode_Controller extends IG_Request {
 			do_action( 'je_job_saving_process', $model );
 			$model->status = je()->post( 'status' );
 			$model->save();
+
+			if ( $this->is_profile_jobboard_context() ) {
+				$this->redirect( $this->get_profile_jobboard_url( 'my-jobs' ) );
+			}
+
 			if ( $model->status == 'publish' ) {
 				$this->redirect( get_permalink( $model->id ) );
 			} else {

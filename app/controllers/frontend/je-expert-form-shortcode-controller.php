@@ -14,6 +14,35 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 		}
 	}
 
+	protected function is_profile_jobboard_context() {
+		$tab = isset( $_REQUEST['tab'] ) ? sanitize_key( wp_unslash( $_REQUEST['tab'] ) ) : '';
+
+		return $tab === 'jobboard';
+	}
+
+	protected function get_profile_jobboard_url( $section = 'landing' ) {
+		$profile_page_id = (int) get_option( 'cpccom_profile_page' );
+		if ( ! $profile_page_id ) {
+			return '';
+		}
+
+		$profile_url = get_permalink( $profile_page_id );
+		if ( ! $profile_url ) {
+			return '';
+		}
+
+		$user_id = isset( $_REQUEST['user_id'] ) ? absint( wp_unslash( $_REQUEST['user_id'] ) ) : get_current_user_id();
+
+		return add_query_arg(
+			array(
+				'user_id'    => $user_id,
+				'tab'        => 'jobboard',
+				'je_section' => $section,
+			),
+			$profile_url
+		);
+	}
+
 	function avatar_process() {
 		if ( wp_verify_nonce( je()->get( 'upload_file_nonce' ), 'hn_upload_avatar' ) ) {
 			if ( ! function_exists( 'wp_handle_upload' ) ) {
@@ -80,6 +109,16 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 			if (!$should_validate || $model->validate()) {
 				do_action( 'je_expert_saving_process', $model );
 				$model->save();
+
+				$redirect_url = '';
+				if ( $this->is_profile_jobboard_context() ) {
+					$redirect_url = $this->get_profile_jobboard_url( 'my-expert' );
+				}
+				if ( empty( $redirect_url ) ) {
+					$redirect_url = $model->status == 'publish'
+						? get_permalink( $model->id )
+						: get_permalink( je()->pages->page( JE_Page_Factory::MY_EXPERT ) );
+				}
 				
 				// Check if this is an AJAX request
 				if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
@@ -87,16 +126,12 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 					wp_send_json_success( array(
 						'status' => $model->status,
 						'id' => $model->id,
-						'redirect_url' => $model->status == 'publish' ? get_permalink( $model->id ) : get_permalink( je()->pages->page( JE_Page_Factory::MY_EXPERT ) )
+						'redirect_url' => $redirect_url
 					) );
 					exit;
 				} else {
 					// Normal redirect for non-AJAX submissions
-					if ( $model->status == 'publish' ) {
-						$this->redirect( get_permalink( $model->id ) );
-					} else {
-						$this->redirect( get_permalink( je()->pages->page( JE_Page_Factory::MY_EXPERT ) ) );
-					}
+					$this->redirect( $redirect_url );
 				}
 			} else {
 				// Validation failed

@@ -174,7 +174,7 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
         //todo update url
         $ob = sprintf('<a class="jbp-shortcode-button jbp-browse-pro %s" href="%s">
 			%s
-		</a>', esc_attr($class), $url, esc_html($text));
+		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'expert_list'), esc_html($text));
 
         return $ob;
     }
@@ -217,7 +217,7 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
 
         $ob = sprintf('<a class="jbp-shortcode-button jbp-browse-job %s" href="%s">
 			%s
-		</a>', esc_attr($class), $url, esc_html($text));
+		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'job_list'), esc_html($text));
 
         return apply_filters('jbp_job_list_btn_output', $ob);
     }

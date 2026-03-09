@@ -182,7 +182,7 @@ class Credit_Plan_Controller extends IG_Request {
 
 		$ob = sprintf( '<a class="ig-container jbp-shortcode-button jbp-my-wallet %s" href="%s">
 			<i style="display: block" class="glyphicon glyphicon-piggy-bank fa-2x"></i>%s
-		</a>', esc_attr( $class ), $url, esc_html( $text ) );
+		</a>', esc_attr( $class ), apply_filters( 'jbp_button_url', $url, 'my_wallet' ), esc_html( $text ) );
 
 		return $ob;
 	}

@@ -21,6 +21,12 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 			return $this->render( 'login', array(), false );
 		}
 
+		$this->ensure_profile_panel_assets_registered();
+
+		// Set global flag to indicate we're in profile panel context
+		global $je_in_profile_panel_context;
+		$je_in_profile_panel_context = true;
+
 		$section = isset( $_GET['je_section'] ) ? sanitize_key( $_GET['je_section'] ) : 'landing';
 
 		$html  = '';
@@ -35,14 +41,14 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	 * Render profile navigation menu with original Jobboard buttons
 	 */
 	function render_profile_nav() {
+		$shortcodes = apply_filters(
+			'je_buttons_on_single_page',
+			'[jbp-my-job-btn][jbp-expert-profile-btn][jbp-job-browse-btn][jbp-expert-browse-btn][jbp-job-post-btn][jbp-expert-post-btn]'
+		);
+
 		$nav_html  = '<div style="text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #e0e0e0;">';
 		$nav_html .= do_shortcode( '[jbp-landing-btn]' );
-		$nav_html .= do_shortcode( '[jbp-my-job-btn]' );
-		$nav_html .= do_shortcode( '[jbp-expert-profile-btn]' );
-		$nav_html .= do_shortcode( '[jbp-job-browse-btn]' );
-		$nav_html .= do_shortcode( '[jbp-expert-browse-btn]' );
-		$nav_html .= do_shortcode( '[jbp-job-post-btn]' );
-		$nav_html .= do_shortcode( '[jbp-expert-post-btn]' );
+		$nav_html .= do_shortcode( $shortcodes );
 		$nav_html .= '</div>';
 
 		return $nav_html;
@@ -83,6 +89,10 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 				$html .= $this->render_expert_add();
 				break;
 
+			case 'my-wallet':
+				$html .= $this->render_my_wallet();
+				break;
+
 			default:
 				$html .= '<p class="je-error">' . __( 'Unbekannte Sektion.', 'psjb' ) . '</p>';
 		}
@@ -96,6 +106,7 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	 * Render landing content (jobs + experts)
 	 */
 	function render_landing() {
+		je()->load_script( 'landing' );
 		return do_shortcode( '[jbp-landing-page]' );
 	}
 
@@ -113,31 +124,41 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function render_my_expert() {
 		je()->load_script( 'experts' );
 
-		$model = JE_Expert_Model::model()->find_by_attributes( array(
-			'owner' => get_current_user_id()
-		), true );
+		$models = JE_Expert_Model::model()->find_by_attributes( array(
+			'user_id' => get_current_user_id()
+		) );
 
-		return $this->render( 'my-expert/main', array( 'model' => $model ), false );
+		return $this->render( 'my-expert/main', array( 'models' => $models ), false );
 	}
 
 	function render_job_list() {
 		je()->load_script( 'jobs' );
 
-		$models = JE_Job_Model::model()->find_by_attributes( array(
-			'status' => 'publish'
-		) );
-
-		return $this->render( 'job-archive/main', array( 'models' => $models ), false );
+		return do_shortcode( '[jbp-job-archive-page]' );
 	}
 
 	function render_expert_list() {
 		je()->load_script( 'experts' );
 
-		$models = JE_Expert_Model::model()->find_by_attributes( array(
-			'status' => 'publish'
-		) );
+		return do_shortcode( '[jbp-expert-archive-page]' );
+	}
 
-		return $this->render( 'expert-archive/main', array( 'models' => $models ), false );
+	function ensure_profile_panel_assets_registered() {
+		if ( method_exists( je(), 'scripts' ) ) {
+			je()->scripts();
+		}
+
+		if ( function_exists( 'ig_social_wall' ) && method_exists( ig_social_wall(), 'scripts' ) ) {
+			ig_social_wall()->scripts();
+		}
+
+		if ( function_exists( 'ig_skill' ) && method_exists( ig_skill(), 'scripts' ) ) {
+			ig_skill()->scripts();
+		}
+
+		if ( function_exists( 'ig_uploader' ) && method_exists( ig_uploader(), 'scripts' ) ) {
+			ig_uploader()->scripts();
+		}
 	}
 
 	function render_job_add() {
@@ -146,12 +167,27 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 		$slug = isset( $_GET['job'] ) ? sanitize_key( $_GET['job'] ) : null;
 
 		if ( ! empty( $slug ) ) {
-			$model = JE_Job_Model::model()->find_by_attributes( array(
-				'id'    => $slug,
-				'owner' => get_current_user_id()
-			), true );
+			if ( filter_var( $slug, FILTER_VALIDATE_INT ) ) {
+				$model = JE_Job_Model::model()->find( $slug );
+			} else {
+				$model = JE_Job_Model::model()->find_by_slug( $slug );
+			}
+
+			if ( ! is_object( $model ) || ! $model->is_current_owner() ) {
+				$model = null;
+			}
 		} else {
-			$model = null;
+			$model              = new JE_Job_Model();
+			$model->status      = 'je-draft';
+			$model->description = '';
+			$model->owner       = get_current_user_id();
+		}
+
+		if ( ! is_object( $model ) ) {
+			$model              = new JE_Job_Model();
+			$model->status      = 'je-draft';
+			$model->description = '';
+			$model->owner       = get_current_user_id();
 		}
 
 		return $this->render( 'job-form/main', array(
@@ -163,14 +199,25 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function render_expert_add() {
 		je()->load_script( 'expert-form' );
 
-		$model = JE_Expert_Model::model()->find_by_attributes( array(
-			'owner' => get_current_user_id()
-		), true );
+		$model = JE_Expert_Model::model()->find_one_by_attributes( array(
+			'user_id' => get_current_user_id()
+		) );
+
+		if ( ! is_object( $model ) ) {
+			$model            = new JE_Expert_Model();
+			$model->status    = 'je-draft';
+			$model->biography = '';
+			$model->user_id   = get_current_user_id();
+		}
 
 		return $this->render( 'expert-form/main', array(
 			'model'       => $model,
 			'form_action' => '#'
 		), false );
+	}
+
+	function render_my_wallet() {
+		return do_shortcode( '[jbp-my-wallet]' );
 	}
 
 	/**
@@ -184,6 +231,12 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 		if ( ! is_user_logged_in() ) {
 			wp_send_json_error( array( 'message' => __( 'Not logged in', 'psjb' ) ) );
 		}
+
+		// Set global flag to indicate we're in profile panel context
+		global $je_in_profile_panel_context;
+		$je_in_profile_panel_context = true;
+
+		$this->ensure_profile_panel_assets_registered();
 
 		$section = isset( $_POST['section'] ) ? sanitize_key( $_POST['section'] ) : 'landing';
 
