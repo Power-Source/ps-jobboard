@@ -20,6 +20,33 @@
     color: white !important;
 }
 
+.jbp-landing.dark:hover:before, .jbp-landing.bright:hover:before {
+    content:    "";
+    display:    block;
+    width:      32px;
+    height:     32px;
+    margin:     0 auto;
+    background: url("image/icons/Browse_Jobs/Browse_Jobs_Hover.svg") no-repeat;
+}
+
+.jbp-landing.dark:before {
+    content:    "";
+    display:    block;
+    width:      32px;
+    height:     32px;
+    margin:     0 auto;
+    background: url("image/icons/Browse_Jobs/Browse_Jobs_Dark.svg") no-repeat;
+}
+
+.jbp-landing.bright:before {
+    content:    "";
+    display:    block;
+    width:      32px;
+    height:     32px;
+    margin:     0 auto;
+    background: url("image/icons/Browse_Jobs/Browse_Jobs_Bright.svg") no-repeat;
+}
+
 .jbp-add-job.dark:hover:before, .jbp-add-job.bright:hover:before {
     content:    "";
     display:    block;
