@@ -1,4 +1,5 @@
 <div class="ig-container">
+    <?php if (!isset($models) || !is_array($models)) $models = array(); ?>
     <?php if ($this->has_flash('profile_deleted')): ?>
         <div class="alert alert-success">
             <?php echo $this->get_flash('profile_deleted') ?>

@@ -1,4 +1,5 @@
 <div class="ig-container">
+    <?php if (!isset($search)) $search = ''; ?>
     <div class="hn-container">
         <div class="job-search">
             <form method="get"

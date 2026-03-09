@@ -10,7 +10,7 @@ if (!class_exists('IG_Active_Form')) {
 
         public function __construct($model)
         {
-            $this->model = $model;
+            $this->model = is_object($model) ? $model : new stdClass();
         }
 
         public function open($args = array())
@@ -135,13 +135,13 @@ if (!class_exists('IG_Active_Form')) {
 
         public function build_name($attribute)
         {
-            $class_name = get_class($this->model);
+            $class_name = is_object($this->model) ? get_class($this->model) : 'IG_Model';
             return $class_name . "[$attribute]";
         }
 
         public function build_id($attribute)
         {
-            $class_name = get_class($this->model);
+            $class_name = is_object($this->model) ? get_class($this->model) : 'IG_Model';
             return sanitize_title($class_name . '-' . $attribute);
         }
 

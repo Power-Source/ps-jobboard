@@ -117,6 +117,9 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 			'owner'  => get_current_user_id(),
 			'status' => array( 'publish', 'draft', 'pending' )
 		) );
+		if ( ! is_array( $models ) ) {
+			$models = array();
+		}
 
 		return $this->render( 'my-job/main', array( 'models' => $models ), false );
 	}
@@ -124,9 +127,10 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function render_my_expert() {
 		je()->load_script( 'experts' );
 
-		$models = JE_Expert_Model::model()->find_by_attributes( array(
+		$model = JE_Expert_Model::model()->find_one_by_attributes( array(
 			'user_id' => get_current_user_id()
 		) );
+		$models = is_object( $model ) ? array( $model ) : array();
 
 		return $this->render( 'my-expert/main', array( 'models' => $models ), false );
 	}
@@ -144,6 +148,15 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	}
 
 	function ensure_profile_panel_assets_registered() {
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			if ( ! wp_style_is( 'ig-packed', 'registered' ) ) {
+				wp_register_style( 'ig-packed', false, array(), null );
+			}
+			if ( ! wp_script_is( 'ig-packed', 'registered' ) ) {
+				wp_register_script( 'ig-packed', '', array( 'jquery' ), null, true );
+			}
+		}
+
 		if ( method_exists( je(), 'scripts' ) ) {
 			je()->scripts();
 		}
@@ -248,8 +261,19 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 
 		$content = $this->render_section_content( $section );
 
-		$new_style_handles = array_values( array_diff( $styles->queue, $initial_style_queue ) );
-		$new_script_handles = array_values( array_diff( $scripts->queue, $initial_script_queue ) );
+		$queued_style_handles = isset( $styles->queue ) && is_array( $styles->queue ) ? $styles->queue : array();
+		$queued_script_handles = isset( $scripts->queue ) && is_array( $scripts->queue ) ? $scripts->queue : array();
+		$done_style_handles = isset( $styles->done ) && is_array( $styles->done ) ? $styles->done : array();
+		$done_script_handles = isset( $scripts->done ) && is_array( $scripts->done ) ? $scripts->done : array();
+
+		$new_style_handles = array_values( array_unique( array_merge(
+			array_diff( $queued_style_handles, $initial_style_queue ),
+			array_diff( $queued_style_handles, $done_style_handles )
+		) ) );
+		$new_script_handles = array_values( array_unique( array_merge(
+			array_diff( $queued_script_handles, $initial_script_queue ),
+			array_diff( $queued_script_handles, $done_script_handles )
+		) ) );
 
 		$styles_html = '';
 		$scripts_html = '';
@@ -277,13 +301,14 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function get_profile_panel_js() {
 		$nonce = wp_create_nonce( 'je_profile_panel_nonce' );
 
-		$js = <<<'JSCODE'
+		ob_start();
+		?>
 <script>
 (function() {
 	'use strict';
 
 	var jeProfilePanel = {
-		nonce: '%s',
+		nonce: '<?php echo esc_js( $nonce ); ?>',
 		loading: false,
 
 		init: function() {
@@ -332,13 +357,11 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 
 						jQuery(document).trigger('je_profile_section_loaded', [section]);
 					} else {
-						console.error('Error loading section:', response.data.message);
 						jQuery('.je-profile-panel-content').css('opacity', '1');
 					}
 					self.loading = false;
 				},
 				error: function() {
-					console.error('AJAX error loading section');
 					jQuery('.je-profile-panel-content').css('opacity', '1');
 					self.loading = false;
 				}
@@ -363,8 +386,8 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	}
 })();
 </script>
-JSCODE;
+		<?php
 
-		return sprintf( $js, $nonce );
+		return ob_get_clean();
 	}
 }
