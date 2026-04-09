@@ -85,6 +85,7 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 * Fix: Abstürze bei Job/Experten-Formularen im Profil-Panel behoben (null/array Guards)
 * Fix: Kompatibilitätsprobleme bei der JS-Ausgabe im Profil-Panel behoben
 * Verbesserte Robustheit bei Job-/Experten-Archivansichten (defensive Fallbacks)
+* Fix: `open_basedir`-Warnung beim Laden aktivierter Addons nach Server-Migration behoben (Pfadauflösung/Validierung)
 
 = 1.0.1 =
 
