@@ -231,8 +231,13 @@ class Jobs_Experts {
 		if ( ! is_array( $addons ) ) {
 			$addons = array();
 		}
-		if ( array_search( $this->plugin_path . 'app/addons/je-message.php', $addons ) !== false ) {
-			include $this->plugin_path . 'app/addons/je-message.php';
+
+		foreach ( $addons as $addon ) {
+			$addon_file = $this->resolve_addon_file( $addon );
+			if ( $addon_file === $this->plugin_path . 'app/addons/je-message.php' ) {
+				include $addon_file;
+				break;
+			}
 		}
 	}
 

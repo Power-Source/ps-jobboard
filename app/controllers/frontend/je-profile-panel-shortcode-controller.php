@@ -261,19 +261,28 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 
 		$content = $this->render_section_content( $section );
 
-		$queued_style_handles = isset( $styles->queue ) && is_array( $styles->queue ) ? $styles->queue : array();
-		$queued_script_handles = isset( $scripts->queue ) && is_array( $scripts->queue ) ? $scripts->queue : array();
-		$done_style_handles = isset( $styles->done ) && is_array( $styles->done ) ? $styles->done : array();
-		$done_script_handles = isset( $scripts->done ) && is_array( $scripts->done ) ? $scripts->done : array();
+		$final_style_queue = isset( $styles->queue ) && is_array( $styles->queue ) ? $styles->queue : array();
+		$final_script_queue = isset( $scripts->queue ) && is_array( $scripts->queue ) ? $scripts->queue : array();
 
-		$new_style_handles = array_values( array_unique( array_merge(
-			array_diff( $queued_style_handles, $initial_style_queue ),
-			array_diff( $queued_style_handles, $done_style_handles )
-		) ) );
-		$new_script_handles = array_values( array_unique( array_merge(
-			array_diff( $queued_script_handles, $initial_script_queue ),
-			array_diff( $queued_script_handles, $done_script_handles )
-		) ) );
+		// Simple diff: what was added to queue during section render
+		$new_style_handles = array_values( array_diff( $final_style_queue, $initial_style_queue ) );
+		$new_script_handles = array_values( array_diff( $final_script_queue, $initial_script_queue ) );
+
+		// Fallback: if no handles enqueued, force enqueue core jobboard assets
+		if ( empty( $new_style_handles ) && empty( $new_script_handles ) ) {
+			$fallback_styles = array( 'jobs-main', 'jobs-buttons-shortcode', 'jobs-list-shortcode', 'expert-list-shortcode', 'jobs-landing-shortcode' );
+			$fallback_scripts = array( 'jobs-main' );
+
+			foreach ( $fallback_styles as $handle ) {
+				wp_enqueue_style( $handle );
+			}
+			foreach ( $fallback_scripts as $handle ) {
+				wp_enqueue_script( $handle );
+			}
+
+			$new_style_handles = $fallback_styles;
+			$new_script_handles = $fallback_scripts;
+		}
 
 		$styles_html = '';
 		$scripts_html = '';
@@ -310,8 +319,15 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	var jeProfilePanel = {
 		nonce: '<?php echo esc_js( $nonce ); ?>',
 		loading: false,
+		initialized: false,
 
 		init: function() {
+			// Prevent multiple initialization
+			if (this.initialized) {
+				return;
+			}
+			this.initialized = true;
+
 			var self = this;
 			jQuery('body').on('click', '.jbp-shortcode-button', function(e) {
 				var href = jQuery(this).attr('href');
@@ -380,6 +396,8 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	if (typeof jQuery !== 'undefined') {
 		jQuery(document).on('cpc_profile_tab_loaded', function(e, tab) {
 			if (tab === 'jobboard') {
+				// Reset initialized flag to allow re-init on tab reload
+				jeProfilePanel.initialized = false;
 				jeProfilePanel.init();
 			}
 		});
