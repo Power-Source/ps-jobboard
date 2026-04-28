@@ -79,6 +79,10 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 
 == ChangeLog ==
 
+= 1.0.3 =
+
+* Fix: open_basedir-Warnungen beim Laden aktivierter Addons behoben (nur lokale Addon-Dateien werden geprüft, keine veralteten absoluten Serverpfade)
+
 = 1.0.2 =
 
 * Fix: Profile-Panel AJAX stabilisiert (Assets/Styles/Skripte werden in Tabs konsistent geladen)
@@ -89,26 +93,13 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 
 = 1.0.1 =
 
-* 🧭 Admin-Menü überarbeitet und Jobboard-Navigation vereinheitlicht
-* 💳 Wallet-Einstellungen in die zentralen Plugin-Einstellungen integriert
-* 🗓️ Datepicker auf Flatpickr umgestellt (jQuery UI entfernt)
-* 🌐 Wallet-Bereiche auf Deutsch lokalisiert und Textdomain vereinheitlicht
-* 🔧 Diverse Bugfixes (Wallet-Weiterleitungen, CORS bei Seitenerstellung, Tab-Layout)
+* Admin-Menü überarbeitet und Jobboard-Navigation vereinheitlicht
+* Wallet-Einstellungen in die zentralen Plugin-Einstellungen integriert
+* Datepicker auf Flatpickr umgestellt (jQuery UI entfernt)
+* Wallet-Bereiche auf Deutsch lokalisiert und Textdomain vereinheitlicht
+* Diverse Bugfixes (Wallet-Weiterleitungen, CORS bei Seitenerstellung, Tab-Layout)
 
 = 1.0.0 =
 
-* 🎉 Offizielles Release von PS Job-Board
-* ✨ Vollständiges Job-Management System
-* 👥 Experten-Profil System
-* 🔍 Advanced Search Integration
-* 🎨 Theme-Integration & Anpassbarkeit
-* 📱 Responsive Design & Mobile Support
-* 🔐 Security Best Practices implementiert
-
-== Support ==
-
-Für Support und weitere Informationen besuche:
-- [GitHub Issues](https://github.com/Power-Source/ps-jobboard/issues)
-- [GitHub Discussions](https://github.com/Power-Source/ps-jobboard/discussions)
-- [Dokumentation](https://cp-psource.github.io/ps-jobboard/)
+* Offizielles Release von PS Job-Board
 
