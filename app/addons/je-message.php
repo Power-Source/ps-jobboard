@@ -76,7 +76,7 @@ class JE_Message
 				'<a href="%s">Jetzt herunterladen und installieren</a>.',
 				'psjb'
 			),
-			'https://github.com/PSOURCE/private-messaging'
+			'https://github.com/Power-Source/private-messaging/releases'
 		);
 
 		echo '<div class="notice notice-warning"><p>' . wp_kses_post( $message ) . '</p></div>';
