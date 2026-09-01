@@ -7,12 +7,100 @@ class JE_Router
 {
     public function __construct()
     {
+        add_filter('comments_open', array(&$this, 'disable_jobboard_comments'), 99, 2);
+        add_filter('pings_open', array(&$this, 'disable_jobboard_comments'), 99, 2);
+        add_filter('get_comments_number', array(&$this, 'clear_jobboard_comment_count'), 99, 2);
+        add_filter('comments_number', array(&$this, 'clear_jobboard_comment_text'), 99, 2);
+        add_filter('body_class', array(&$this, 'jobboard_body_class'));
+        add_action('wp_head', array(&$this, 'hide_jobboard_comment_elements'));
+
         if (apply_filters('jbp_use_core_front_request', true)) {
             add_action('template_include', array(&$this, 'determine_page'));
             add_filter('the_content', array(&$this, 'je_single_content'));
             add_filter('the_title', array(&$this, 'je_single_title'));
             add_filter('get_edit_post_link', array(&$this, 'hide_edit_post_link'));
         }
+    }
+
+    function is_jobboard_page($post_id = 0)
+    {
+        $post = get_post($post_id ?: get_the_ID());
+        if (!$post) {
+            return false;
+        }
+
+        if (in_array($post->post_type, array('jbp_job', 'jbp_pro'), true)) {
+            return true;
+        }
+
+        if (JE_Page_Factory::is_core_page($post->ID)) {
+            return true;
+        }
+
+        $shortcodes = array(
+            'jbp-landing-page',
+            'jbp-job-update-page',
+            'jbp-job-archive-page',
+            'jbp-job-contact-page',
+            'jbp-my-job-page',
+            'jbp-expert-update-page',
+            'jbp-expert-archive-page',
+            'jbp-expert-contact-page',
+            'jbp-my-expert-page',
+            'jbp-job-single-page',
+            'jbp-job-pro-page',
+            'jbp-profile-panel'
+        );
+
+        foreach ($shortcodes as $shortcode) {
+            if (has_shortcode($post->post_content, $shortcode)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function disable_jobboard_comments($open, $post_id = 0)
+    {
+        return $this->is_jobboard_page($post_id) ? false : $open;
+    }
+
+    function clear_jobboard_comment_count($count, $post_id = 0)
+    {
+        return $this->is_jobboard_page($post_id) ? 0 : $count;
+    }
+
+    function clear_jobboard_comment_text($output, $number)
+    {
+        return $this->is_jobboard_page() ? '' : $output;
+    }
+
+    function jobboard_body_class($classes)
+    {
+        if ($this->is_jobboard_page()) {
+            $classes[] = 'je-jobboard-page';
+        }
+
+        return $classes;
+    }
+
+    function hide_jobboard_comment_elements()
+    {
+        if (!$this->is_jobboard_page()) {
+            return;
+        }
+        ?>
+        <style id="je-jobboard-comments">
+            .je-jobboard-page .upostdata-part.comment_count,
+            .je-jobboard-page .uposts-part.comment_count,
+            .je-jobboard-page .upost-data-object-comments,
+            .je-jobboard-page .comments-area,
+            .je-jobboard-page #comments {
+                display: none !important;
+            }
+        </style>
+        <?php
     }
 
     function je_single_content($content)

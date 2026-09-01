@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: PS-Jobboard
- * Plugin URI: https://cp-psource.github.io/ps-jobboard/
+ * Plugin URI: https://psource.eimen.net/wiki/ps-jobboard/
  * Description: Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche Jobbörse.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: PSOURCE
- * Author URI: https://nerdservice.eimen.net
- * ClassicPress: 2.6.0
+ * Author URI: https://psource.eimen.net
+ * ClassicPress: 2.7.1
  * Text Domain: psjb
- * Domain Path: languages
+ * Domain Path: /languages
  * Network: false
  * License: GPLv2 or later
  */
@@ -24,11 +24,11 @@ require_once( dirname( __FILE__ ) . '/app/components/je-bootstrap-module.php' );
 require_once( dirname( __FILE__ ) . '/app/components/je-permissions-module.php' );
 require_once( dirname( __FILE__ ) . '/app/components/je-loader-module.php' );
 
-//add action to load language
-/*add_action( 'plugins_loaded', 'jbp_load_languages' );
+// Load plugin translations.
+add_action( 'plugins_loaded', 'jbp_load_languages' );
 function jbp_load_languages() {
-	load_plugin_textdomain( 'psjb', false, plugin_basename( je()->plugin_path . 'languages/' ) );
-}*/
+	load_plugin_textdomain( 'psjb', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
 
 // Third-party
 if ( ! class_exists( 'SmartDOMDocument' ) ) {
@@ -46,7 +46,7 @@ class Jobs_Experts {
 	public $domain;
 	public $prefix;
 
-	public $version = "1.0.3";
+	public $version = "1.0.4";
 	public $db_version = "1.0";
 
 	public $global = array();

@@ -1,0 +1,2846 @@
+# Copyright (C) 2026 PSOURCE
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: PS-Jobboard 1.0.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ps-jobboard\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01T12:21:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: psjb\n"
+
+#. Plugin Name of the plugin
+#: jobs-experts.php
+msgid "PS-Jobboard"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: jobs-experts.php
+msgid "https://psource.eimen.net/wiki/ps-jobboard/"
+msgstr ""
+
+#. Description of the plugin
+#: jobs-experts.php
+msgid "Bringe Menschen mit Projekten und Branchenfachleute zusammen - es ist mehr als eine durchschnittliche Jobbörse."
+msgstr ""
+
+#. Author of the plugin
+#: jobs-experts.php
+msgid "PSOURCE"
+msgstr ""
+
+#. Author URI of the plugin
+#: jobs-experts.php
+msgid "https://psource.eimen.net"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:44
+#: app/addons/je-advanced-search.php:669
+#: app/controllers/backend/je-job-admin-controller.php:265
+#: app/views/my-job/main.php:10
+msgid "Vergütung"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:49
+#: app/addons/je-advanced-search.php:679
+#: app/views/backend/jobs/_form.php:209
+msgid "Kategorie"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:60
+#: app/addons/je-advanced-search.php:738
+#: app/addons/je-advanced-search.php:754
+#: app/addons/je-pages-manager.php:267
+#: app/addons/je-pages-manager.php:293
+#: app/addons/je-pages-manager.php:320
+#: app/addons/je-pages-manager.php:346
+#: app/addons/je-pages-manager.php:372
+#: app/addons/je-pages-manager.php:402
+#: app/addons/je-pages-manager.php:428
+#: app/addons/je-pages-manager.php:455
+#: app/addons/je-pages-manager.php:481
+#: app/addons/je-pages-manager.php:507
+#: app/addons/je-pages-manager.php:538
+msgid "--Auswählen--"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:63
+msgid "Ordnen nach"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:65
+#: app/addons/je-advanced-search.php:700
+#: app/addons/je-advanced-search.php:764
+#: app/components/ig-wallet/app/views/credit/main.php:20
+#: app/components/je-addon-table.php:35
+#: app/controllers/backend/je-expert-admin-controller.php:129
+#: app/views/my-expert/main.php:10
+msgid "Name"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:68
+#: app/addons/je-advanced-search.php:704
+msgid "Neueste"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:71
+msgid "Kurz vor Ende"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:142
+msgid "Erweiterte Suche"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:147
+msgid "Erweitertes Suchformular"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:520
+msgid "Advanced Search"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:525
+msgid "Advanced Search Form"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:690
+msgid "--AUSWÄHLEN--"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:696
+#: app/addons/je-advanced-search.php:760
+#: app/controllers/frontend/je-job-recent-widget-controller.php:187
+msgid "Sortieren nach"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:708
+msgid "Bald zu Ende"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:716
+#: app/addons/je-advanced-search.php:780
+msgid "Suche"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:719
+#: app/addons/je-advanced-search.php:783
+#: app/addons/je-custom-location/_location_popup.php:31
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:274
+#: app/views/expert-form/main.php:343
+#: app/views/expert-form/_avatar_upload.php:23
+#: app/views/expert-form/_biography_popup.php:13
+#: app/views/expert-form/_company_popup.php:24
+#: app/views/expert-form/_email_popup.php:15
+#: app/views/expert-form/_location_popup.php:21
+#: app/views/expert-form/_name_popup.php:24
+#: app/views/expert-form/_tagline_popup.php:14
+msgid "Abbrechen"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:731
+#: app/addons/je-custom-location/_location_popup.php:4
+#: app/controllers/backend/je-expert-admin-controller.php:93
+#: app/views/expert-form/_location_popup.php:4
+msgid "Standort"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:744
+msgid "Fähigkeit"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:768
+msgid "Am beliebtesten"
+msgstr ""
+
+#: app/addons/je-advanced-search.php:772
+msgid "Die meisten Likes"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:68
+msgid "Benutzerdefiniertes Layout"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:78
+msgid "Benutzerdefiniertes Layout der Jobliste"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:80
+#: app/addons/je-custom-layout.php:111
+msgid "Wir haben 4 Größen:"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:82
+msgid "bedeutet, dass der Jobblock 100% breit ist"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:83
+msgid "bedeutet, dass der Jobblock eine halbe Breite hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:84
+msgid "bedeutet, dass der Jobblock eine Breite von 1/3 hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:85
+msgid "bedeutet, dass der Jobblock eine Breite von 1/4 hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:87
+msgid "Du kannst das Layout wie oben beschrieben anpassen. Jede Zeile sollte 100% entsprechen. Zum Beispiel ist sm, sm, sm 100%."
+msgstr ""
+
+#: app/addons/je-custom-layout.php:89
+#: app/addons/je-custom-layout.php:120
+msgid "Beispiel für das Standardlayout"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:109
+msgid "Benutzerdefiniertes Layout der Expertenliste"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:113
+msgid "bedeutet, dass der Expertenblock 100% breit ist"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:114
+msgid "bedeutet, dass der Expertenblock eine halbe Breite hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:115
+msgid "bedeutet, dass der Expertenblock 1/3 Breite hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:116
+msgid "bedeutet, dass der Expertenblock eine Breite von 1/4 hat"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:118
+msgid "Du kannst das Layout anpassen, jede Zeile sollte einen Wert von 100% haben und der Standardwert ist xs"
+msgstr ""
+
+#: app/addons/je-custom-layout.php:136
+#: app/addons/je-custom-location.php:88
+#: app/addons/je-pages-manager.php:526
+#: app/components/ig-wallet/app/views/settings/general.php:45
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:76
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:76
+#: app/views/backend/jobs/_form.php:252
+#: app/views/backend/settings/general.php:202
+#: app/views/backend/settings/uploader.php:36
+msgid "Änderungen speichern"
+msgstr ""
+
+#: app/addons/je-custom-location.php:54
+#: app/addons/je-custom-location.php:66
+msgid "Benutzerdefinierter Expertenstandort"
+msgstr ""
+
+#: app/addons/je-custom-location.php:80
+msgid "API Schlüssel "
+msgstr ""
+
+#: app/addons/je-custom-location.php:99
+#: app/views/expert-form/main.php:111
+msgid "Dein Standort"
+msgstr ""
+
+#: app/addons/je-custom-location/_location_popup.php:29
+#: app/components/ig-wallet/app/views/credit/main.php:146
+#: app/views/expert-form/_biography_popup.php:11
+#: app/views/expert-form/_company_popup.php:22
+#: app/views/expert-form/_email_popup.php:13
+#: app/views/expert-form/_location_popup.php:19
+#: app/views/expert-form/_name_popup.php:22
+#: app/views/expert-form/_tagline_popup.php:12
+msgid "Speichern"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:263
+msgid "Experten Demo-Daten"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:273
+msgid "Erstelle Dummy-Daten für Experten"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:277
+msgid "Dummy Experten Menge"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:282
+msgid "Anzahl der zu erstellenden Dummy-Experten"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:287
+msgid "Soziales Profil"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:296
+msgid "Soziales Profil für Experten. Wenn leer, werden 3-5 Profile zufällig hinzugefügt"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:301
+#: app/controllers/backend/je-gdpr-controller.php:117
+#: app/controllers/backend/je-gdpr-controller.php:185
+#: app/views/backend/jobs/_form.php:232
+#: app/views/expert-single/main.php:157
+msgid "Fähigkeiten"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:307
+msgid "Experten Fähigkeiten. Die Punktzahl ist zufällig von 0-100."
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:312
+msgid "Beispieldateien?"
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:317
+msgid "Wenn Du möchtest, dass die Demo-Experten Beispieldateien haben, aktiviere dieses Kontrollkästchen."
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:323
+#: app/addons/je-job-demo-data.php:253
+msgid "Demodaten erstellen, bitte warten...."
+msgstr ""
+
+#: app/addons/je-expert-demo-data.php:334
+msgid "Hinzufügen"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:186
+msgid "Jobs Demo Daten"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:197
+msgid "Erstelle Dummy-Daten für Jobs"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:200
+msgid "Dummy Jobs Menge"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:205
+msgid "Anzahl der zu erstellenden Dummy-Jobs"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:210
+msgid "Preisklasse"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:215
+msgid "Preisspanne"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:220
+#: app/controllers/frontend/je-job-recent-widget-controller.php:198
+msgid "Kategorien"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:226
+msgid "Demo-Jobkategorien, durch Kommas getrennt. Wird zufällig vergeben."
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:231
+msgid "Fähigkeits-Tags"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:237
+msgid "Demo-Fähigkeiten, durch Kommas getrennt. Wird zufällig vergeben."
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:242
+msgid "Haben Beispieldateien"
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:247
+msgid "Wenn diese Demo-Jobs Beispieldateien enthalten sollen, aktiviere dieses Kontrollkästchen."
+msgstr ""
+
+#: app/addons/je-job-demo-data.php:264
+#: app/components/ig-wallet/app/views/settings/sending_credit.php:38
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:265
+#: app/views/backend/experts/_form.php:142
+msgid "Einreichen"
+msgstr ""
+
+#: app/addons/je-marketpress.php:42
+msgid "Die Erweiterung <strong>MarketPress Integration</strong> von <strong>PS Jobboard</strong> benötigt <strong>MarketPress</strong>"
+msgstr ""
+
+#: app/addons/je-message.php:74
+#, php-format
+msgid "Das PN-System Add-On benötigt das <strong>Private Messaging Plugin</strong>. <a href=\"%s\">Jetzt herunterladen und installieren</a>."
+msgstr ""
+
+#: app/addons/je-message.php:113
+msgid "Postfach"
+msgstr ""
+
+#: app/addons/je-message.php:183
+#: app/views/job-single/main.php:38
+#: app/views/job-single/main.php:48
+msgid "Kontakt"
+msgstr ""
+
+#: app/addons/je-message.php:196
+msgid "Nimm Kontakt auf"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:101
+msgid "Seitenmanager"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:252
+msgid "Job Seiten"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:255
+#: app/components/je-custom-content.php:19
+#: app/views/backend/jobs/add.php:4
+#: app/views/backend/jobs/edit.php:4
+msgid "Neuen Job hinzufügen"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:273
+#: app/addons/je-pages-manager.php:299
+#: app/addons/je-pages-manager.php:326
+#: app/addons/je-pages-manager.php:352
+#: app/addons/je-pages-manager.php:378
+#: app/addons/je-pages-manager.php:408
+#: app/addons/je-pages-manager.php:434
+#: app/addons/je-pages-manager.php:461
+#: app/addons/je-pages-manager.php:487
+#: app/addons/je-pages-manager.php:513
+#: app/addons/je-pages-manager.php:566
+#: app/components/ig-wallet/app/views/credit/settings.php:57
+msgid "Seite erstellen"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:281
+#: app/components/je-custom-content.php:20
+msgid "Bearbeite Job"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:308
+msgid "Jobangebote"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:334
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:265
+msgid "Meine Jobs"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:360
+msgid "Jobkontakt"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:387
+msgid "Experten Seiten"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:390
+msgid "Neuen Experten hinzufügen"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:416
+msgid "Expertenprofil bearbeiten"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:443
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:164
+msgid "Expertenboard"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:469
+msgid "Meine Profile"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:495
+msgid "Expertenkontakt"
+msgstr ""
+
+#: app/addons/je-pages-manager.php:553
+#: app/components/ig-wallet/app/views/credit/settings.php:49
+msgid "Erstelle..."
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:44
+msgid "Blau"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:45
+msgid "Rot"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:46
+msgid "Orange"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:47
+msgid "Hellblau"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:48
+msgid "Grün"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:51
+msgid "Aktiviere Animiert"
+msgstr ""
+
+#: app/components/ig-skill/app/views/_form.php:67
+#: app/components/ig-wallet/app/views/credit/main.php:52
+#: app/views/expert-single/main.php:236
+#: app/views/my-expert/main.php:35
+#: app/views/my-job/main.php:41
+msgid "Löschen"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:34
+msgid "Größe"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:47
+#: app/components/ig-uploader/app/views/footer_modal.php:53
+msgid "N/A"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:52
+msgid "Typ"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:62
+msgid "Link"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:79
+msgid "Link aufrufen"
+msgstr ""
+
+#: app/components/ig-uploader/app/views/footer_modal.php:84
+msgid "Dateidownload"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:48
+#: app/components/ig-wallet/app/views/credit/main.php:21
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:4
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:11
+msgid "Guthaben"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:64
+#, php-format
+msgid "für %s Guthaben"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:81
+msgid "Einstellungen wurden erfolgreich gespeichert."
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:90
+#, php-format
+msgid "Du hast %s Guthaben erhalten mit der Begründung: \"%s\""
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:91
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:216
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:230
+msgid "Gekaufte Guthaben"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:93
+#, php-format
+msgid "Du hast <strong>%s Guthaben</strong> erfolgreich an den Benutzer <strong>%s</strong> gesendet."
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:122
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:172
+msgid "Jobboardguthaben"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:137
+msgid "Guthaben Pakete"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:213
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:227
+#, php-format
+msgid "Du hast %s Guthaben für %s bis %s gekauft"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:247
+#, php-format
+msgid "Paket <strong>%s</strong> wurde gelöscht!"
+msgstr ""
+
+#: app/components/ig-wallet/app/controllers/credit-plan-controller.php:269
+#, php-format
+msgid "Paket <strong>%s</strong> wurde gespeichert!"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/hook.php:2
+msgid "Guthaben-Regeln"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:2
+msgid "Guthabenpakete"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:3
+msgid "Neues hinzufügen"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:22
+msgid "Kosten"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:23
+msgid "Verkaufspreis"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:61
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:64
+msgid "Keine Daten verfügbar"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/main.php:148
+msgid "Formular zurücksetzen"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:5
+msgid "Kaufverlauf"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:9
+msgid "Guthabensaldo"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:18
+msgid "Guthaben Kaufen"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:30
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:99
+msgid "Alle"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:46
+msgid "Datum"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/my_wallets.php:47
+msgid "Detail"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/settings.php:2
+#: app/controllers/backend/je-unified-admin-controller.php:76
+#: app/controllers/backend/je-unified-admin-controller.php:77
+#: app/controllers/backend/je-unified-admin-controller.php:85
+#: app/controllers/backend/je-unified-admin-controller.php:86
+#: app/controllers/backend/je-unified-admin-controller.php:93
+#: app/controllers/backend/je-unified-admin-controller.php:94
+#: app/views/backend/getting_start.php:93
+#: app/views/backend/getting_start.php:126
+#: app/views/backend/jobboard-dashboard.php:51
+#: app/views/backend/settings.php:2
+msgid "Einstellungen"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/settings.php:18
+msgid "Allgemeine Einstellungen"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/credit/settings.php:23
+msgid "Guthaben senden"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/settings/general.php:12
+#: app/components/ig-wallet/app/views/settings/general.php:30
+msgid "--Choose--"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/settings/general.php:16
+#: app/components/ig-wallet/app/views/settings/general.php:34
+#: app/components/ig-wallet/app/views/settings/general.php:70
+msgid "Create Page"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/settings/general.php:62
+msgid "Creating..."
+msgstr ""
+
+#: app/components/ig-wallet/app/views/settings/sending_credit.php:2
+msgid "Kostenloses Guthaben an Benutzer senden"
+msgstr ""
+
+#: app/components/ig-wallet/app/views/settings/sending_credit.php:22
+msgid "---Auswählen---"
+msgstr ""
+
+#: app/components/je-addon-table.php:36
+#: app/views/backend/jobs/_form.php:29
+msgid "Beschreibung"
+msgstr ""
+
+#: app/components/je-addon-table.php:61
+msgid "Deaktivieren <i class=\"fa fa-circle-o-notch fa-spin loader-ani hide\"></i>"
+msgstr ""
+
+#: app/components/je-addon-table.php:66
+msgid "Aktiviere <i class=\"fa fa-circle-o-notch fa-spin loader-ani hide\"></i>"
+msgstr ""
+
+#: app/components/je-addon-table.php:76
+#: app/components/je-addon-table.php:78
+#, php-format
+msgid "Erweiterung <strong>%s</strong> erforderlich"
+msgstr ""
+
+#: app/components/je-addon-table.php:83
+msgid "Aktivieren <i class=\"fa fa-circle-o-notch fa-spin loader-ani hide\"></i>"
+msgstr ""
+
+#: app/components/je-addon-table.php:92
+msgid "Erstellt von: "
+msgstr ""
+
+#: app/components/je-assets-module.php:80
+msgid "Erledigt"
+msgstr ""
+
+#: app/components/je-assets-module.php:81
+msgid "Heute"
+msgstr ""
+
+#: app/components/je-assets-module.php:84
+msgid "Zeige einen anderen Monat"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/expert-saved-controller.php:30
+#: app/components/je-credit-rules/app/controllers/expert-saved-controller.php:112
+#, php-format
+msgid "Du hast %s Guthaben zum Posten des Profils %s verwendet"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/expert-saved-controller.php:62
+#, php-format
+msgid "Dein Guthaben reicht nicht aus, um ein neues Profil zu erstellen (erfordert %s Guthaben). Klicke auf den folgenden <a href=\"%s\">Link</a>, um Dein Guthaben aufzuladen."
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/expert-saved-controller.php:112
+#: app/components/je-credit-rules/app/controllers/job-saved-controller.php:100
+msgid "Sende Guthaben"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/expert-saved-controller.php:140
+#: app/components/je-credit-rules/app/controllers/job-saved-controller.php:128
+msgid "Einstellungen wurden erfolgreich gespeichert!"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/job-saved-controller.php:42
+#, php-format
+msgid "Dein Guthaben reicht nicht aus, um einen neuen Job zu veröffentlichen. Du benötigst %s Guthaben. Besuche zum Kauf <a href=\"%s\">hier</a>"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/job-saved-controller.php:48
+#, php-format
+msgid "Das Posten eines neuen Jobs kostet %s Guthaben"
+msgstr ""
+
+#: app/components/je-credit-rules/app/controllers/job-saved-controller.php:100
+#, php-format
+msgid "Du hast %s Guthaben für die veröffentlichung des Jobs %s verwendet"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:3
+msgid "Expertenprofil gespeichert"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:6
+msgid "Guthaben für die Erstellung eines neuen Expertenprofils"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:11
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:11
+#: app/controllers/backend/je-unified-admin-controller.php:242
+#: app/views/backend/settings/general.php:231
+msgid "Aktivieren"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:27
+msgid "Creditkosten"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:35
+msgid "Wie viel Guthaben kostet es pro Expertenprofil?"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:41
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:41
+msgid "Frei von"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:46
+msgid "Wie viele Profile muss der Benutzer bezahlen, bevor er sie kostenlos einreichen kann?"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:52
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:52
+msgid "Frei für"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/expert-saved/settings.php:67
+msgid "Kostenlose Übermittlung für bestimmte Rollen"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:3
+msgid "Job gespeichert"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:6
+msgid "Guthaben zum Erstellen eines neuen Jobs"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:27
+msgid "Guthabenkosten"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:35
+msgid "Wie viel Guthaben kostet jeder Job?"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:46
+msgid "Wieviele Jobausschreibungen bis diese kostenlos sind"
+msgstr ""
+
+#: app/components/je-credit-rules/app/views/job-saved/settings.php:67
+msgid "Kostenlose Jobausschreibung für bestimmte Rollen"
+msgstr ""
+
+#: app/components/je-custom-content.php:16
+#: app/views/contact/job.php:6
+msgid "Jobs"
+msgstr ""
+
+#: app/components/je-custom-content.php:17
+msgid "Job"
+msgstr ""
+
+#: app/components/je-custom-content.php:18
+#: app/components/je-custom-content.php:21
+msgid "Neuer Job"
+msgstr ""
+
+#: app/components/je-custom-content.php:22
+msgid "Job ansehen"
+msgstr ""
+
+#: app/components/je-custom-content.php:23
+msgid "Suche Jobs"
+msgstr ""
+
+#: app/components/je-custom-content.php:24
+msgid "Keine jobs gefunden"
+msgstr ""
+
+#: app/components/je-custom-content.php:25
+msgid "Keine Jobs im Papierkorb gefunden"
+msgstr ""
+
+#: app/components/je-custom-content.php:26
+msgid "Job Felder"
+msgstr ""
+
+#: app/components/je-custom-content.php:45
+msgid "Job oausschreibungen"
+msgstr ""
+
+#: app/components/je-custom-content.php:76
+#: app/views/contact/expert.php:6
+msgid "Experten"
+msgstr ""
+
+#: app/components/je-custom-content.php:77
+msgid "Experte"
+msgstr ""
+
+#: app/components/je-custom-content.php:78
+#: app/components/je-custom-content.php:81
+msgid "Neuer Experte"
+msgstr ""
+
+#: app/components/je-custom-content.php:79
+msgid "Neuen Experten anlegen"
+msgstr ""
+
+#: app/components/je-custom-content.php:80
+msgid "Bearbeite Experte"
+msgstr ""
+
+#: app/components/je-custom-content.php:82
+msgid "Experte ansehen"
+msgstr ""
+
+#: app/components/je-custom-content.php:83
+msgid "Suche Experte"
+msgstr ""
+
+#: app/components/je-custom-content.php:84
+msgid "Keinen Experten gefunden"
+msgstr ""
+
+#: app/components/je-custom-content.php:85
+msgid "Keinen Experten im Papierkorb gefunden"
+msgstr ""
+
+#: app/components/je-custom-content.php:86
+msgid "Expertenfelder"
+msgstr ""
+
+#: app/components/je-custom-content.php:106
+msgid "Experten- und erweitertes Profil"
+msgstr ""
+
+#: app/components/je-custom-content.php:138
+#: app/components/je-custom-content.php:146
+msgid "Jobkategorien"
+msgstr ""
+
+#: app/components/je-custom-content.php:139
+msgid "Job Category"
+msgstr ""
+
+#: app/components/je-custom-content.php:140
+msgid "Neue Jobkategorie"
+msgstr ""
+
+#: app/components/je-custom-content.php:141
+msgid "Neue Job Category"
+msgstr ""
+
+#: app/components/je-custom-content.php:142
+msgid "Bearbeite Job Category"
+msgstr ""
+
+#: app/components/je-custom-content.php:143
+msgid "Update Job Category"
+msgstr ""
+
+#: app/components/je-custom-content.php:144
+msgid "Suche Jobkategorien"
+msgstr ""
+
+#: app/components/je-custom-content.php:145
+#: app/components/je-custom-content.php:149
+msgid "Alle Jobkategorien"
+msgstr ""
+
+#: app/components/je-custom-content.php:147
+#: app/views/landing/main.php:41
+msgid "Jobkategorien: "
+msgstr ""
+
+#: app/components/je-custom-content.php:148
+msgid "Jobkategorien hinzufügen/entfernen"
+msgstr ""
+
+#: app/components/je-custom-content.php:184
+msgid "Job Fähigkeiten Tags"
+msgstr ""
+
+#: app/components/je-custom-content.php:185
+msgid "Job Fähigkeiten Tag"
+msgstr ""
+
+#: app/components/je-custom-content.php:186
+msgid "Add New Job Fähigkeiten Tag"
+msgstr ""
+
+#: app/components/je-custom-content.php:187
+msgid "New Job Fähigkeiten Tag"
+msgstr ""
+
+#: app/components/je-custom-content.php:188
+msgid "Edit Job Fähigkeiten Tag"
+msgstr ""
+
+#: app/components/je-custom-content.php:189
+msgid "Update Job Fähigkeiten Tag"
+msgstr ""
+
+#: app/components/je-custom-content.php:190
+msgid "Search Job Fähigkeiten Tags"
+msgstr ""
+
+#: app/components/je-custom-content.php:191
+msgid "Popular Job Fähigkeiten Tags"
+msgstr ""
+
+#: app/components/je-custom-content.php:192
+#: app/components/je-custom-content.php:195
+msgid "All Job Fähigkeiten Tags"
+msgstr ""
+
+#: app/components/je-custom-content.php:193
+msgid "Jobs tags:"
+msgstr ""
+
+#: app/components/je-custom-content.php:194
+msgid "Add or Remove Job Fähigkeiten Tags"
+msgstr ""
+
+#: app/components/je-custom-content.php:221
+#: app/components/je-custom-content.php:231
+msgid "Virtual"
+msgstr ""
+
+#: app/components/je-custom-content.php:240
+msgid "Temp"
+msgstr ""
+
+#: app/components/je-page-factory.php:32
+msgid ""
+"<!-- Du kannst diese Seite, den Titel und den Slug bearbeiten, aber es erfordert als Minimum den richtigen Seiten-Shortcode, um zu funktionieren. Du kannst die ursprüngliche Standardseite neu erstellen, indem Du diese löschst. -->\n"
+""
+msgstr ""
+
+#: app/components/je-page-factory.php:63
+msgid "Jobs & Experten"
+msgstr ""
+
+#: app/components/je-page-factory.php:64
+msgid "jobs-experts"
+msgstr ""
+
+#: app/components/je-page-factory.php:99
+#, php-format
+msgid "Einen %s hinzufügen"
+msgstr ""
+
+#: app/components/je-page-factory.php:100
+#: app/components/je-page-factory.php:241
+#, php-format
+msgid "add-a-%s"
+msgstr ""
+
+#: app/components/je-page-factory.php:126
+#: app/components/je-page-factory.php:268
+#, php-format
+msgid "Bearbeite %s"
+msgstr ""
+
+#: app/components/je-page-factory.php:127
+#: app/components/je-page-factory.php:269
+#, php-format
+msgid "edit-%s"
+msgstr ""
+
+#: app/components/je-page-factory.php:154
+#: app/components/je-page-factory.php:155
+#: app/components/je-page-factory.php:296
+#: app/components/je-page-factory.php:297
+#: app/views/backend/getting_start.php:85
+#: app/views/backend/getting_start.php:92
+#: app/views/backend/getting_start.php:117
+#: app/views/backend/getting_start.php:125
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: app/components/je-page-factory.php:183
+#: app/components/je-page-factory.php:324
+#, php-format
+msgid "%s Kontakt"
+msgstr ""
+
+#: app/components/je-page-factory.php:184
+#: app/components/je-page-factory.php:325
+#, php-format
+msgid "%s-contact"
+msgstr ""
+
+#: app/components/je-page-factory.php:212
+#, php-format
+msgid "Mein %s"
+msgstr ""
+
+#: app/components/je-page-factory.php:213
+#, php-format
+msgid "my-%s"
+msgstr ""
+
+#: app/components/je-page-factory.php:240
+#, php-format
+msgid "Hinzufügen eines %s"
+msgstr ""
+
+#: app/components/je-page-factory.php:353
+#, php-format
+msgid "Mein %s Profil"
+msgstr ""
+
+#: app/components/je-page-factory.php:354
+#, php-format
+msgid "my-%s-profile"
+msgstr ""
+
+#: app/components/je-router.php:125
+msgid "Job Kategorie: "
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:39
+#: app/controllers/backend/je-job-admin-controller.php:37
+#: app/views/backend/jobs/_form.php:78
+msgid "Job Meta"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:43
+msgid "Social Profile & Skill"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:48
+#: app/controllers/backend/je-expert-admin-controller.php:71
+#: app/controllers/backend/je-job-admin-controller.php:42
+#: app/controllers/backend/je-job-admin-controller.php:53
+msgid "Füge Beispiele für zusätzliche Informationen bei"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:84
+#: app/controllers/backend/je-job-admin-controller.php:115
+#: app/views/backend/jobs/_form.php:110
+#: app/views/job-form/main.php:205
+msgid "Kontakt Email"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:106
+msgid "Firmenname"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:116
+#: app/views/expert-form/_company_popup.php:13
+msgid "Webseite"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:128
+msgid "Benutzer"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:132
+#: app/controllers/backend/je-gdpr-controller.php:121
+#: app/controllers/backend/je-job-admin-controller.php:267
+#: app/views/my-expert/main.php:13
+#: app/views/my-job/main.php:11
+msgid "Status"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:150
+#: app/controllers/backend/je-expert-admin-controller.php:151
+#: app/views/backend/experts/edit.php:4
+msgid "Experte bearbeiten"
+msgstr ""
+
+#: app/controllers/backend/je-expert-admin-controller.php:191
+msgid "Experte nicht gefunden!"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:15
+#: app/controllers/backend/je-gdpr-controller.php:24
+msgid "PS Jobboard"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:89
+msgid "PS Job-Board - Jobs"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:93
+msgid "Job Name"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:97
+msgid "Category"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:101
+#: app/controllers/backend/je-gdpr-controller.php:157
+#: app/views/expert-form/_email_popup.php:4
+msgid "Email"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:105
+#: app/controllers/backend/je-job-admin-controller.php:207
+#: app/models/je-job-model.php:276
+#: app/views/job-form/main.php:167
+#: app/views/job-form/main.php:395
+msgid "Budget"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:109
+msgid "Open For"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:113
+msgid "Completion Date"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:149
+msgid "PS Job-Board - Experts"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:153
+msgid "Expert Name"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:161
+msgid "Location"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:165
+msgid "Tag Line"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:169
+msgid "Biography"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:173
+msgid "Company"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:177
+msgid "Company URL"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:181
+msgid "Social"
+msgstr ""
+
+#: app/controllers/backend/je-gdpr-controller.php:217
+#: app/controllers/backend/je-unified-admin-controller.php:42
+#: app/controllers/backend/je-unified-admin-controller.php:43
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:207
+msgid "Jobboard"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:69
+#: app/views/job-form/main.php:51
+msgid "Beschäftigungsart"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:73
+#: app/models/je-job-model.php:270
+#: app/views/job-form/main.php:57
+msgid "Freelance/Projektarbeit"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:74
+#: app/models/je-job-model.php:270
+#: app/views/job-form/main.php:58
+msgid "Festanstellung"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:82
+msgid "Budget ($)"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:101
+#: app/views/job-form/main.php:184
+msgid "Gehaltszeitraum"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:105
+#: app/views/job-form/main.php:190
+msgid "Pro Jahr"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:106
+#: app/views/job-form/main.php:191
+msgid "Pro Monat"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:107
+#: app/views/job-form/main.php:192
+msgid "Pro Stunde"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:126
+#: app/views/job-form/main.php:221
+msgid "Externer Link"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:130
+#: app/views/job-form/main.php:227
+msgid "Firmenwebseite"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:131
+#: app/views/job-form/main.php:228
+msgid "Externes Bewerbungsformular"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:138
+#: app/views/job-form/main.php:237
+msgid "URL (optional)"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:146
+#: app/views/job-form/main.php:253
+msgid "Terminangabe"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:150
+#: app/views/job-form/main.php:259
+msgid "Konkretes Datum"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:151
+#: app/models/je-job-model.php:288
+#: app/views/job-form/main.php:260
+msgid "Ab sofort"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:152
+#: app/models/je-job-model.php:291
+#: app/views/job-form/main.php:261
+msgid "Nach Absprache"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:153
+#: app/views/job-form/main.php:262
+msgid "Eigene Angabe"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:161
+#: app/controllers/backend/je-job-admin-controller.php:209
+#: app/models/je-job-model.php:282
+#: app/views/job-form/main.php:273
+#: app/views/job-form/main.php:399
+msgid "Fertigstellung bis"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:173
+#: app/models/je-job-model.php:175
+#: app/views/job-form/main.php:289
+msgid "Alternative Terminangabe"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:182
+msgid "Job offen für"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:189
+#: app/views/backend/jobs/_form.php:150
+#: app/views/job-form/main.php:311
+msgid "Tage"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:207
+#: app/views/job-form/main.php:395
+msgid "Gehalt (optional)"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:209
+#: app/models/je-job-model.php:282
+#: app/views/job-form/main.php:399
+msgid "Einstellung ab"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:238
+#: app/controllers/backend/je-job-admin-controller.php:239
+msgid "Job bearbeiten"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:262
+#: app/views/backend/jobs/_form.php:43
+msgid "Job Anbieter"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:266
+msgid "Offen für"
+msgstr ""
+
+#: app/controllers/backend/je-job-admin-controller.php:313
+msgid "Job nicht gefunden!"
+msgstr ""
+
+#: app/controllers/backend/je-settings-controller.php:58
+msgid "Deine Einstellungen wurden erfolgreich aktualisiert."
+msgstr ""
+
+#: app/controllers/backend/je-unified-admin-controller.php:54
+#: app/controllers/backend/je-unified-admin-controller.php:55
+msgid "Dashboard"
+msgstr ""
+
+#: app/controllers/backend/je-unified-admin-controller.php:66
+#: app/controllers/backend/je-unified-admin-controller.php:67
+msgid "Übersichtsseiten"
+msgstr ""
+
+#: app/controllers/backend/je-unified-admin-controller.php:231
+#: app/views/backend/settings/general.php:253
+msgid "Deaktivieren"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:2
+msgid "Welche personenbezogenen Daten erheben wir und warum?"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:4
+msgid "PS Job-Board speichert Daten, die über die neuen Auflistungsformulare von Jobs and Experts übermittelt wurden. Außerdem wird eine <strong>verschlüsselte Version der IP-Adresse</strong> für alle Personen gespeichert, die eine Liste anzeigen, um Benutzerstatistiken zu verfolgen."
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:7
+msgid "Vollständiger Datensatz für Jobs:"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:8
+msgid "Titel, Beschreibung, E-Mail, Fähigkeiten, Budget, Ablaufdatum, verfügbare Tage"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:11
+msgid "Vollständiger Datensatz für Experten:"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:12
+msgid "Name, Biografie, Tag Line, Firma, Firmen-URL, Standort, E-Mail, Fähigkeiten, soziale Medien"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:15
+msgid "Vorgeschlagener Text: "
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:16
+msgid "Wenn Besucher oder Mitglieder eine Liste anzeigen, wird die IP-Adresse verschlüsselt und zur Verfolgung von Statistiken aufbewahrt. Wenn ein Job- oder Expertenformular gesendet wird, bleiben die Daten bis zum Löschen erhalten."
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:19
+msgid "Wie lange speichern wir Deine Daten?"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:21
+msgid "Bis ein Eintrag gelöscht wird."
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:24
+#: app/controllers/backend/policy-text.php:33
+msgid "Suggested text: "
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:25
+msgid "Die Daten bleiben so lange erhalten, bis die Liste entweder vom Autor oder vom Administrator gelöscht wird."
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:28
+msgid "Wohin wir Deine Daten senden"
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:30
+msgid "Jobs & Experten-Einträge können abhängig von den Einstellungen der Website öffentlich, für alle Besucher oder privat nur für Mitglieder angezeigt werden."
+msgstr ""
+
+#: app/controllers/backend/policy-text.php:34
+msgid "Informationen, die an PS Jobboard gesendet werden, können öffentlich angezeigt werden."
+msgstr ""
+
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:47
+msgid "Neues Expertenprofil"
+msgstr ""
+
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:91
+msgid "Job ausschreiben"
+msgstr ""
+
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:122
+#: app/views/contact/expert.php:4
+#: app/views/contact/job.php:4
+msgid "Startseite"
+msgstr ""
+
+#: app/controllers/frontend/je-buttons-shortcode-controller.php:234
+msgid "Mein Profil"
+msgstr ""
+
+#: app/controllers/frontend/je-contact-shortcode-controller.php:154
+#: app/controllers/frontend/je-contact-shortcode-controller.php:186
+msgid "Deine Anfrage wurde verschickt. Vielen Dank!"
+msgstr ""
+
+#: app/controllers/frontend/je-contact-shortcode-controller.php:155
+#: app/controllers/frontend/je-contact-shortcode-controller.php:187
+msgid "Ein Fehler ist aufgetreten, bitte versuche es später. Vielen Dank!"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:14
+#: app/controllers/frontend/je-expert-add-widget-controller.php:32
+#: app/controllers/frontend/je-expert-add-widget-controller.php:64
+#: app/views/job-single/main.php:44
+#: app/views/landing/main.php:123
+msgid "Biete Deine Fähigkeiten an"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:16
+msgid "Jobboard: Fähigkeiten anbieten"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:49
+#: app/views/expert-form/main.php:60
+#: app/views/expert-form/_name_popup.php:4
+msgid "Vorname"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:56
+#: app/views/expert-form/main.php:68
+#: app/views/expert-form/_name_popup.php:13
+msgid "Nachname"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:102
+#: app/controllers/frontend/je-job-add-widget-controller.php:89
+#: app/controllers/frontend/je-job-search-widget-controller.php:96
+msgid "Titel: "
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:109
+#: app/controllers/frontend/je-job-add-widget-controller.php:96
+#: app/controllers/frontend/je-job-search-widget-controller.php:103
+msgid "Wer kann sehen:"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:112
+#: app/controllers/frontend/je-job-add-widget-controller.php:99
+#: app/controllers/frontend/je-job-search-widget-controller.php:106
+msgid "Jeder"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:114
+#: app/controllers/frontend/je-job-add-widget-controller.php:101
+#: app/controllers/frontend/je-job-search-widget-controller.php:108
+msgid "Eingeloggt"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-add-widget-controller.php:116
+#: app/controllers/frontend/je-job-add-widget-controller.php:103
+msgid "Ausgeloggt"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:173
+msgid "Dein Name"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:174
+#: app/views/expert-form/main.php:91
+msgid "Dein Unternehmen"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:175
+msgid "Woher kommst Du?"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:176
+msgid "Deine E-Mail wird nicht über die Website veröffentlicht"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:177
+msgid "Erzähl uns von dir"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:178
+msgid "Kurze Beschreibung über dich"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:179
+msgid "Avatar muss ein Bild sein"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:180
+msgid "Datei zu groß."
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:181
+msgid "Bitte wähle eine Datei ause"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:258
+msgid "Wähle ein Bild oder eine Datei aus"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:268
+#: app/controllers/frontend/je-expert-form-shortcode-controller.php:271
+msgid "Hochgeladenen Avatar löschen"
+msgstr ""
+
+#: app/controllers/frontend/je-expert-search-shortcode-controller.php:20
+#: app/views/expert-archive/main.php:11
+msgid "Suche nach Experten"
+msgstr ""
+
+#: app/controllers/frontend/je-job-add-widget-controller.php:13
+#: app/controllers/frontend/je-job-add-widget-controller.php:31
+msgid "Veröffentliche neuen Job"
+msgstr ""
+
+#: app/controllers/frontend/je-job-add-widget-controller.php:15
+msgid "Jobboard: Veröffentliche neuen Job"
+msgstr ""
+
+#: app/controllers/frontend/je-job-add-widget-controller.php:48
+#: app/views/backend/jobs/_form.php:19
+msgid "Job Titel"
+msgstr ""
+
+#: app/controllers/frontend/je-job-add-widget-controller.php:52
+msgid "Schreibe den Job aus"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:17
+msgid "Die neuesten Jobangebote"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:19
+msgid "Jobbo Die neuesten Jobangebote"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:35
+msgid "Aktuelle Jobs"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:107
+#: app/views/job-archive/main.php:78
+msgid "Kategorien: "
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:165
+msgid "Anzahl anzuzeigender Jobs:"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:176
+msgid "Jobkategorien anzeigen?"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:183
+msgid "Ausgewähltes Bild anzeigen?"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:192
+msgid "Zufällig"
+msgstr ""
+
+#: app/controllers/frontend/je-job-recent-widget-controller.php:194
+#: app/views/expert-archive/_paging.php:50
+#: app/views/job-archive/_paging.php:50
+msgid "Letzte"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:16
+msgid "Jobs suchen Widget"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:18
+msgid "Jobboard: Suche Jobs"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:34
+msgid "Jobs suchen"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:53
+msgid "Keywords"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:59
+msgid "Suchen"
+msgstr ""
+
+#: app/controllers/frontend/je-job-search-widget-controller.php:110
+msgid "Nicht angemeldet"
+msgstr ""
+
+#: app/controllers/frontend/je-job-single-shortcode-controller.php:27
+msgid "Job löschen erfolgreich!"
+msgstr ""
+
+#: app/controllers/frontend/je-profile-panel-shortcode-controller.php:97
+msgid "Unbekannte Sektion."
+msgstr ""
+
+#: app/controllers/frontend/je-profile-panel-shortcode-controller.php:290
+msgid "Nonce verification failed"
+msgstr ""
+
+#: app/controllers/frontend/je-profile-panel-shortcode-controller.php:294
+msgid "Not logged in"
+msgstr ""
+
+#: app/controllers/je-shared-controller.php:27
+msgid "Dein Expertenprofil wurde gelöscht."
+msgstr ""
+
+#: app/models/je-expert-model.php:354
+#: app/views/backend/settings/job.php:76
+msgid "Veröffentlicht"
+msgstr ""
+
+#: app/models/je-expert-model.php:356
+msgid "Ausstehend"
+msgstr ""
+
+#: app/models/je-expert-model.php:358
+#: app/models/je-job-model.php:411
+#: app/views/backend/settings/expert.php:56
+#: app/views/backend/settings/job.php:92
+msgid "Entwurf"
+msgstr ""
+
+#: app/models/je-job-model.php:176
+#: app/views/job-form/main.php:303
+msgid "Anzeige veröffentlichen für"
+msgstr ""
+
+#: app/models/je-job-model.php:200
+msgid "Bitte gib eine vollständige URL mit http:// oder https:// ein."
+msgstr ""
+
+#: app/models/je-job-model.php:206
+msgid "Bitte gib sowohl das minimale als auch das maximale Gehalt an oder lasse beide Felder leer."
+msgstr ""
+
+#: app/models/je-job-model.php:212
+msgid "Das Mindestgehalt sollte unter dem Maximalgehalt liegen."
+msgstr ""
+
+#: app/models/je-job-model.php:213
+msgid "Das Mindestbudget sollte unter dem Maximalbudget liegen."
+msgstr ""
+
+#: app/models/je-job-model.php:242
+#: app/models/je-job-model.php:297
+msgid "Nicht angegeben"
+msgstr ""
+
+#: app/models/je-job-model.php:276
+msgid "Gehalt"
+msgstr ""
+
+#: app/models/je-job-model.php:303
+msgid "Zum externen Bewerbungsformular"
+msgstr ""
+
+#: app/models/je-job-model.php:303
+msgid "Zur Firmenwebseite"
+msgstr ""
+
+#: app/models/je-job-model.php:316
+msgid "pro Jahr"
+msgstr ""
+
+#: app/models/je-job-model.php:317
+msgid "pro Monat"
+msgstr ""
+
+#: app/models/je-job-model.php:318
+msgid "pro Stunde"
+msgstr ""
+
+#: app/models/je-job-model.php:361
+#, php-format
+msgid "%d Tage %dhrs"
+msgstr ""
+
+#: app/models/je-job-model.php:363
+#: app/models/je-job-model.php:385
+msgid "Abgelaufen"
+msgstr ""
+
+#: app/models/je-job-model.php:407
+msgid "veröffentlicht"
+msgstr ""
+
+#: app/models/je-job-model.php:409
+msgid "ausstehend"
+msgstr ""
+
+#: app/views/backend/experts/add.php:4
+msgid "Experten hinzufügen"
+msgstr ""
+
+#: app/views/backend/experts/_form.php:12
+#: app/views/backend/jobs/_form.php:14
+msgid "Allgemeine Information"
+msgstr ""
+
+#: app/views/backend/experts/_form.php:74
+msgid "Zusätzliche Informationen"
+msgstr ""
+
+#: app/views/backend/experts/_form.php:139
+#: app/views/job-form/main.php:366
+msgid "Füge technische Beispiele oder zusätzliche Informationen hinzu"
+msgstr ""
+
+#: app/views/backend/getting_start.php:5
+#: app/views/backend/getting_start.php:55
+msgid "Loslegen mit Jobs & Experten"
+msgstr ""
+
+#: app/views/backend/getting_start.php:13
+#: app/views/backend/getting_start.php:40
+#: app/views/backend/getting_start.php:78
+#: app/views/backend/getting_start.php:110
+#, php-format
+msgid "Zeige %s Einträge"
+msgstr ""
+
+#: app/views/backend/getting_start.php:17
+#: app/views/backend/getting_start.php:33
+#: app/views/backend/getting_start.php:44
+#: app/views/backend/getting_start.php:82
+#: app/views/backend/getting_start.php:104
+#: app/views/backend/getting_start.php:114
+msgid "Bearbeite"
+msgstr ""
+
+#: app/views/backend/getting_start.php:17
+#: app/views/backend/getting_start.php:33
+#: app/views/backend/getting_start.php:44
+#: app/views/backend/getting_start.php:82
+#: app/views/backend/getting_start.php:104
+#: app/views/backend/getting_start.php:114
+msgid " diese virtuelle Seite"
+msgstr ""
+
+#: app/views/backend/getting_start.php:21
+#: app/views/backend/getting_start.php:48
+#: app/views/backend/getting_start.php:88
+#: app/views/backend/getting_start.php:121
+msgid "Erstelle"
+msgstr ""
+
+#: app/views/backend/getting_start.php:21
+#: app/views/backend/getting_start.php:48
+#: app/views/backend/getting_start.php:88
+#: app/views/backend/getting_start.php:121
+#, php-format
+msgid "einen neuen %s"
+msgstr ""
+
+#: app/views/backend/getting_start.php:29
+#: app/views/backend/getting_start.php:100
+msgid "Jobs & Experten Übersicht"
+msgstr ""
+
+#: app/views/backend/getting_start.php:85
+#: app/views/backend/getting_start.php:117
+msgid "Verwalte"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:9
+msgid "Jobboard Verwaltung"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:33
+msgid "Aktive Jobs"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:35
+#: app/views/backend/jobboard-dashboard.php:43
+msgid "Alle anzeigen"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:41
+msgid "Registrierte Experten"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:49
+msgid "Plugin-Version"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:59
+msgid "Schnellaktionen"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:62
+msgid "➕ Neuer Job"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:65
+msgid "➕ Neuer Experte"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:68
+msgid "⚙️ Einstellungen"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:75
+msgid "Systemstatus"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:78
+msgid "Plugin:"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:79
+msgid "Aktiv"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:85
+msgid "Erste Schritte"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:88
+msgid "1. Erstelle deinen ersten Job:"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:90
+msgid "Veröffentliche einen neuen Job"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:94
+msgid "2. Füge Experten hinzu:"
+msgstr ""
+
+#: app/views/backend/jobboard-dashboard.php:96
+msgid "Registriere neue Experten"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:57
+msgid "Job Status"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:84
+msgid "Budget (€)"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:126
+msgid "Fertigstellungstermin"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:142
+msgid "Job Offen für"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:172
+msgid "Ausgewähltes Bild"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:177
+msgid "Lade ein Bild hoch oder wähle es aus"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:188
+#: app/views/job-form/main.php:348
+msgid "Bild setzen"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:189
+#: app/views/job-form/main.php:349
+msgid "Bild entfernen"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:204
+msgid "Kategorie & Fähigkeiten"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:247
+msgid "Fügen technische Beispiele oder zusätzliche Informationen hinzu"
+msgstr ""
+
+#: app/views/backend/jobs/_form.php:269
+#: app/views/job-form/main.php:428
+msgid "Füge ein Tag hinzu und trenne es durch Kommas"
+msgstr ""
+
+#: app/views/backend/settings.php:12
+msgid "Basis Einstellungen"
+msgstr ""
+
+#: app/views/backend/settings.php:18
+msgid "Jobs Einstellungen"
+msgstr ""
+
+#: app/views/backend/settings.php:24
+msgid "Experten Einstellungen"
+msgstr ""
+
+#: app/views/backend/settings.php:29
+msgid "Shortcodes"
+msgstr ""
+
+#: app/views/backend/settings.php:34
+msgid " Anhänge"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:3
+#: app/views/backend/settings/job.php:5
+#, php-format
+msgid "%s Status Optionen"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:10
+#, php-format
+msgid "Maximale %s Profile pro Benutzer"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:15
+#: app/views/backend/settings/job.php:15
+#, php-format
+msgid "Maximale Anzahl von %s Profilen für jeden Benutzer."
+msgstr ""
+
+#: app/views/backend/settings/expert.php:21
+#, php-format
+msgid "%s Einträge pro Seite"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:26
+#: app/views/backend/settings/job.php:26
+#, php-format
+msgid "Maximale Anzahl von %s Profilen für jede Seite."
+msgstr ""
+
+#: app/views/backend/settings/expert.php:32
+#: app/views/backend/settings/job.php:68
+#, php-format
+msgid "Neu erstellte %s Statusoptionen"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:40
+#: app/views/expert-form/main.php:328
+#: app/views/job-form/main.php:375
+msgid "Veröffentlichen"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:43
+#: app/views/backend/settings/job.php:79
+#, php-format
+msgid "Ermögliche Mitgliedern, %s selbst zu veröffentlichen."
+msgstr ""
+
+#: app/views/backend/settings/expert.php:48
+#: app/views/backend/settings/job.php:84
+msgid "Ausstehende Begutachtung"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:51
+#: app/views/backend/settings/job.php:87
+#, php-format
+msgid "%s muss noch von einem Administrator überprüft werden."
+msgstr ""
+
+#: app/views/backend/settings/expert.php:60
+#: app/views/backend/settings/job.php:96
+msgid "Ermögliche Mitgliedern, Entwürfe zu speichern."
+msgstr ""
+
+#: app/views/backend/settings/expert.php:67
+#: app/views/backend/settings/job.php:103
+#, php-format
+msgid "%s Bildspeicher"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:72
+#: app/views/backend/settings/job.php:108
+msgid "Maximale Galerie-Bilder"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:78
+#: app/views/backend/settings/job.php:114
+#, php-format
+msgid "Maximale Anzahl von Bildern, die in die %s Portfolio-Galerie hochgeladen werden können. Standard ist 4"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:83
+#: app/views/backend/settings/job.php:119
+msgid "Benachrichtigungseinstellungen"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:87
+#: app/views/backend/settings/job.php:123
+msgid "Kontaktformular deaktivieren:"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:94
+msgid "Kontaktformular deaktivieren"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:101
+#: app/views/backend/settings/job.php:137
+msgid "CC den Administrator:"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:108
+#: app/views/backend/settings/job.php:144
+msgid "cc den administrator"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:115
+#: app/views/backend/settings/job.php:151
+msgid "Email Betreff:"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:121
+#: app/views/backend/settings/expert.php:134
+#: app/views/backend/settings/job.php:159
+#: app/views/backend/settings/job.php:176
+msgid "Variablen: TO_NAME, FROM_NAME, FROM_EMAIL, FROM_MESSAGE, POST_TITLE, POST_LINK, SITE_NAME"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:128
+#: app/views/backend/settings/job.php:166
+msgid "Email Inhalt:"
+msgstr ""
+
+#: app/views/backend/settings/expert.php:142
+#: app/views/backend/settings/job.php:184
+msgid "Übernehmen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:2
+msgid "General Options"
+msgstr ""
+
+#: app/views/backend/settings/general.php:7
+msgid "Symbolfarben"
+msgstr ""
+
+#: app/views/backend/settings/general.php:15
+msgid "Dunkle Symbole"
+msgstr ""
+
+#: app/views/backend/settings/general.php:15
+msgid "für helle Hintergründe"
+msgstr ""
+
+#: app/views/backend/settings/general.php:23
+msgid "Helle Symbole"
+msgstr ""
+
+#: app/views/backend/settings/general.php:23
+msgid "für dunkle Hintergründe"
+msgstr ""
+
+#: app/views/backend/settings/general.php:31
+msgid "Keine Symbole"
+msgstr ""
+
+#: app/views/backend/settings/general.php:31
+msgid "um Symbole zu entfernen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:35
+msgid "Legt die Standardfarbe der Schaltflächensymbole fest. Kann für einzelne Schaltflächen im Attribut \"class\" des Shortcodes überschrieben werden."
+msgstr ""
+
+#: app/views/backend/settings/general.php:39
+msgid "Währung"
+msgstr ""
+
+#: app/views/backend/settings/general.php:54
+msgid "Position des Währungssymbols"
+msgstr ""
+
+#: app/views/backend/settings/general.php:93
+msgid "Dezimalzahl in Preisen anzeigen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:101
+#: app/views/backend/settings/general.php:136
+msgid "Ja"
+msgstr ""
+
+#: app/views/backend/settings/general.php:107
+#: app/views/backend/settings/general.php:139
+msgid "Nein"
+msgstr ""
+
+#: app/views/backend/settings/general.php:114
+msgid "Avatar Hochladen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:116
+msgid "Welche Rollen können benutzerdefinierte Avatare hochladen? Bitte beachte dass Rollen mit der Funktion <strong>upload_files</strong> standardmäßig hochaden können"
+msgstr ""
+
+#: app/views/backend/settings/general.php:120
+#: app/views/backend/settings/uploader.php:8
+msgid "Rollenname"
+msgstr ""
+
+#: app/views/backend/settings/general.php:121
+#: app/views/backend/settings/uploader.php:9
+msgid "Kann hochladen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:186
+msgid "Erweiterungen"
+msgstr ""
+
+#: app/views/backend/settings/general.php:292
+msgid "Es sieht so aus, als hättest Du etwas bearbeitet - wenn Du vor dem Speichern gehst, gehen Deine Änderungen verloren."
+msgstr ""
+
+#: app/views/backend/settings/job.php:10
+#, php-format
+msgid "Maximal %s Datensätze pro Benutzer"
+msgstr ""
+
+#: app/views/backend/settings/job.php:21
+#, php-format
+msgid "%s Datensätze pro Seite"
+msgstr ""
+
+#: app/views/backend/settings/job.php:32
+msgid "Verwende den Budgetbereich"
+msgstr ""
+
+#: app/views/backend/settings/job.php:38
+msgid "Verwende Min- und Max-Budgetfelder"
+msgstr ""
+
+#: app/views/backend/settings/job.php:39
+msgid "Zeigt sowohl minimale als auch maximale Budgetfelder an."
+msgstr ""
+
+#: app/views/backend/settings/job.php:45
+msgid "Kommentare zu Jobs zulassen"
+msgstr ""
+
+#: app/views/backend/settings/job.php:51
+msgid "Dadurch können Benutzer Jobs kommentieren."
+msgstr ""
+
+#: app/views/backend/settings/job.php:57
+msgid "Abgelaufene Jobs im Archiv verbergen?"
+msgstr ""
+
+#: app/views/backend/settings/job.php:130
+msgid "disable contact form"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:8
+msgid "Werde ein Experte-Button"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:16
+#: app/views/backend/settings/shortcode.php:43
+#: app/views/backend/settings/shortcode.php:71
+#: app/views/backend/settings/shortcode.php:99
+#: app/views/backend/settings/shortcode.php:127
+#: app/views/backend/settings/shortcode.php:155
+msgid "text"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:17
+#: app/views/backend/settings/shortcode.php:44
+#: app/views/backend/settings/shortcode.php:72
+#: app/views/backend/settings/shortcode.php:100
+#: app/views/backend/settings/shortcode.php:128
+#: app/views/backend/settings/shortcode.php:156
+msgid "Der Text wird unter dieser Schaltfläche angezeigt."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:20
+#: app/views/backend/settings/shortcode.php:47
+#: app/views/backend/settings/shortcode.php:75
+#: app/views/backend/settings/shortcode.php:103
+#: app/views/backend/settings/shortcode.php:131
+#: app/views/backend/settings/shortcode.php:159
+msgid "view"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:21
+#: app/views/backend/settings/shortcode.php:48
+#: app/views/backend/settings/shortcode.php:76
+#: app/views/backend/settings/shortcode.php:104
+#: app/views/backend/settings/shortcode.php:132
+#: app/views/backend/settings/shortcode.php:160
+#, php-format
+msgid "Szenario wem diese Schaltfläche angezeigt wird, wir haben %s %s %s"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:24
+#: app/views/backend/settings/shortcode.php:51
+#: app/views/backend/settings/shortcode.php:79
+#: app/views/backend/settings/shortcode.php:107
+#: app/views/backend/settings/shortcode.php:135
+#: app/views/backend/settings/shortcode.php:163
+msgid "class"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:25
+msgid "Custom Css Class for this button"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:28
+#: app/views/backend/settings/shortcode.php:55
+#: app/views/backend/settings/shortcode.php:83
+#: app/views/backend/settings/shortcode.php:111
+#: app/views/backend/settings/shortcode.php:139
+#: app/views/backend/settings/shortcode.php:167
+msgid "url"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:29
+msgid "The destination of this button."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:36
+msgid "Add new Post Button"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:52
+#: app/views/backend/settings/shortcode.php:80
+#: app/views/backend/settings/shortcode.php:108
+#: app/views/backend/settings/shortcode.php:136
+#: app/views/backend/settings/shortcode.php:164
+msgid "Benutzerdefinierte CSS-Klasse für diese Schaltfläche"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:56
+#: app/views/backend/settings/shortcode.php:84
+#: app/views/backend/settings/shortcode.php:112
+#: app/views/backend/settings/shortcode.php:140
+#: app/views/backend/settings/shortcode.php:168
+msgid "Das Ziel dieser Schaltfläche."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:64
+msgid "Schaltfläche Jobs auflisten"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:92
+msgid "Schaltfläche Experten auflisten"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:120
+msgid "Auflistung der eigenen Jobs"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:148
+msgid "Auflisten der Experten Profile"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:176
+msgid "Expertensuchformular"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:183
+msgid "search_placeholder"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:184
+msgid "Platzhaltertext für Suchformular"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:196
+msgid "Jobarchiv Seite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:203
+#: app/views/backend/settings/shortcode.php:217
+msgid "post_per_page"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:204
+#: app/views/backend/settings/shortcode.php:218
+msgid "Anzahl der Jobs, die Du auf einer Seite auflisten möchtest. Standard ist die Konfiguration von der Einstellungsseite."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:210
+msgid "Expertenarchiv Seite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:230
+msgid "Seite zum Hinzufügen/Aktualisieren von Jobs"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:237
+#: app/views/backend/settings/shortcode.php:250
+#: app/views/backend/settings/shortcode.php:371
+#: app/views/backend/settings/shortcode.php:385
+msgid "Dieser Shortcode hat keine Parameter."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:243
+msgid "Seite zum Hinzufügen/Aktualisieren von Experten"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:262
+msgid "Job Kontakteite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:270
+msgid "ID des Jobs, an den Du den Kontakt senden möchtest."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:273
+#: app/views/backend/settings/shortcode.php:295
+msgid "success_text"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:274
+#: app/views/backend/settings/shortcode.php:296
+msgid "Der Text, der nach erfolgreicher Übermittlung durch den Benutzer angezeigt werden soll."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:277
+#: app/views/backend/settings/shortcode.php:299
+msgid "error_text"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:278
+#: app/views/backend/settings/shortcode.php:300
+msgid "Der Text, der angezeigt wird, wenn nach der Übermittlung durch den Benutzer ein Fehler auftritt."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:284
+msgid "Experten Kontaktseite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:292
+msgid "ID des Experten, an den Du den Kontakt senden möchtest."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:312
+msgid "Job Einzelne Seite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:319
+#: app/views/backend/settings/shortcode.php:333
+msgid "id"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:320
+msgid "ID des Jobs"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:326
+msgid "Experte Einzelne Seite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:334
+msgid "ID des Experten"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:346
+msgid "Landeseite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:353
+msgid "job_show_count"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:354
+msgid "Anzahl der anzuzeigenden Jobs, Standard 3."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:357
+msgid "expert_show_count"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:358
+msgid "Anzahl der anzuzeigenden Experten, Standard 6."
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:364
+msgid "Meine Jobseite"
+msgstr ""
+
+#: app/views/backend/settings/shortcode.php:378
+msgid "Meine Expertenseite"
+msgstr ""
+
+#: app/views/backend/settings/uploader.php:1
+msgid "Wähle aus, welche Benutzerrollen Dateien hochladen können"
+msgstr ""
+
+#: app/views/contact/expert.php:14
+#: app/views/contact/job.php:15
+msgid "Diese Funktion wurde vom Administrator deaktiviert."
+msgstr ""
+
+#: app/views/contact/expert.php:32
+#: app/views/contact/job.php:33
+msgid "Dein Name:"
+msgstr ""
+
+#: app/views/contact/expert.php:43
+#: app/views/contact/job.php:44
+#: app/views/expert-form/main.php:125
+msgid "Kontakt Email:"
+msgstr ""
+
+#: app/views/contact/expert.php:54
+#: app/views/contact/job.php:55
+msgid "Inhalt"
+msgstr ""
+
+#: app/views/contact/expert.php:72
+#: app/views/contact/job.php:73
+msgid "Nachricht senden"
+msgstr ""
+
+#: app/views/expert-archive/main.php:25
+#: app/views/landing/main.php:117
+msgid "Kein Experte gefunden"
+msgstr ""
+
+#: app/views/expert-archive/main.php:67
+#: app/views/expert-single/main.php:95
+#: app/views/landing/main.php:95
+#: app/views/my-expert/main.php:11
+msgid "Ansichten"
+msgstr ""
+
+#: app/views/expert-archive/main.php:72
+#: app/views/landing/main.php:100
+msgid "Empfehlungen"
+msgstr ""
+
+#: app/views/expert-archive/_paging.php:24
+#: app/views/job-archive/_paging.php:24
+#, php-format
+msgid "Seite %1$d von %2$d"
+msgstr ""
+
+#: app/views/expert-archive/_paging.php:28
+#: app/views/job-archive/_paging.php:28
+msgid "Erste"
+msgstr ""
+
+#: app/views/expert-archive/_paging.php:33
+#: app/views/job-archive/_paging.php:33
+msgid "Vorherige"
+msgstr ""
+
+#: app/views/expert-archive/_paging.php:45
+#: app/views/job-archive/_paging.php:45
+msgid "Nächste"
+msgstr ""
+
+#: app/views/expert-form/limit.php:3
+msgid "Du hast das Limit für die Anzahl der Expertenprofile erreicht, die Du veröffentlichen kannst."
+msgstr ""
+
+#: app/views/expert-form/main.php:29
+msgid "Meine Einstellung"
+msgstr ""
+
+#: app/views/expert-form/main.php:36
+msgid "Kurze Beschreibung oder Motto (max. 100 Zeichen)"
+msgstr ""
+
+#: app/views/expert-form/main.php:76
+#: app/views/expert-single/main.php:111
+#, php-format
+msgid "Mitglied seit %s"
+msgstr ""
+
+#: app/views/expert-form/main.php:84
+#: app/views/expert-single/main.php:118
+msgid "Unternehmen:"
+msgstr ""
+
+#: app/views/expert-form/main.php:103
+#: app/views/expert-single/main.php:130
+msgid "Standort:"
+msgstr ""
+
+#: app/views/expert-form/main.php:132
+msgid "Deine Kontakt-E-Mail"
+msgstr ""
+
+#: app/views/expert-form/main.php:148
+#: app/views/expert-single/main.php:144
+msgid "Biografie"
+msgstr ""
+
+#: app/views/expert-form/main.php:149
+#: app/views/expert-single/main.php:146
+msgid "Soziales & Fähigkeiten"
+msgstr ""
+
+#: app/views/expert-form/main.php:157
+#: app/views/expert-form/main.php:267
+msgid "Biografie (erforderlich, mindestens 200 Zeichen)"
+msgstr ""
+
+#: app/views/expert-form/main.php:272
+msgid "Erzähle uns von dir..."
+msgstr ""
+
+#: app/views/expert-form/main.php:302
+msgid "Arbeitsbeispiele oder zusätzliche Informationen"
+msgstr ""
+
+#: app/views/expert-form/main.php:332
+#: app/views/job-form/main.php:378
+msgid "Zur Überprüfung einreichen"
+msgstr ""
+
+#: app/views/expert-form/main.php:338
+#: app/views/job-form/main.php:382
+msgid "Entwurf speichern"
+msgstr ""
+
+#: app/views/expert-form/_avatar_upload.php:9
+msgid "Avatar ändern"
+msgstr ""
+
+#: app/views/expert-form/_avatar_upload.php:17
+msgid "Bild auswählen"
+msgstr ""
+
+#: app/views/expert-form/_avatar_upload.php:19
+#, php-format
+msgid "Max. Größe: %s MB"
+msgstr ""
+
+#: app/views/expert-form/_avatar_upload.php:22
+#: app/views/expert-form/_avatar_upload.php:97
+#: app/views/expert-form/_avatar_upload.php:113
+msgid "Hochladen"
+msgstr ""
+
+#: app/views/expert-form/_avatar_upload.php:27
+msgid "Du hast keine Berechtigung zum Hochladen eines Avatars"
+msgstr ""
+
+#: app/views/expert-form/_company_popup.php:4
+msgid "Unternehmen"
+msgstr ""
+
+#: app/views/expert-single/main.php:19
+#: app/views/expert-single/main.php:22
+msgid "Kontaktiere mich"
+msgstr ""
+
+#: app/views/expert-single/main.php:41
+msgid "likes"
+msgstr ""
+
+#: app/views/expert-single/main.php:172
+msgid "Dieser Experte hat noch keine Fähigkeiten hinzugefügt"
+msgstr ""
+
+#: app/views/expert-single/main.php:178
+msgid "Soziale Profile"
+msgstr ""
+
+#: app/views/expert-single/main.php:192
+msgid "Dieses Mitglied hat keine sozialen Profile hinzugefügt."
+msgstr ""
+
+#: app/views/expert-single/main.php:206
+#: app/views/job-single/main.php:77
+msgid "Beispieldateien"
+msgstr ""
+
+#: app/views/expert-single/main.php:229
+#: app/views/job-single/main.php:97
+#: app/views/my-expert/main.php:29
+#: app/views/my-job/main.php:35
+msgid "Bearbeiten"
+msgstr ""
+
+#: app/views/expert-single/main.php:244
+#: app/views/job-single/main.php:108
+#: app/views/my-expert/main.php:53
+#: app/views/my-job/main.php:51
+msgid "Bist Du sicher?"
+msgstr ""
+
+#: app/views/job-archive/main.php:11
+msgid "Suche nach Job"
+msgstr ""
+
+#: app/views/job-archive/main.php:23
+msgid "Kein Job gefunden"
+msgstr ""
+
+#: app/views/job-archive/main.php:55
+msgid "Dieser Job ist abgelaufen"
+msgstr ""
+
+#: app/views/job-form/limit.php:3
+msgid "Du hast das Limit für die Anzahl der Jobs erreicht, die Du veröffentlichen kannst."
+msgstr ""
+
+#: app/views/job-form/main.php:10
+msgid "Wähle eine Kategorie"
+msgstr ""
+
+#: app/views/job-form/main.php:29
+msgid "Wähle die Kategorie, in der Interessierte deinen Job am ehesten suchen."
+msgstr ""
+
+#: app/views/job-form/main.php:38
+msgid "Gib dem Job einen Titel"
+msgstr ""
+
+#: app/views/job-form/main.php:43
+msgid "Formuliere kurz und konkret, worum es geht."
+msgstr ""
+
+#: app/views/job-form/main.php:62
+msgid "Wähle Projektarbeit für einen Auftrag oder Festanstellung für eine feste Stelle."
+msgstr ""
+
+#: app/views/job-form/main.php:71
+msgid "Beschreibe die Stelle oder Aufgabe"
+msgstr ""
+
+#: app/views/job-form/main.php:103
+msgid "Beschreibe Aufgaben, Ziel, Umfang und was dir bei der Zusammenarbeit wichtig ist."
+msgstr ""
+
+#: app/views/job-form/main.php:112
+msgid "Welche Fähigkeiten werden benötigt?"
+msgstr ""
+
+#: app/views/job-form/main.php:123
+msgid "Füge passende Fähigkeiten als Schlagwörter hinzu und trenne sie mit Kommas."
+msgstr ""
+
+#: app/views/job-form/main.php:134
+#: app/views/job-form/main.php:396
+msgid "Min. Budget"
+msgstr ""
+
+#: app/views/job-form/main.php:143
+msgid "Gib den kleinsten Betrag an, den du einplanst."
+msgstr ""
+
+#: app/views/job-form/main.php:150
+#: app/views/job-form/main.php:397
+msgid "Max. Budget"
+msgstr ""
+
+#: app/views/job-form/main.php:159
+msgid "Gib den höchsten Betrag an, den du einplanst."
+msgstr ""
+
+#: app/views/job-form/main.php:176
+msgid "Gib ein realistisches Budget für den Auftrag an."
+msgstr ""
+
+#: app/views/job-form/main.php:213
+msgid "An diese Adresse können Interessierte ihre Anfrage senden."
+msgstr ""
+
+#: app/views/job-form/main.php:245
+msgid "Lass das Feld leer, wenn die Kontaktaufnahme direkt über das Jobboard erfolgen soll."
+msgstr ""
+
+#: app/views/job-form/main.php:266
+msgid "Wähle die Terminart, die am besten zu deinem Job passt."
+msgstr ""
+
+#: app/views/job-form/main.php:282
+msgid "Wähle den gewünschten Abschluss- oder Starttermin."
+msgstr ""
+
+#: app/views/job-form/main.php:294
+msgid "Zum Beispiel: „Im Laufe des Monats“ oder „Nach Rücksprache“."
+msgstr ""
+
+#: app/views/job-form/main.php:317
+msgid "--Wähle--"
+msgstr ""
+
+#: app/views/job-form/main.php:322
+msgid "Danach endet die Anzeige automatisch und kann bei Bedarf neu veröffentlicht werden."
+msgstr ""
+
+#: app/views/job-form/main.php:334
+msgid "Job-Bild"
+msgstr ""
+
+#: app/views/job-form/main.php:396
+msgid "Min. Gehalt (optional)"
+msgstr ""
+
+#: app/views/job-form/main.php:397
+msgid "Max. Gehalt (optional)"
+msgstr ""
+
+#: app/views/job-form/main.php:431
+msgid "Keine Treffer gefunden"
+msgstr ""
+
+#: app/views/job-form/main.php:440
+msgid "Einreichen..."
+msgstr ""
+
+#: app/views/job-single/main.php:20
+msgid "Anzeige noch offen"
+msgstr ""
+
+#: app/views/job-single/main.php:63
+msgid "<h4>Du musst diese Fähigkeiten haben:"
+msgstr ""
+
+#: app/views/job-single/main.php:103
+msgid "Papierkorb"
+msgstr ""
+
+#: app/views/landing/main.php:7
+msgid "Kürzlich veröffentlichte Jobs"
+msgstr ""
+
+#: app/views/landing/main.php:11
+msgid "Keine Jobs gefunden"
+msgstr ""
+
+#: app/views/landing/main.php:62
+msgid "Job hinzufügen"
+msgstr ""
+
+#: app/views/landing/main.php:67
+msgid "Aktuelle Experten"
+msgstr ""
+
+#: app/views/login.php:7
+msgid "Anmelden"
+msgstr ""
+
+#: app/views/login.php:15
+msgid "Registrieren"
+msgstr ""
+
+#: app/views/login.php:17
+msgid "MeRegistriere Dich, um ein Mitglied zu werden"
+msgstr ""
+
+#: app/views/login.php:19
+msgid "Konto erstellen"
+msgstr ""
+
+#: app/views/login.php:26
+msgid "Sign in"
+msgstr ""
+
+#: app/views/my-expert/main.php:12
+msgid "Likes"
+msgstr ""
+
+#: app/views/my-expert/main.php:44
+msgid "Du hast kein Expertenprofil."
+msgstr ""
+
+#: app/views/my-job/main.php:9
+msgid "Titel"
+msgstr ""
+
+#: app/views/my-job/main.php:61
+msgid "Du hast keinen Job ausgeschrieben."
+msgstr ""
+
+#: jobs-experts.php:494
+msgid "Forgot password?"
+msgstr ""

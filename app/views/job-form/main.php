@@ -26,6 +26,7 @@
 				"attributes" => array( "class" => "form-control" ),
 				"data"       => array_combine(wp_list_pluck(get_terms('jbp_category', 'hide_empty=0'), 'term_id'), wp_list_pluck(get_terms('jbp_category', 'hide_empty=0'), 'name'))
 			) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Wähle die Kategorie, in der Interessierte deinen Job am ehesten suchen.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-categories"><?php $form->error( "categories" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -34,11 +35,12 @@
 	<?php do_action( 'je_before_job_title_field', $model, $form ) ?>
 	<div class="form-group <?php echo $model->has_error( "job_title" ) ? "has-error" : null ?>">
 		<?php $form->label( "job_title", array(
-			"text"       => __( "Gib den Job einen Titel", 'psjb' ),
+			"text"       => __( "Gib dem Job einen Titel", 'psjb' ),
 			"attributes" => array( "class" => "col-lg-3 control-label" )
 		) ) ?>
 		<div class="col-lg-9">
 			<?php $form->text( "job_title", array( "attributes" => array( "class" => "form-control" ) ) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Formuliere kurz und konkret, worum es geht.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-job_title"><?php $form->error( "job_title" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -57,6 +59,7 @@
 				),
 				"attributes" => array( "class" => "form-control", "id" => "je-engagement-type" )
 			) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Wähle Projektarbeit für einen Auftrag oder Festanstellung für eine feste Stelle.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-engagement_type"><?php $form->error( "engagement_type" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -97,6 +100,7 @@
 					)
 				) ) ?>
 			<?php endif; ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Beschreibe Aufgaben, Ziel, Umfang und was dir bei der Zusammenarbeit wichtig ist.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-description"><?php $form->error( "description" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -116,6 +120,7 @@
 					'style' => 'width:100%'
 				)
 			) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Füge passende Fähigkeiten als Schlagwörter hinzu und trenne sie mit Kommas.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-skills"><?php $form->error( "skills" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -135,6 +140,7 @@
 	                    class="input-group-addon"><?php echo JobsExperts_Helper::format_currency( je()->settings()->currency ) ?></span>
 					<?php $form->text( "min_budget", array( "attributes" => array( "class" => "form-control" ) ) ) ?>
 				</div>
+				<span class="help-block job-field-hint"><?php esc_html_e( 'Gib den kleinsten Betrag an, den du einplanst.', 'psjb' ); ?></span>
 				<span class="help-block m-b-none error-min_budget"><?php $form->error( "min_budget" ) ?></span>
 			</div>
 			<div class="clearfix"></div>
@@ -150,6 +156,7 @@
 	                    class="input-group-addon"><?php echo JobsExperts_Helper::format_currency( je()->settings()->currency ) ?></span>
 					<?php $form->text( "max_budget", array( "attributes" => array( "class" => "form-control" ) ) ) ?>
 				</div>
+				<span class="help-block job-field-hint"><?php esc_html_e( 'Gib den höchsten Betrag an, den du einplanst.', 'psjb' ); ?></span>
 				<span class="help-block m-b-none error-max_budget"><?php $form->error( "max_budget" ) ?></span>
 			</div>
 			<div class="clearfix"></div>
@@ -166,6 +173,7 @@
 	                    class="input-group-addon"><?php echo JobsExperts_Helper::format_currency( je()->settings()->currency ) ?></span>
 					<?php $form->text( "budget", array( "attributes" => array( "class" => "form-control" ) ) ) ?>
 				</div>
+				<span class="help-block job-field-hint"><?php esc_html_e( 'Gib ein realistisches Budget für den Auftrag an.', 'psjb' ); ?></span>
 				<span class="help-block m-b-none error-budget"><?php $form->error( "budget" ) ?></span>
 			</div>
 			<div class="clearfix"></div>
@@ -202,6 +210,7 @@
 				<span class="input-group-addon">@</span>
 				<?php $form->text( "contact_email", array( "attributes" => array( "class" => "form-control" ) ) ) ?>
 			</div>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'An diese Adresse können Interessierte ihre Anfrage senden.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-contact_email"><?php $form->error( "contact_email" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -233,6 +242,7 @@
 				<span class="input-group-addon"><i class="fa fa-link"></i></span>
 				<?php $form->text( "external_url", array( "attributes" => array( "class" => "form-control", "placeholder" => "https://" ) ) ) ?>
 			</div>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Lass das Feld leer, wenn die Kontaktaufnahme direkt über das Jobboard erfolgen soll.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-external_url"><?php $form->error( "external_url" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -253,6 +263,7 @@
 				),
 				"attributes" => array( "class" => "form-control", "id" => "je-schedule-mode" )
 			) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Wähle die Terminart, die am besten zu deinem Job passt.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-schedule_mode"><?php $form->error( "schedule_mode" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -268,6 +279,7 @@
 				<?php $attributes = apply_filters( 'je_completion_date_attributes', array( "attributes" => array( "class" => "form-control datepicker" ) ) ) ?>
 				<?php $form->text( "dead_line", $attributes ) ?>
 			</div>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Wähle den gewünschten Abschluss- oder Starttermin.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-dead_line"><?php $form->error( "dead_line" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -279,6 +291,7 @@
 		) ) ?>
 		<div class="col-lg-9">
 			<?php $form->text( "schedule_text", array( "attributes" => array( "class" => "form-control", "maxlength" => "25" ) ) ) ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Zum Beispiel: „Im Laufe des Monats“ oder „Nach Rücksprache“.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-schedule_text"><?php $form->error( "schedule_text" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -306,6 +319,7 @@
 					'class' => 'form-control'
 				)
 			) ); ?>
+			<span class="help-block job-field-hint"><?php esc_html_e( 'Danach endet die Anzeige automatisch und kann bei Bedarf neu veröffentlicht werden.', 'psjb' ); ?></span>
 			<span class="help-block m-b-none error-open_for"><?php $form->error( "open_for" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
