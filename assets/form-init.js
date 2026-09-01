@@ -88,14 +88,15 @@ jQuery(function($) {
   /**
    * Initialize Expert Form with specific rules
    */
-  const $expertForm = $('.jobs-expert-form form');
+  const $expertForm = $('.jobs-expert-form').closest('form');
   if ($expertForm.length) {
-    const expertValidator = new FormValidator('.jobs-expert-form form', {
+    const expertValidator = new FormValidator($expertForm.get(0), {
       realTimeValidation: true
     });
+    $expertForm.data('formValidator', expertValidator);
 
     // Custom validation for biography field (min 200 chars without HTML)
-    const biographyField = document.querySelector('[name="biography"]');
+    const biographyField = $expertForm.get(0).querySelector('[name="biography"]');
     if (biographyField) {
       // Add to error containers if not already there
       if (!expertValidator.errorContainers.has(biographyField)) {
@@ -119,16 +120,8 @@ jQuery(function($) {
     }
 
     // Handle draft saves (no validation required)
-    $expertForm.on('click', 'button[data-status="draft"]', function(e) {
+    $expertForm.on('click', 'button[value="draft"]', function() {
       expertValidator.clearErrors();
-    });
-
-    // Handle publish/review (with validation)
-    $expertForm.on('click', 'button[data-status="publish"], button[data-status="review"]', function(e) {
-      if (!expertValidator.validate()) {
-        e.preventDefault();
-        return false;
-      }
     });
   }
 
@@ -149,9 +142,13 @@ jQuery(function($) {
 
     // Validation rules
     if (value.length === 0) {
-      errors.push('<?php echo esc_js(__("Die Biografie ist erforderlich", "psjb")); ?>');
+      errors.push(window.expert_form && expert_form.biography_required
+        ? expert_form.biography_required
+        : 'Die Biografie ist erforderlich');
     } else if (value.length < 200) {
-      errors.push('<?php echo esc_js(__("Die Biografie muss mindestens 200 Zeichen lang sein", "psjb")); ?>');
+      errors.push(window.expert_form && expert_form.biography_min_length
+        ? expert_form.biography_min_length
+        : 'Die Biografie muss mindestens 200 Zeichen lang sein');
     }
 
     validator.showFieldError(field, errors);

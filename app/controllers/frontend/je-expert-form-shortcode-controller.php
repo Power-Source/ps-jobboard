@@ -103,21 +103,14 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 			$model->status            = je()->post( 'status' );
 			$model->name              = $model->first_name . ' ' . $model->last_name;
 			
-			// Biography kommt als separates POST-Feld, nicht aus dem Model-Array!
-			$biography_content = je()->post( 'biography' );
-			if ( !empty($biography_content) ) {
-				$model->biography = jbp_filter_text( stripslashes( $biography_content ) );
-			}
+			// Biography kommt als separates POST-Feld, nicht aus dem Model-Array.
+			$biography_content = je()->post( 'biography', '' );
+			$model->biography = jbp_filter_text( stripslashes( $biography_content ) );
 			
 			$model->short_description = jbp_filter_text( stripslashes( $model->short_description ) );
 
 			// Bei Draft KEINE Validierung - direkt speichern!
 			$should_validate = ($model->status !== 'draft' && $model->status !== 'je-draft');
-			
-			error_log('[PUBLISH] Status: ' . $model->status);
-			error_log('[PUBLISH] Should validate: ' . ($should_validate ? 'YES' : 'NO'));
-			error_log('[PUBLISH] Biography length: ' . strlen($model->biography));
-			error_log('[PUBLISH] Biography content: ' . substr($model->biography, 0, 100));
 			
 			if (!$should_validate || $model->validate()) {
 				do_action( 'je_expert_saving_process', $model );
@@ -148,9 +141,6 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 				}
 			} else {
 				// Validation failed
-				error_log('[PUBLISH] VALIDATION FAILED!');
-				error_log('[PUBLISH] Errors: ' . print_r($model->get_errors(), true));
-				
 				if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 					wp_send_json_error( array(
 						'errors' => $model->get_errors()
@@ -175,6 +165,8 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 				'location_title'    => __( "Woher kommst Du?", 'psjb' ),
 				'email_title'       => __( "Deine E-Mail wird nicht über die Website veröffentlicht", 'psjb' ),
 				'biography_title'   => __( "Erzähl uns von dir", 'psjb' ),
+				'biography_required' => __( 'Die Biografie ist erforderlich', 'psjb' ),
+				'biography_min_length' => __( 'Die Biografie muss mindestens 200 Zeichen lang sein', 'psjb' ),
 				'tagline_title'     => __( "Kurze Beschreibung über dich", 'psjb' ),
 				'avatar_error_file' => __( 'Avatar muss ein Bild sein', 'psjb' ),
 				'avatar_error_size' => __( 'Datei zu groß.', 'psjb' ),

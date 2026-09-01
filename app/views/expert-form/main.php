@@ -5,6 +5,7 @@
         $form->open(array("attributes" => array("class" => "form-horizontal")));
         ?>
         <div class="jobs-expert-form">
+            <div id="expert-form-feedback" class="alert" role="status" aria-live="polite" style="display: none;"></div>
             <?php if (is_array($model->get_errors()) && count($model->get_errors())): ?>
                 <div class="alert alert-danger">
                     <?php echo implode('<br/>', $model->get_errors()) ?>
@@ -145,11 +146,11 @@
                             <br/>
                             <div id="expert-content-tabs">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li><a href="#biography"><?php _e('Biografie', 'psjb') ?></a></li>
+                                    <li><a href="#expert-biography-tab"><?php _e('Biografie', 'psjb') ?></a></li>
                                     <li><a href="#profile"><?php _e('Soziales & Fähigkeiten', 'psjb') ?></a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div id="biography">
+                                    <div id="expert-biography-tab">
                                         <?php 
                                         if (class_exists('JE_WYSIWYG')) {
                                             // WYSIWYG-Addon aktiviert: WordPress-Editor verwenden (nur visueller Modus)
@@ -161,8 +162,7 @@
                                             ?>
                                             <style type="text/css">
                                                 /* Textarea verstecken */
-                                                #biography textarea#biography,
-                                                #biography #biography,
+                                                #expert-biography-tab textarea#biography,
                                                 textarea#biography { 
                                                     display: none !important; 
                                                     visibility: hidden !important;
@@ -171,17 +171,17 @@
                                                     left: -9999px !important;
                                                 }
                                                 /* Editor anzeigen */
-                                                #biography .mce-tinymce,
-                                                #biography #wp-biography-wrap { 
+                                                #expert-biography-tab .mce-tinymce,
+                                                #expert-biography-tab #wp-biography-wrap {
                                                     display: block !important; 
                                                 }
                                                 /* Überflüssige Tools/Icons/Statusbar verstecken */
                                                 #wp-biography-editor-tools,
-                                                #biography .mce-fullscreen,
-                                                #biography .wp-editor-tools,
-                                                #biography .mce-statusbar,
-                                                #biography .mce-path,
-                                                #biography .mce-resizehandle,
+                                                #expert-biography-tab .mce-fullscreen,
+                                                #expert-biography-tab .wp-editor-tools,
+                                                #expert-biography-tab .mce-statusbar,
+                                                #expert-biography-tab .mce-path,
+                                                #expert-biography-tab .mce-resizehandle,
                                                 #wp-biography-wrap .mce-statusbar,
                                                 .mce-container .mce-statusbar,
                                                 #wp-biography-editor-container .mce-statusbar,
@@ -222,7 +222,10 @@
                                             <script type="text/javascript">
                                             jQuery(document).ready(function($) {
                                                 // NUR das Textarea verstecken
-                                                $('textarea#biography').hide().css({'display': 'none', 'visibility': 'hidden', 'opacity': 0});
+                                                $('textarea#biography')
+                                                    .attr({'required': 'required', 'minlength': 200})
+                                                    .hide()
+                                                    .css({'display': 'none', 'visibility': 'hidden', 'opacity': 0});
                                                 
                                                 // TinyMCE: Content aus Textarea holen und explizit setzen
                                                 if (typeof tinymce !== 'undefined') {
@@ -364,6 +367,8 @@
         
         // Show first tab
         if (tabPanes.length > 0) {
+            tabPanes.removeClass('active');
+            tabLinks.parent().removeClass('active');
             $(tabPanes[0]).addClass('active');
             tabLinks.eq(0).parent().addClass('active');
         }
@@ -378,21 +383,23 @@
             tabLinks.parent().removeClass('active');
             
             // Add active to selected
-            $(href).addClass('active');
+            tabsContainer.find('.tab-content > ' + href).addClass('active');
             $(this).parent().addClass('active');
         });
 
         // Get form and expert validator
-        var form = $(".form-horizontal");
+        var form = tabsContainer.closest('form');
+        var formFeedback = $('#expert-form-feedback');
         var expertFormValidator = null;
 
         // Initialize modern form validation after a delay to ensure all editors are loaded
         setTimeout(function() {
-            if (typeof FormValidator !== 'undefined') {
-                // Der richtige Selektor: form.form-horizontal (das parent Form element)
-                expertFormValidator = new FormValidator('.form-horizontal', {
+            expertFormValidator = form.data('formValidator') || null;
+            if (!expertFormValidator && typeof FormValidator !== 'undefined') {
+                expertFormValidator = new FormValidator(form.get(0), {
                     realTimeValidation: true
                 });
+                form.data('formValidator', expertFormValidator);
             }
         }, 1000);
 
@@ -402,8 +409,16 @@
             var button = $(this);
             var status = button.attr('value'); // 'draft', 'pending', or 'publish'
 
+            if (typeof tinyMCE !== 'undefined') {
+                tinyMCE.triggerSave();
+            }
+            formFeedback.hide();
+
             // Draft saves without validation
             if (status === 'draft') {
+                if (expertFormValidator) {
+                    expertFormValidator.clearErrors();
+                }
                 submitExpertForm(form, status, button);
             } else {
                 // Publish/Pending requires validation
@@ -412,14 +427,43 @@
                     submitExpertForm(form, status, button);
                 } else if (expertFormValidator) {
                     // Errors already displayed by FormValidator
+                    showValidationFailure();
                 } else {
                     // Fallback validation if FormValidator not loaded yet
                     if (validateMainFormFields(form)) {
                         submitExpertForm(form, status, button);
+                    } else {
+                        showValidationFailure();
                     }
                 }
             }
         });
+
+        function showFeedback(message, type) {
+            formFeedback
+                .removeClass('alert-success alert-danger')
+                .addClass(type === 'success' ? 'alert-success' : 'alert-danger')
+                .text(message)
+                .show();
+        }
+
+        function showValidationFailure() {
+            showFeedback('<?php echo esc_js(__("Bitte prüfe die markierten Felder.", "psjb")) ?>', 'danger');
+            var invalidField = form.find('.is-invalid').first();
+
+            if (invalidField.attr('name') === 'biography') {
+                tabLinks.filter('[href="#expert-biography-tab"]').trigger('click');
+                var biographyEditor = typeof tinyMCE !== 'undefined' ? tinyMCE.get('biography') : null;
+                if (biographyEditor) {
+                    biographyEditor.focus();
+                    return;
+                }
+            }
+
+            if (invalidField.length && invalidField.is(':visible')) {
+                invalidField.trigger('focus');
+            }
+        }
 
         /**
          * Fallback Validation - for use if FormValidator lib doesn't load
@@ -471,8 +515,11 @@
          */
         function submitExpertForm(form, status, button) {
             var originalButtonText = button.text();
-            button.addClass('disabled').text('<?php echo esc_js(__("wird verarbeitet...")) ?>');
+            button.prop('disabled', true).addClass('disabled').text('<?php echo esc_js(__("wird verarbeitet...")) ?>');
 
+            if (typeof tinyMCE !== 'undefined') {
+                tinyMCE.triggerSave();
+            }
             var formData = form.serialize() + '&status=' + status;
 
             $.ajax({
@@ -496,7 +543,8 @@
 
                     if (data && data.success === true) {
                         if (status === 'draft') {
-                            button.removeClass('disabled').text(originalButtonText);
+                            button.prop('disabled', false).removeClass('disabled').text(originalButtonText);
+                            showFeedback('<?php echo esc_js(__("Entwurf gespeichert.", "psjb")) ?>', 'success');
                         } else {
                             if (data.data && data.data.redirect_url) {
                                 window.location.href = data.data.redirect_url;
@@ -505,24 +553,24 @@
                             }
                         }
                     } else if (data && data.success === false) {
-                        button.removeClass('disabled').text(originalButtonText);
+                        button.prop('disabled', false).removeClass('disabled').text(originalButtonText);
                         var errorMsg = '<?php echo esc_js(__("Validierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.")) ?>';
                         if (data.data && data.data.errors) {
-                            errorMsg += '\n\nFehler:\n';
                             for (var field in data.data.errors) {
                                 if (data.data.errors[field]) {
-                                    errorMsg += '- ' + field + ': ' + data.data.errors[field].join(', ') + '\n';
+                                    var fieldErrors = data.data.errors[field];
+                                    errorMsg += '\n- ' + (Array.isArray(fieldErrors) ? fieldErrors.join(', ') : fieldErrors);
                                 }
                             }
                         }
-                        alert(errorMsg);
+                        showFeedback(errorMsg, 'danger');
                     } else {
                         window.location.reload();
                     }
                 },
                 error: function(xhr, status, error) {
-                    button.removeClass('disabled').text(originalButtonText);
-                    alert('<?php echo esc_js(__("Es gab einen Fehler beim Speichern. Bitte versuchen Sie es erneut.")) ?>');
+                    button.prop('disabled', false).removeClass('disabled').text(originalButtonText);
+                    showFeedback('<?php echo esc_js(__("Es gab einen Fehler beim Speichern. Bitte versuchen Sie es erneut.")) ?>', 'danger');
                 }
             });
         }

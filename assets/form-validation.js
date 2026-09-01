@@ -6,7 +6,9 @@
 
 class FormValidator {
   constructor(formSelector, options = {}) {
-    this.form = document.querySelector(formSelector);
+    this.form = typeof formSelector === 'string'
+      ? document.querySelector(formSelector)
+      : formSelector;
     this.options = {
       showErrors: true,
       realTimeValidation: true,

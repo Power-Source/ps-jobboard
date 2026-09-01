@@ -4,7 +4,7 @@ Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
 Requires at least: 4.9
 Tested up to: 7.1
 ClassicPress: 2.7.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -143,6 +143,13 @@ Nein. Virtuelle Seiten, normale Seiten mit Jobboard-Shortcodes sowie Job- und Ex
 Weitere Dokumentation, Downloads und Support findest Du im [PS Jobboard Repository](https://github.com/cp-psource/ps-jobboard).
 
 == ChangeLog ==
+
+= 1.0.5 =
+* Verbesserung: Expertenformular mit zuverlässiger TinyMCE-Synchronisierung vor Validierung und Speicherung
+* Verbesserung: Sichtbare Validierungs-, Fehler- und Erfolgsmeldungen beim Veröffentlichen und Speichern von Expertenprofilen
+* Fix: Tabwechsel zwischen Biografie sowie sozialen Profilen und Fähigkeiten repariert
+* Fix: Fehler beim Laden und Ändern sozialer Profile im Expertenformular behoben
+* Fix: Leere Biografien können in Entwürfen korrekt gespeichert werden
 
 = 1.0.4 =
 * Neu: Jobs können als Festanstellung oder Freelance-/Projektarbeit ausgeschrieben werden

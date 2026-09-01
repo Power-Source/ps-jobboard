@@ -27,12 +27,21 @@
 
         $('body').on('change', 'select[name="social"]', function () {
             var socials = <?php echo json_encode(ig_social_wall()->get_social_list()) ?>;
-            var form = $(this).closest('form');
-            var data = socials[form.find('select').first().val()];
-            var preview = form.find('.social-preview');
+            var select = $(this);
+            var container = select.closest('.social-add-form');
+            var data = socials[select.val()];
+            var preview = container.find('.social-preview');
+
+            if (!data) {
+                preview.find('h4').text('');
+                preview.find('img').removeAttr('src');
+                container.find('.note').text('');
+                return;
+            }
+
             preview.find('h4').text(data.name);
             preview.find('img').attr('src', data.url);
-            form.find('.note').text(capitaliseFirstLetter(data.type));
+            container.find('.note').text(capitaliseFirstLetter(data.type));
         });
         
         // Formular inline laden (Hinzufügen)
