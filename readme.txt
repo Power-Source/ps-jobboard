@@ -4,7 +4,7 @@ Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
 Requires at least: 4.9
 Tested up to: 6.4
 ClassicPress: 2.6.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -79,12 +79,20 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 
 == ChangeLog ==
 
-= 1.0.3 =
+= 1.0.4 =
+* Neu: Jobs können als Festanstellung oder Freelance-/Projektarbeit ausgeschrieben werden
+* Neu: Beschäftigungsabhängige Vergütung mit Pflichtbudget für Projekte, optionalem Gehalt für Festanstellungen und Zeiträumen pro Jahr, Monat oder Stunde
+* Neu: Flexible Terminangaben als konkretes Datum, "Ab sofort", "Nach Absprache" oder individuelle Angabe mit maximal 25 Zeichen
+* Neu: Optionale Firmenwebseite oder externes Bewerbungsformular mit sicherer URL-Validierung und Ausgabe
+* Verbesserung: Formularfelder, Validierung, Einzelansicht, Joblisten, Landingpage, "Meine Jobs" und Admin-Metabox an beide Beschäftigungsarten angepasst
+* Verbesserung: Neutrale Bezeichnungen für Stellen und Projekte sowie verständlichere Veröffentlichungsdauer der Anzeige
+* Verbesserung: Normale Jobarchive zeigen auch Festanstellungen ohne Gehaltsangabe; Vergütungsfilter greifen nur bei einer expliziten erweiterten Suche
+* Kompatibilität: Bestehende Jobs ohne Beschäftigungsart bleiben automatisch als Freelance-/Projektarbeit mit konkretem Termin erhalten
 
+= 1.0.3 =
 * Fix: open_basedir-Warnungen beim Laden aktivierter Addons behoben (nur lokale Addon-Dateien werden geprüft, keine veralteten absoluten Serverpfade)
 
 = 1.0.2 =
-
 * Fix: Profile-Panel AJAX stabilisiert (Assets/Styles/Skripte werden in Tabs konsistent geladen)
 * Fix: Abstürze bei Job/Experten-Formularen im Profil-Panel behoben (null/array Guards)
 * Fix: Kompatibilitätsprobleme bei der JS-Ausgabe im Profil-Panel behoben
@@ -92,7 +100,6 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 * Fix: `open_basedir`-Warnung beim Laden aktivierter Addons nach Server-Migration behoben (Pfadauflösung/Validierung)
 
 = 1.0.1 =
-
 * Admin-Menü überarbeitet und Jobboard-Navigation vereinheitlicht
 * Wallet-Einstellungen in die zentralen Plugin-Einstellungen integriert
 * Datepicker auf Flatpickr umgestellt (jQuery UI entfernt)
@@ -100,6 +107,5 @@ Selbstverständlich! PS Job-Board ist vollständig an Dein Theme anpassbar. Pass
 * Diverse Bugfixes (Wallet-Weiterleitungen, CORS bei Seitenerstellung, Tab-Layout)
 
 = 1.0.0 =
-
 * Offizielles Release von PS Job-Board
 

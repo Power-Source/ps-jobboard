@@ -40,6 +40,19 @@ class JE_Job_Form_Shortcode_Controller extends IG_Request {
 		);
 	}
 
+	protected function get_current_user_jobs() {
+		return JE_Job_Model::model()->find_by_attributes( array(
+			'owner'  => get_current_user_id(),
+			'status' => array( 'publish', 'draft', 'pending', 'je-draft' )
+		), false, 'modified DESC' );
+	}
+
+	protected function get_saved_jobs( $jobs ) {
+		return array_values( array_filter( $jobs, function( $job ) {
+			return $job->status !== 'je-draft';
+		} ) );
+	}
+
 	function process() {
 		if ( ! wp_verify_nonce( je()->post( '_wpnonce' ), 'je_job_form' ) ) {
 			return;
@@ -78,6 +91,7 @@ class JE_Job_Form_Shortcode_Controller extends IG_Request {
 		if ( is_user_logged_in() ) {
 			je()->load_script( 'job-form' );
 			$slug = je()->get( 'job', null );
+			$is_new = (int) je()->get( 'new', 0 ) === 1;
 			if ( isset( je()->global['job_model'] ) && $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 				$model = je()->global['job_model'];
 			} else {
@@ -89,27 +103,39 @@ class JE_Job_Form_Shortcode_Controller extends IG_Request {
 						$model = JE_Job_Model::model()->find_by_slug( $slug );
 					}
 				} else {
-					//check does this man can post new
-					if ( JE_Job_Model::model()->count() >= je()->settings()->job_max_records && ! current_user_can( 'manage_options' ) ) {
-						return $this->render( 'job-form/limit', array(), false );
-					} else {
-						$model = JE_Job_Model::model()->find_one_by_attributes( array(
-							'status' => 'je-draft',
-							'owner'  => get_current_user_id()
-						) );
+					$jobs = $this->get_current_user_jobs();
+					$saved_jobs = $this->get_saved_jobs( $jobs );
+					$model = ! empty( $saved_jobs ) ? $saved_jobs[0] : ( ! empty( $jobs ) ? $jobs[0] : null );
 
-						if ( ! is_object( $model ) ) {
-							$model              = new JE_Job_Model();
-							$model->status      = 'je-draft';
-							$model->description = '';
-							$model->owner       = get_current_user_id();
-							$model->save();
+					if ( $is_new ) {
+						$max_jobs = (int) je()->settings()->job_max_records;
+						if ( count( $saved_jobs ) >= $max_jobs ) {
+							if ( $max_jobs !== 1 ) {
+								return $this->render( 'job-form/limit', array(), false );
+							}
+						} else {
+							$draft = JE_Job_Model::model()->find_one_by_attributes( array(
+								'status' => 'je-draft',
+								'owner'  => get_current_user_id()
+							), 'modified DESC' );
+
+							if ( is_object( $draft ) ) {
+								$model = $draft;
+							} else {
+								$model              = new JE_Job_Model();
+								$model->status      = 'je-draft';
+								$model->description = '';
+								$model->owner       = get_current_user_id();
+								$model->save();
+							}
 						}
+					} elseif ( ! is_object( $model ) ) {
+						return $this->render( 'my-job/main', array( 'models' => array() ), false );
 					}
 				}
 			}
 
-			if ( $model->is_current_owner() ) {
+			if ( is_object( $model ) && $model->is_current_owner() ) {
 				return $this->render( 'job-form/main', array(
 					'model' => $model
 				), false );

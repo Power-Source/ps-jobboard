@@ -66,7 +66,19 @@ class JE_Job_Admin_Controller extends IG_Request {
 		?>
 		<table class="widefat">
 			<tr>
-				<th valign="top">
+				<th valign="top"><?php _e( "Beschäftigungsart", 'psjb' ) ?></th>
+				<td>
+					<?php $form->select( 'engagement_type', array(
+						'data' => array(
+							'freelance'  => __( 'Freelance/Projektarbeit', 'psjb' ),
+							'employment' => __( 'Festanstellung', 'psjb' ),
+						),
+						'attributes' => array( 'class' => 'widefat', 'id' => 'je-admin-engagement-type' )
+					) ) ?>
+				</td>
+			</tr>
+			<tr>
+				<th valign="top" id="je-admin-compensation-label">
 					<?php _e( "Budget ($)", 'psjb' ) ?>
 				</th>
 				<td>
@@ -85,6 +97,19 @@ class JE_Job_Admin_Controller extends IG_Request {
 					<?php endif; ?>
 				</td>
 			</tr>
+			<tr id="je-admin-compensation-period-row">
+				<th valign="top"><?php _e( "Gehaltszeitraum", 'psjb' ) ?></th>
+				<td>
+					<?php $form->select( 'compensation_period', array(
+						'data' => array(
+							'year'  => __( 'Pro Jahr', 'psjb' ),
+							'month' => __( 'Pro Monat', 'psjb' ),
+							'hour'  => __( 'Pro Stunde', 'psjb' ),
+						),
+						'attributes' => array( 'class' => 'widefat' )
+					) ) ?>
+				</td>
+			</tr>
 			<tr>
 				<th valign="top">
 					<?php _e( "Kontakt Email", 'psjb' ) ?>
@@ -98,8 +123,42 @@ class JE_Job_Admin_Controller extends IG_Request {
 				</td>
 			</tr>
 			<tr>
-				<th valign="top">
-					<?php _e( "Fertigstellungstermin", 'psjb' ) ?>
+				<th valign="top"><?php _e( "Externer Link", 'psjb' ) ?></th>
+				<td>
+					<?php $form->select( 'external_url_type', array(
+						'data' => array(
+							'company'     => __( 'Firmenwebseite', 'psjb' ),
+							'application' => __( 'Externes Bewerbungsformular', 'psjb' ),
+						),
+						'attributes' => array( 'class' => 'widefat' )
+					) ) ?>
+				</td>
+			</tr>
+			<tr>
+				<th valign="top"><?php _e( "URL (optional)", 'psjb' ) ?></th>
+				<td>
+					<?php $form->text( 'external_url', array(
+						'attributes' => array( 'class' => 'regular-text widefat', 'placeholder' => 'https://' )
+					) ) ?>
+				</td>
+			</tr>
+			<tr>
+				<th valign="top"><?php _e( "Terminangabe", 'psjb' ) ?></th>
+				<td>
+					<?php $form->select( 'schedule_mode', array(
+						'data' => array(
+							'date'        => __( 'Konkretes Datum', 'psjb' ),
+							'immediately' => __( 'Ab sofort', 'psjb' ),
+							'arrangement' => __( 'Nach Absprache', 'psjb' ),
+							'custom'      => __( 'Eigene Angabe', 'psjb' ),
+						),
+						'attributes' => array( 'class' => 'widefat', 'id' => 'je-admin-schedule-mode' )
+					) ) ?>
+				</td>
+			</tr>
+			<tr id="je-admin-schedule-date-row">
+				<th valign="top" id="je-admin-schedule-date-label">
+					<?php _e( "Fertigstellung bis", 'psjb' ) ?>
 				</th>
 				<td>
 					<?php $form->text( 'dead_line', array(
@@ -108,6 +167,14 @@ class JE_Job_Admin_Controller extends IG_Request {
 						)
 					) )
 					?>
+				</td>
+			</tr>
+			<tr id="je-admin-schedule-text-row">
+				<th valign="top"><?php _e( "Alternative Terminangabe", 'psjb' ) ?></th>
+				<td>
+					<?php $form->text( 'schedule_text', array(
+						'attributes' => array( 'class' => 'regular-text widefat', 'maxlength' => '25' )
+					) ) ?>
 				</td>
 			</tr>
 			<tr>
@@ -135,6 +202,24 @@ class JE_Job_Admin_Controller extends IG_Request {
 		</table>
 		<script type="text/javascript">
 			jQuery(function ($) {
+				function updateJobMetaFields() {
+					var isEmployment = $('#je-admin-engagement-type').val() === 'employment';
+					$('#je-admin-compensation-label').text(isEmployment ? '<?php echo esc_js( __( 'Gehalt (optional)', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Budget', 'psjb' ) ); ?>');
+					$('#je-admin-compensation-period-row').toggle(isEmployment);
+					$('#je-admin-schedule-date-label').text(isEmployment ? '<?php echo esc_js( __( 'Einstellung ab', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Fertigstellung bis', 'psjb' ) ); ?>');
+				}
+
+				function updateScheduleMetaFields() {
+					var mode = $('#je-admin-schedule-mode').val();
+					$('#je-admin-schedule-date-row').toggle(mode === 'date');
+					$('#je-admin-schedule-text-row').toggle(mode === 'custom');
+				}
+
+				$('#je-admin-engagement-type').on('change', updateJobMetaFields);
+				$('#je-admin-schedule-mode').on('change', updateScheduleMetaFields);
+				updateJobMetaFields();
+				updateScheduleMetaFields();
+
 				if (typeof flatpickr !== 'undefined') {
 					flatpickr('.datepicker', {
 						dateFormat: 'Y-m-d',
@@ -177,7 +262,7 @@ class JE_Job_Admin_Controller extends IG_Request {
 		$columns['author'] = __( "Job Anbieter", 'psjb' );
 		unset( $columns['comments'] );
 		$new_cols = array(
-			'price'       => __( "Preis", 'psjb' ),
+			'price'       => __( "Vergütung", 'psjb' ),
 			'expire_date' => __( "Offen für", 'psjb' ),
 			'status'      => __( "Status", 'psjb' )
 		);

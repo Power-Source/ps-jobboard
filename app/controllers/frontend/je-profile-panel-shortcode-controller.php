@@ -127,10 +127,10 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function render_my_expert() {
 		je()->load_script( 'experts' );
 
-		$model = JE_Expert_Model::model()->find_one_by_attributes( array(
-			'user_id' => get_current_user_id()
-		) );
-		$models = is_object( $model ) ? array( $model ) : array();
+		$models = JE_Expert_Model::model()->find_by_attributes( array(
+			'user_id' => get_current_user_id(),
+			'status'  => array( 'publish', 'draft', 'pending' )
+		), false, 'modified DESC' );
 
 		return $this->render( 'my-expert/main', array( 'models' => $models ), false );
 	}
@@ -190,13 +190,45 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 				$model = null;
 			}
 		} else {
-			$model              = new JE_Job_Model();
-			$model->status      = 'je-draft';
-			$model->description = '';
-			$model->owner       = get_current_user_id();
+			$jobs = JE_Job_Model::model()->find_by_attributes( array(
+				'owner'  => get_current_user_id(),
+				'status' => array( 'publish', 'draft', 'pending', 'je-draft' )
+			), false, 'modified DESC' );
+			$saved_jobs = array_values( array_filter( $jobs, function( $job ) {
+				return $job->status !== 'je-draft';
+			} ) );
+			$model = JE_Job_Model::model()->find_one_by_attributes( array(
+				'status' => 'je-draft',
+				'owner'  => get_current_user_id()
+			), 'modified DESC' );
+
+			$max_jobs = (int) je()->settings()->job_max_records;
+			if ( count( $saved_jobs ) >= $max_jobs ) {
+				if ( $max_jobs === 1 ) {
+					$model = $saved_jobs[0];
+				} else {
+					return $this->render( 'job-form/limit', array(), false );
+				}
+			}
+
+			if ( ! is_object( $model ) ) {
+				$model              = new JE_Job_Model();
+				$model->status      = 'je-draft';
+				$model->description = '';
+				$model->owner       = get_current_user_id();
+			}
 		}
 
 		if ( ! is_object( $model ) ) {
+			$jobs = isset( $jobs ) ? $jobs : JE_Job_Model::model()->find_by_attributes( array(
+				'owner'  => get_current_user_id(),
+				'status' => array( 'publish', 'draft', 'pending', 'je-draft' )
+			), false, 'modified DESC' );
+
+			if ( count( $jobs ) >= (int) je()->settings()->job_max_records ) {
+				return $this->render( 'job-form/limit', array(), false );
+			}
+
 			$model              = new JE_Job_Model();
 			$model->status      = 'je-draft';
 			$model->description = '';
@@ -212,9 +244,26 @@ class JE_Profile_Panel_Shortcode_Controller extends IG_Request {
 	function render_expert_add() {
 		je()->load_script( 'expert-form' );
 
+		$profiles = JE_Expert_Model::model()->find_by_attributes( array(
+			'user_id' => get_current_user_id(),
+			'status'  => array( 'publish', 'draft', 'pending', 'je-draft' )
+		), false, 'modified DESC' );
+		$saved_profiles = array_values( array_filter( $profiles, function( $profile ) {
+			return $profile->status !== 'je-draft';
+		} ) );
 		$model = JE_Expert_Model::model()->find_one_by_attributes( array(
-			'user_id' => get_current_user_id()
-		) );
+			'user_id' => get_current_user_id(),
+			'status'  => 'je-draft'
+		), 'modified DESC' );
+
+		$max_profiles = (int) je()->settings()->expert_max_records;
+		if ( count( $saved_profiles ) >= $max_profiles ) {
+			if ( $max_profiles === 1 ) {
+				$model = $saved_profiles[0];
+			} else {
+				return $this->render( 'expert-form/limit', array(), false );
+			}
+		}
 
 		if ( ! is_object( $model ) ) {
 			$model            = new JE_Expert_Model();

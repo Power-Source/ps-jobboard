@@ -48,7 +48,7 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
             'view' => 'both', //loggedin, loggedout, both
             'class' => je()->settings()->theme,
             'template' => '',
-            'url' => get_permalink($page_module->page(JE_Page_Factory::EXPERT_ADD))
+            'url' => add_query_arg('new', 1, get_permalink($page_module->page(JE_Page_Factory::EXPERT_ADD)))
         ), $atts));
         //check does this can view
         if (!$this->can_view($view)) {
@@ -59,9 +59,11 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
             return $this->custom_template($template);
         }
 
+        $url = add_query_arg( 'new', 1, apply_filters( 'jbp_button_url', $url, 'add_new_expert' ) );
+
         $ob = sprintf('<a class="jbp-shortcode-button jbp-add-pro %s" href="%s">
 			%s
-		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'add_new_expert'), esc_html($text));
+        </a>', esc_attr($class), esc_url( $url ), esc_html($text));
 
         return apply_filters('jbp_pro_post_btn_output', $ob);
     }
@@ -90,7 +92,7 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
             'view' => 'both', //loggedin, loggedout, both
             'class' => je()->settings()->theme,
             'template' => '',
-            'url' => get_permalink($page_module->page(JE_Page_Factory::JOB_ADD))
+            'url' => add_query_arg('new', 1, get_permalink($page_module->page(JE_Page_Factory::JOB_ADD)))
         ), $atts));
         //check does this can view
         if (!$this->can_view($view)) {
@@ -100,9 +102,11 @@ class JE_Buttons_Shortcode_Controller extends IG_Request
             return $this->custom_template($template);
         }
 
+        $url = add_query_arg( 'new', 1, apply_filters( 'jbp_button_url', $url, 'add_new_job' ) );
+
         $ob = sprintf('<a class="jbp-shortcode-button jbp-add-job %s" href="%s">
 			%s
-		</a>', esc_attr($class), apply_filters('jbp_button_url', $url, 'add_new_job'), esc_html($text));
+        </a>', esc_attr($class), esc_url( $url ), esc_html($text));
 
         return apply_filters('jbp_job_post_btn_output', $ob);
     }

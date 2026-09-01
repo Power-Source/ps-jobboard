@@ -7,7 +7,7 @@
     <table class="table table-hover table-striped table-bordered">
         <thead>
         <th><?php _e('Titel', 'psjb') ?></th>
-        <th><?php _e('Budget', 'psjb') ?></th>
+        <th><?php _e('Vergütung', 'psjb') ?></th>
         <th><?php _e('Status', 'psjb') ?></th>
         <th></th>
         </thead>
@@ -27,7 +27,7 @@
                     <a href="<?php echo get_permalink($model->id) ?>"><?php echo $model->job_title ?>
                 </a>
                 </td>
-                <td><?php echo $model->render_prices() ?></td>
+                <td><?php echo esc_html( $model->get_compensation_label() ); ?>: <?php $model->render_prices() ?></td>
                 <td><?php echo ucfirst($model->get_status()) ?></td>
                 <td style="width: 120px">
                     <a class="btn btn-primary btn-sm" href="<?php echo esc_url(add_query_arg(array(

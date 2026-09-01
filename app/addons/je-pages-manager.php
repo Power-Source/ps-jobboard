@@ -12,6 +12,7 @@ class JE_Pages_Manager
         include(dirname(__FILE__) . '/je-pages-manager/model.php');
         add_action('jbp_setting_menu', array(&$this, 'menu'));
         add_action('je_settings_content_pages_manager', array(&$this, 'content'));
+        add_action('admin_enqueue_scripts', array(&$this, 'enqueue_assets'));
 
         add_action('wp_ajax_jbp_create_wp_page', array(&$this, 'create_page'));
         add_action('je_saved_setting', array(&$this, 'save_setting'));
@@ -19,6 +20,17 @@ class JE_Pages_Manager
 
         add_filter('je_jobs_archive_url', array(&$this, 'job_archive'));
         add_filter('je_experts_archive_url', array(&$this, 'expert_archive'));
+    }
+
+    function enqueue_assets()
+    {
+        $settings_pages = array('je-jobboard-settings', 'jobs-plus-menu');
+        if (!in_array(je()->get('page'), $settings_pages, true) || je()->get('tab') !== 'pages_manager') {
+            return;
+        }
+
+        wp_enqueue_script('jbp_select2');
+        wp_enqueue_style('jbp_select2');
     }
 
     function job_archive($link)
@@ -120,6 +132,7 @@ class JE_Pages_Manager
                     $new_id = wp_insert_post($page);
                     $model->edit_job = $new_id;
                     $model->save();
+                    echo $new_id;
                     break;
                 case 'contact_job':
                     $vid = $page_module->page(JE_Page_Factory::JOB_CONTACT, true);
@@ -130,6 +143,7 @@ class JE_Pages_Manager
                     $new_id = wp_insert_post($page);
                     $model->contact_job = $new_id;
                     $model->save();
+                    echo $new_id;
                     break;
                 case 'list_jobs':
                     $vid = $page_module->page(JE_Page_Factory::JOB_LISTING, true);
@@ -517,6 +531,15 @@ class JE_Pages_Manager
         <?php $form->close() ?>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
+                var pageSelects = $('#page-creator select');
+                if ($.fn.select2) {
+                    pageSelects.select2({
+                        width: '100%',
+                        placeholder: '<?php echo esc_js(__('--Auswählen--', 'psjb')) ?>',
+                        allowClear: true
+                    });
+                }
+
                 $('body').on('click', '.create-page', function () {
                     var that = $(this);
                     $.ajax({
@@ -538,7 +561,7 @@ class JE_Pages_Manager
                                     text: 'Neue Seite'
                                 });
                                 element.append(newOption);
-                                element.val(newPageId);
+                                element.val(newPageId).trigger('change');
                             }
                             that.removeAttr('disabled').text('<?php echo esc_js(__('Seite erstellen','psjb')) ?>');
                         }

@@ -43,6 +43,7 @@ class JE_Expert_Add_Widget_Controller extends WP_Widget
                             <div class="well well-sm">
                                 <form class="search-form" method="GET"
                                       action="<?php echo get_permalink(je()->pages->page(JE_Page_Factory::EXPERT_ADD)); ?>">
+                                                                        <input type="hidden" name="new" value="1">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label><?php _e('Vorname', 'psjb') ?></label>

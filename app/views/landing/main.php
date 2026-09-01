@@ -41,10 +41,10 @@
                                                         <?php echo the_terms($job->id, 'jbp_category', __('Jobkategorien: ', 'psjb'), ', ', ''); ?>
                                                         <div class="jbp_meta">
                                                             <div class="pull-left">
-                                                                <?php _e('Bis: ', 'psjb'); ?><?php echo $job->get_end_date() ?>
+                                                                <?php echo esc_html( $job->get_schedule_label() ); ?>: <?php echo esc_html( $job->get_schedule_value() ); ?>
                                                             </div>
                                                             <div class="pull-right">
-                                                                <?php _e('Budget: ', 'psjb'); ?><?php $job->render_prices(); ?>
+                                                                <?php echo esc_html( $job->get_compensation_label() ); ?>: <?php $job->render_prices(); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -59,7 +59,7 @@
                     <?php endif; ?>
                     <div class="add-record">
                         <a class="btn btn-primary"
-                           href="<?php echo apply_filters('jbp_add_new_job_url', get_permalink(je()->pages->page(JE_Page_Factory::JOB_ADD))) ?>"><?php _e('Job hinzufügen', 'psjb') ?></a>
+                           href="<?php echo esc_url(add_query_arg('new', 1, apply_filters('jbp_add_new_job_url', get_permalink(je()->pages->page(JE_Page_Factory::JOB_ADD))))) ?>"><?php _e('Job hinzufügen', 'psjb') ?></a>
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-12 col-sm-12">
@@ -120,7 +120,7 @@
 
                         <div class="add-record">
                             <a class="btn btn-primary"
-                               href="<?php echo apply_filters('jbp_add_new_expert_url', get_permalink(je()->pages->page(JE_Page_Factory::EXPERT_ADD))) ?>"><?php _e('Biete Deine Fähigkeiten an', 'psjb') ?></a>
+                               href="<?php echo esc_url(add_query_arg('new', 1, apply_filters('jbp_add_new_expert_url', get_permalink(je()->pages->page(JE_Page_Factory::EXPERT_ADD))))) ?>"><?php _e('Biete Deine Fähigkeiten an', 'psjb') ?></a>
                         </div>
 
                     </div>

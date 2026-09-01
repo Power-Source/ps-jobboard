@@ -57,7 +57,7 @@
                                     <?php $form->text('first_name', array(
                                         'attributes' => array(
                                             'class' => 'form-control inline-edit-name',
-                                            'placeholder' => __("ॠVorname", 'psjb'),
+                                               'placeholder' => __("Vorname", 'psjb'),
                                             'required' => true,
                                             'style' => 'display: inline-block; width: 48%; margin-right: 2%;'
                                         )
@@ -65,7 +65,7 @@
                                     <?php $form->text('last_name', array(
                                         'attributes' => array(
                                             'class' => 'form-control inline-edit-name',
-                                            'placeholder' => __("ॠNachname", 'psjb'),
+                                               'placeholder' => __("Nachname", 'psjb'),
                                             'required' => true,
                                             'style' => 'display: inline-block; width: 50%;'
                                         )

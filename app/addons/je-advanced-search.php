@@ -41,7 +41,7 @@ class JE_Advanced_Search {
 
 		?>
         <input type="hidden" name="advance_search" value="1">
-        <label><?php _e( 'Preisklasse', 'psjb' ) ?></label>
+        <label><?php _e( 'Vergütung', 'psjb' ) ?></label>
         <input class="job-price-range" type="text"/>
         <input type="hidden" name="min_price">
         <input type="hidden" name="max_price">
@@ -307,6 +307,10 @@ class JE_Advanced_Search {
 	}
 
 	function addition_search_params( $args ) {
+        if ( empty( $_GET['advance_search'] ) ) {
+            return $args;
+        }
+
 		global $wpdb;
 		//do the manual query
 		$sql   = 'SELECT ID FROM ' . $wpdb->prefix . 'posts posts {{join}} {{where}} {{group}} {{order}}';
@@ -662,7 +666,7 @@ INNER JOIN ' . $wpdb->prefix . 'postmeta max_price ON max_price.post_id = posts.
 
                     <table class="table" style="margin-bottom: 0">
                         <tr>
-                            <td style="width: 20%"><?php _e( 'Preisklasse', 'psjb' ) ?></td>
+                            <td style="width: 20%"><?php _e( 'Vergütung', 'psjb' ) ?></td>
                             <td style="width: 80%">
                                 <div class="job-price-range">
                                     <input class="job-price-range" type="text"/>

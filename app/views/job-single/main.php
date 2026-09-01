@@ -13,24 +13,22 @@
 			<?php } ?>
 			<div class="row hn-border hn-border-round jobs-meta">
 				<div class="col-md-3 jobs-meta-row">
-					<h5><?php _e( 'Job Budget', 'psjb' ); ?></h5>
-					<small class="text-warning"><?php $model->render_prices() ?></small>
+					<h5><?php echo esc_html( $model->get_engagement_label() ); ?></h5>
+					<small class="text-warning"><?php echo esc_html( $model->get_compensation_label() ); ?>: <?php $model->render_prices() ?></small>
 				</div>
 				<div class="col-md-3 jobs-meta-row">
-					<h5><?php _e( 'Dieser Job ist offen für', 'psjb' ) ?></h5>
+					<h5><?php _e( 'Anzeige noch offen', 'psjb' ) ?></h5>
 					<small class="text-warning"><?php echo $model->get_due_day() ?></small>
 				</div>
 				<div class="col-md-3 jobs-meta-row">
-					<h5><?php _e( 'Soll fertiggestellt sein bis', 'psjb' ) ?></h5>
-					<?php if ( strtotime( $model->dead_line ) ): ?>
-						<small
-							class="text-warning"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $model->dead_line ) ); ?></small>
-					<?php else: ?>
-						<small class="text-warning"><?php _e( 'N/A', 'psjb' ) ?></small>
-					<?php endif; ?>
+					<h5><?php echo esc_html( $model->get_schedule_label() ); ?></h5>
+					<small class="text-warning"><?php echo esc_html( $model->get_schedule_value() ); ?></small>
 				</div>
 
 				<div class="col-md-3 jobs-meta-row">
+					<?php if ( ! empty( $model->external_url ) ): ?>
+						<a class="btn btn-primary btn-sm" href="<?php echo esc_url( $model->external_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $model->get_external_url_label() ); ?></a>
+					<?php endif; ?>
 					<?php if ( strtolower( $model->get_due_day() ) != 'expired' && je()->settings()->job_contact_form == 0 ): ?>
 						<?php if ( JobsExperts_Helper::is_user_pro( get_current_user_id() ) ): ?>
 							<?php ob_start(); ?>
@@ -43,7 +41,7 @@
 							?>
 						<?php else: ?>
 							<a class="btn btn-info btn-sm"
-							   href="<?php echo get_permalink( je()->pages->page( JE_Page_Factory::EXPERT_ADD ) ) ?>"><?php _e( 'Biete Deine Fähigkeiten an', 'psjb' ) ?></a>
+							   href="<?php echo esc_url( add_query_arg( 'new', 1, get_permalink( je()->pages->page( JE_Page_Factory::EXPERT_ADD ) ) ) ) ?>"><?php _e( 'Biete Deine Fähigkeiten an', 'psjb' ) ?></a>
 						<?php endif; ?>
 					<?php else: ?>
 						<a disabled class="btn btn-info btn-sm"

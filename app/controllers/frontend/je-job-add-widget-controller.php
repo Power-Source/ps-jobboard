@@ -42,6 +42,7 @@ class JE_Job_Add_Widget_Controller extends WP_Widget
                             <div class="well well-sm">
                                 <form class="search-form" method="GET"
                                       action="<?php echo get_permalink(je()->pages->page(JE_Page_Factory::JOB_ADD)); ?>">
+                                                                        <input type="hidden" name="new" value="1">
                                     <div class="jbp-search-box-container">
                                         <input type="text" name="job_title" class="input-sm" value="" autocomplete="off"
                                                placeholder="<?php echo esc_attr(__('Job Titel', 'psjb')); ?>"/>

@@ -44,20 +44,59 @@
 		<div class="clearfix"></div>
 	</div>
 	<?php do_action( 'je_after_job_title_field', $model, $form ) ?>
+	<div class="form-group <?php echo $model->has_error( "engagement_type" ) ? "has-error" : null ?>">
+		<?php $form->label( "engagement_type", array(
+			"text"       => __( "Beschäftigungsart", 'psjb' ),
+			"attributes" => array( "class" => "col-lg-3 control-label" )
+		) ) ?>
+		<div class="col-lg-9">
+			<?php $form->select( "engagement_type", array(
+				"data" => array(
+					"freelance"  => __( "Freelance/Projektarbeit", 'psjb' ),
+					"employment" => __( "Festanstellung", 'psjb' )
+				),
+				"attributes" => array( "class" => "form-control", "id" => "je-engagement-type" )
+			) ) ?>
+			<span class="help-block m-b-none error-engagement_type"><?php $form->error( "engagement_type" ) ?></span>
+		</div>
+		<div class="clearfix"></div>
+	</div>
 	<?php do_action( 'je_before_description_field', $model, $form ) ?>
 	<?php $form->hidden( 'owner', array( 'value' => get_current_user_id() ) ) ?>
 	<div class="form-group <?php echo $model->has_error( "description" ) ? "has-error" : null ?>">
 		<?php $form->label( "description", array(
-			"text"       => __( "Beschreibe die auszuführende Arbeit", 'psjb' ),
+			"text"       => __( "Beschreibe die Stelle oder Aufgabe", 'psjb' ),
 			"attributes" => array( "class" => "col-lg-3 control-label" )
 		) ) ?>
 		<div class="col-lg-9">
-			<?php $form->text_area( "description", array(
-				"attributes" => array(
-					"class" => "form-control je_wysiwyg",
-					"style" => "height:150px"
-				)
-			) ) ?>
+			<?php if ( class_exists( 'JE_WYSIWYG' ) ): ?>
+				<?php wp_editor( $model->description, 'job_description_editor', array(
+					'textarea_name'     => $form->build_name( 'description' ),
+					'teeny'             => false,
+					'media_buttons'     => false,
+					'quicktags'         => false,
+					'wpautop'           => true,
+					'drag_drop_upload'  => false,
+					'tinymce'           => array(
+						'toolbar1'   => 'formatselect,bold,italic,underline,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_adv',
+						'toolbar2'   => 'forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo',
+						'height'     => 300,
+						'resize'     => false,
+						'statusbar'  => false,
+						'elementpath' => false,
+						'branding'   => false,
+						'menubar'    => false,
+						'plugins'    => 'paste,lists,textcolor,colorpicker,hr,charmap,link'
+					)
+				) ); ?>
+			<?php else: ?>
+				<?php $form->text_area( "description", array(
+					"attributes" => array(
+						"class" => "form-control",
+						"style" => "height:150px"
+					)
+				) ) ?>
+			<?php endif; ?>
 			<span class="help-block m-b-none error-description"><?php $form->error( "description" ) ?></span>
 		</div>
 		<div class="clearfix"></div>
@@ -83,11 +122,12 @@
 	</div>
 	<?php do_action( 'je_after_skill_field', $model, $form ) ?>
 	<?php do_action( 'je_before_price_field', $model, $form ) ?>
+	<div id="je-compensation-fields">
 	<?php if ( je()->settings()->job_budget_range == 1 ): ?>
 		<div class="form-group <?php echo $model->has_error( "min_budget" ) ? "has-error" : null ?>">
 			<?php $form->label( "min_budget", array(
-				"text"       => __( "Min Budget", 'psjb' ),
-				"attributes" => array( "class" => "col-lg-3 control-label" )
+				"text"       => __( "Min. Budget", 'psjb' ),
+				"attributes" => array( "class" => "col-lg-3 control-label je-compensation-min-label" )
 			) ) ?>
 			<div class="col-lg-9">
 				<div class="input-group">
@@ -101,8 +141,8 @@
 		</div>
 		<div class="form-group <?php echo $model->has_error( "max_budget" ) ? "has-error" : null ?>">
 			<?php $form->label( "max_budget", array(
-				"text"       => __( "Max Budget", 'psjb' ),
-				"attributes" => array( "class" => "col-lg-3 control-label" )
+				"text"       => __( "Max. Budget", 'psjb' ),
+				"attributes" => array( "class" => "col-lg-3 control-label je-compensation-max-label" )
 			) ) ?>
 			<div class="col-lg-9">
 				<div class="input-group">
@@ -118,7 +158,7 @@
 		<div class="form-group <?php echo $model->has_error( "budget" ) ? "has-error" : null ?>">
 			<?php $form->label( "budget", array(
 				"text"       => __( "Budget", 'psjb' ),
-				"attributes" => array( "class" => "col-lg-3 control-label" )
+				"attributes" => array( "class" => "col-lg-3 control-label je-compensation-label" )
 			) ) ?>
 			<div class="col-lg-9">
 				<div class="input-group">
@@ -131,6 +171,24 @@
 			<div class="clearfix"></div>
 		</div>
 	<?php endif; ?>
+		<div class="form-group" id="je-compensation-period-row">
+			<?php $form->label( "compensation_period", array(
+				"text"       => __( "Gehaltszeitraum", 'psjb' ),
+				"attributes" => array( "class" => "col-lg-3 control-label" )
+			) ) ?>
+			<div class="col-lg-9">
+				<?php $form->select( "compensation_period", array(
+					"data" => array(
+						"year"  => __( "Pro Jahr", 'psjb' ),
+						"month" => __( "Pro Monat", 'psjb' ),
+						"hour"  => __( "Pro Stunde", 'psjb' )
+					),
+					"attributes" => array( "class" => "form-control" )
+				) ) ?>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 	<?php do_action( 'je_after_price_field', $model, $form ) ?>
 	<?php do_action( 'je_before_email_field', $model, $form ) ?>
 
@@ -149,11 +207,60 @@
 		<div class="clearfix"></div>
 	</div>
 	<?php do_action( 'je_after_email_field', $model, $form ) ?>
-	<?php do_action( 'je_before_complete_date_field', $model, $form ) ?>
-	<div class="form-group <?php echo $model->has_error( "dead_line" ) ? "has-error" : null ?>">
-		<?php $form->label( "dead_line", array(
-			"text"       => __( "Fertigstellungstermin", 'psjb' ),
+	<div class="form-group">
+		<?php $form->label( "external_url_type", array(
+			"text"       => __( "Externer Link", 'psjb' ),
 			"attributes" => array( "class" => "col-lg-3 control-label" )
+		) ) ?>
+		<div class="col-lg-9">
+			<?php $form->select( "external_url_type", array(
+				"data" => array(
+					"company"     => __( "Firmenwebseite", 'psjb' ),
+					"application" => __( "Externes Bewerbungsformular", 'psjb' )
+				),
+				"attributes" => array( "class" => "form-control" )
+			) ) ?>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="form-group <?php echo $model->has_error( "external_url" ) ? "has-error" : null ?>">
+		<?php $form->label( "external_url", array(
+			"text"       => __( "URL (optional)", 'psjb' ),
+			"attributes" => array( "class" => "col-lg-3 control-label" )
+		) ) ?>
+		<div class="col-lg-9">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-link"></i></span>
+				<?php $form->text( "external_url", array( "attributes" => array( "class" => "form-control", "placeholder" => "https://" ) ) ) ?>
+			</div>
+			<span class="help-block m-b-none error-external_url"><?php $form->error( "external_url" ) ?></span>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<?php do_action( 'je_before_complete_date_field', $model, $form ) ?>
+	<div class="form-group <?php echo $model->has_error( "schedule_mode" ) ? "has-error" : null ?>">
+		<?php $form->label( "schedule_mode", array(
+			"text"       => __( "Terminangabe", 'psjb' ),
+			"attributes" => array( "class" => "col-lg-3 control-label" )
+		) ) ?>
+		<div class="col-lg-9">
+			<?php $form->select( "schedule_mode", array(
+				"data" => array(
+					"date"        => __( "Konkretes Datum", 'psjb' ),
+					"immediately" => __( "Ab sofort", 'psjb' ),
+					"arrangement" => __( "Nach Absprache", 'psjb' ),
+					"custom"      => __( "Eigene Angabe", 'psjb' )
+				),
+				"attributes" => array( "class" => "form-control", "id" => "je-schedule-mode" )
+			) ) ?>
+			<span class="help-block m-b-none error-schedule_mode"><?php $form->error( "schedule_mode" ) ?></span>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div id="je-schedule-date-row" class="form-group <?php echo $model->has_error( "dead_line" ) ? "has-error" : null ?>">
+		<?php $form->label( "dead_line", array(
+			"text"       => __( "Fertigstellung bis", 'psjb' ),
+			"attributes" => array( "class" => "col-lg-3 control-label", "id" => "je-schedule-date-label" )
 		) ) ?>
 		<div class="col-lg-9">
 			<div class="input-group">
@@ -165,11 +272,22 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
+	<div id="je-schedule-text-row" class="form-group <?php echo $model->has_error( "schedule_text" ) ? "has-error" : null ?>">
+		<?php $form->label( "schedule_text", array(
+			"text"       => __( "Alternative Terminangabe", 'psjb' ),
+			"attributes" => array( "class" => "col-lg-3 control-label" )
+		) ) ?>
+		<div class="col-lg-9">
+			<?php $form->text( "schedule_text", array( "attributes" => array( "class" => "form-control", "maxlength" => "25" ) ) ) ?>
+			<span class="help-block m-b-none error-schedule_text"><?php $form->error( "schedule_text" ) ?></span>
+		</div>
+		<div class="clearfix"></div>
+	</div>
 	<?php do_action( 'je_after_complete_date_field', $model, $form ) ?>
 	<?php do_action( 'je_before_open_for_field', $model, $form ) ?>
 	<div class="form-group <?php echo $model->has_error( "open_for" ) ? "has-error" : null ?>">
 		<?php $form->label( "open_for", array(
-			"text"       => __( "Stellenangebot offen für", 'psjb' ),
+			"text"       => __( "Anzeige veröffentlichen für", 'psjb' ),
 			"attributes" => array( "class" => "col-lg-3 control-label" )
 		) ) ?>
 		<div class="col-lg-9">
@@ -258,6 +376,26 @@ $lang       = str_replace( '_', '-', $lang );
 ?>
 <script type="text/javascript">
 	jQuery(function ($) {
+		function updateJobTypeFields() {
+			var isEmployment = $('#je-engagement-type').val() === 'employment';
+			$('.je-compensation-label').text(isEmployment ? '<?php echo esc_js( __( 'Gehalt (optional)', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Budget', 'psjb' ) ); ?>');
+			$('.je-compensation-min-label').text(isEmployment ? '<?php echo esc_js( __( 'Min. Gehalt (optional)', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Min. Budget', 'psjb' ) ); ?>');
+			$('.je-compensation-max-label').text(isEmployment ? '<?php echo esc_js( __( 'Max. Gehalt (optional)', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Max. Budget', 'psjb' ) ); ?>');
+			$('#je-compensation-period-row').toggle(isEmployment);
+			$('#je-schedule-date-label').text(isEmployment ? '<?php echo esc_js( __( 'Einstellung ab', 'psjb' ) ); ?>' : '<?php echo esc_js( __( 'Fertigstellung bis', 'psjb' ) ); ?>');
+		}
+
+		function updateScheduleFields() {
+			var mode = $('#je-schedule-mode').val();
+			$('#je-schedule-date-row').toggle(mode === 'date');
+			$('#je-schedule-text-row').toggle(mode === 'custom');
+		}
+
+		$('#je-engagement-type').on('change', updateJobTypeFields);
+		$('#je-schedule-mode').on('change', updateScheduleFields);
+		updateJobTypeFields();
+		updateScheduleFields();
+
 		// Flatpickr - moderner Vanilla-JS Datepicker (ersetzt jQuery UI)
 		if (typeof flatpickr !== 'undefined') {
 			flatpickr('.datepicker', {
@@ -277,6 +415,11 @@ $lang       = str_replace( '_', '-', $lang );
 			tokenSeparators: [","],
 			formatNoMatches: function () {
 				return '<?php esc_attr_e('Keine Treffer gefunden','psjb') ?>'
+			}
+		});
+		$('textarea#job_description_editor').closest('form').on('submit', function () {
+			if (typeof tinyMCE !== 'undefined') {
+				tinyMCE.triggerSave();
 			}
 		});
 		$('.job-submit').on('click', function () {

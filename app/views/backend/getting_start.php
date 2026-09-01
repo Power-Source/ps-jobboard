@@ -18,7 +18,7 @@
 				</p>
 
 				<p class="text-center">
-					<a href="<?php echo get_permalink( je()->pages->page( JE_Page_Factory::JOB_ADD ) ) ?>"><?php _e( 'Erstelle', 'psjb' ) ?></a> <?php echo esc_html( sprintf( __( 'einen neuen %s', 'psjb' ), $job_labels->singular_name ) ); ?>
+					<a href="<?php echo esc_url( add_query_arg( 'new', 1, get_permalink( je()->pages->page( JE_Page_Factory::JOB_ADD ) ) ) ) ?>"><?php _e( 'Erstelle', 'psjb' ) ?></a> <?php echo esc_html( sprintf( __( 'einen neuen %s', 'psjb' ), $job_labels->singular_name ) ); ?>
 				</p>
 			</div>
 			<hr/>
@@ -45,7 +45,7 @@
 				</p>
 
 				<p class="text-center">
-					<a href="<?php echo get_permalink( je()->pages->page( JE_Page_Factory::EXPERT_ADD ) ) ?>"><?php _e( 'Erstelle', 'psjb' ) ?></a> <?php echo esc_html( sprintf( __( 'einen neuen %s', 'psjb' ), $pro_labels->singular_name ) ); ?>
+					<a href="<?php echo esc_url( add_query_arg( 'new', 1, get_permalink( je()->pages->page( JE_Page_Factory::EXPERT_ADD ) ) ) ) ?>"><?php _e( 'Erstelle', 'psjb' ) ?></a> <?php echo esc_html( sprintf( __( 'einen neuen %s', 'psjb' ), $pro_labels->singular_name ) ); ?>
 				</p>
 			</div>
 		</div>

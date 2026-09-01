@@ -20,6 +20,12 @@ class JE_Job_Model extends IG_Post_Model {
 	public $min_budget;
 	public $max_budget;
 	public $owner;
+	public $engagement_type;
+	public $compensation_period;
+	public $schedule_mode;
+	public $schedule_text;
+	public $external_url_type;
+	public $external_url;
 
 	public $text_domain = 'jbp';
 
@@ -79,6 +85,36 @@ class JE_Job_Model extends IG_Post_Model {
 			'map'  => 'max_budget'
 		),
 		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_engagement_type',
+			'map'  => 'engagement_type'
+		),
+		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_compensation_period',
+			'map'  => 'compensation_period'
+		),
+		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_schedule_mode',
+			'map'  => 'schedule_mode'
+		),
+		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_schedule_text',
+			'map'  => 'schedule_text'
+		),
+		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_external_url_type',
+			'map'  => 'external_url_type'
+		),
+		array(
+			'type' => 'meta',
+			'key'  => '_jbp_job_external_url',
+			'map'  => 'external_url'
+		),
+		array(
 			'type' => 'taxonomy',
 			'key'  => 'jbp_category',
 			'map'  => 'categories'
@@ -98,26 +134,46 @@ class JE_Job_Model extends IG_Post_Model {
 	}
 
 	public function before_validate() {
+		$this->normalize_employment_fields();
 		$rules = array(
 			'job_title'     => 'required',
 			'contact_email' => 'required|valid_email',
-			'dead_line'     => 'required',
+			'engagement_type' => 'required',
+			'schedule_mode' => 'required',
 			'open_for'      => 'required',
 			'description'   => 'required',
 		);
-		if ( je()->settings()->job_budget_range == 1 ) {
+		if ( 'date' === $this->schedule_mode ) {
+			$rules['dead_line'] = 'required';
+		} elseif ( 'custom' === $this->schedule_mode ) {
+			$rules['schedule_text'] = 'required|max_len,25';
+		}
+		if ( 'freelance' === $this->engagement_type && je()->settings()->job_budget_range == 1 ) {
 			$rules['min_budget'] = 'required|numeric|min_numeric,0';
 			$rules['max_budget'] = 'required|numeric';
-		} else {
+		} elseif ( 'freelance' === $this->engagement_type ) {
 			$rules['budget'] = 'required|numeric';
+		} elseif ( je()->settings()->job_budget_range == 1 ) {
+			if ( strlen( (string) $this->min_budget ) ) {
+				$rules['min_budget'] = 'numeric|min_numeric,0';
+			}
+			if ( strlen( (string) $this->max_budget ) ) {
+				$rules['max_budget'] = 'numeric';
+			}
+		} elseif ( strlen( (string) $this->budget ) ) {
+			$rules['budget'] = 'numeric';
+		}
+		if ( strlen( (string) $this->external_url ) ) {
+			$rules['external_url'] = 'valid_url';
 		}
 
 		$rules       = apply_filters( 'je_job_validation_rules', $rules );
 		$this->rules = $rules;
 
 		$fields_text = array(
-			'dead_line' => __( 'Fertigstellungstermin', 'psjb' ),
-			'open_for'  => __( 'Job ooffen für', 'psjb' )
+			'dead_line'     => $this->get_schedule_label(),
+			'schedule_text' => __( 'Alternative Terminangabe', 'psjb' ),
+			'open_for'      => __( 'Anzeige veröffentlichen für', 'psjb' )
 		);
 		$fields_text = apply_filters( 'je_job_field_name', $fields_text );
 		foreach ( $fields_text as $key => $text ) {
@@ -126,6 +182,8 @@ class JE_Job_Model extends IG_Post_Model {
 	}
 
 	public function before_save() {
+		$this->normalize_employment_fields();
+		$this->external_url = esc_url_raw( (string) $this->external_url );
 		if ( $this->is_expired() ) {
 			update_post_meta( $this->id, 'jbp_job_post_day', date( 'Y-m-d H:i:s' ) );
 		}
@@ -136,8 +194,24 @@ class JE_Job_Model extends IG_Post_Model {
 	}
 
 	public function after_validate() {
-		if ( je()->settings()->job_budget_range == 1 && $this->min_budget > $this->max_budget ) {
-			$this->set_error( 'min_budget', __( "Das Mindestbudget sollte unter dem Maximalbudget liegen", 'psjb' ) );
+		if ( strlen( (string) $this->external_url ) ) {
+			$scheme = strtolower( (string) wp_parse_url( $this->external_url, PHP_URL_SCHEME ) );
+			if ( ! filter_var( $this->external_url, FILTER_VALIDATE_URL ) || ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
+				$this->set_error( 'external_url', __( 'Bitte gib eine vollständige URL mit http:// oder https:// ein.', 'psjb' ) );
+
+				return false;
+			}
+		}
+		if ( 'employment' === $this->engagement_type && je()->settings()->job_budget_range == 1 && ( strlen( (string) $this->min_budget ) xor strlen( (string) $this->max_budget ) ) ) {
+			$this->set_error( 'min_budget', __( 'Bitte gib sowohl das minimale als auch das maximale Gehalt an oder lasse beide Felder leer.', 'psjb' ) );
+
+			return false;
+		}
+		if ( je()->settings()->job_budget_range == 1 && strlen( (string) $this->min_budget ) && strlen( (string) $this->max_budget ) && $this->min_budget > $this->max_budget ) {
+			$message = 'employment' === $this->engagement_type
+				? __( 'Das Mindestgehalt sollte unter dem Maximalgehalt liegen.', 'psjb' )
+				: __( 'Das Mindestbudget sollte unter dem Maximalbudget liegen.', 'psjb' );
+			$this->set_error( 'min_budget', $message );
 
 			return false;
 		}
@@ -160,10 +234,13 @@ class JE_Job_Model extends IG_Post_Model {
 	}
 
 	public function render_prices( $return = '' ) {
+		$this->normalize_employment_fields();
 		$prices   = $this->get_price();
 		$currency = je()->settings()->currency;
 		ob_start();
-		if ( is_array( $prices ) ) {
+		if ( ( is_array( $prices ) && ! strlen( (string) $this->min_budget ) && ! strlen( (string) $this->max_budget ) ) || ( ! is_array( $prices ) && ! strlen( (string) $prices ) ) ) {
+			_e( 'Nicht angegeben', 'psjb' );
+		} elseif ( is_array( $prices ) ) {
 			?>
 			<?php if ( empty( $return ) ): ?>
 				<?php echo JobsExperts_Helper::format_currency( $currency, $this->min_budget ) ?> -
@@ -177,11 +254,80 @@ class JE_Job_Model extends IG_Post_Model {
 			<?php echo JobsExperts_Helper::format_currency( $currency, $this->budget ) ?>
 			<?php
 		}
+		if ( 'employment' === $this->engagement_type && $this->has_compensation() ) {
+			echo ' ' . esc_html( $this->get_compensation_period_label() );
+		}
 		$content = ob_get_clean();
 		if ( $return == true ) {
 			return $content;
 		}
 		echo $content;
+	}
+
+	public function get_engagement_label() {
+		$this->normalize_employment_fields();
+
+		return 'employment' === $this->engagement_type ? __( 'Festanstellung', 'psjb' ) : __( 'Freelance/Projektarbeit', 'psjb' );
+	}
+
+	public function get_compensation_label() {
+		$this->normalize_employment_fields();
+
+		return 'employment' === $this->engagement_type ? __( 'Gehalt', 'psjb' ) : __( 'Budget', 'psjb' );
+	}
+
+	public function get_schedule_label() {
+		$this->normalize_employment_fields();
+
+		return 'employment' === $this->engagement_type ? __( 'Einstellung ab', 'psjb' ) : __( 'Fertigstellung bis', 'psjb' );
+	}
+
+	public function get_schedule_value() {
+		$this->normalize_employment_fields();
+		if ( 'immediately' === $this->schedule_mode ) {
+			return __( 'Ab sofort', 'psjb' );
+		}
+		if ( 'arrangement' === $this->schedule_mode ) {
+			return __( 'Nach Absprache', 'psjb' );
+		}
+		if ( 'custom' === $this->schedule_mode ) {
+			return $this->schedule_text;
+		}
+
+		return strtotime( $this->dead_line ) ? date_i18n( get_option( 'date_format' ), strtotime( $this->dead_line ) ) : __( 'Nicht angegeben', 'psjb' );
+	}
+
+	public function get_external_url_label() {
+		$this->normalize_employment_fields();
+
+		return 'application' === $this->external_url_type ? __( 'Zum externen Bewerbungsformular', 'psjb' ) : __( 'Zur Firmenwebseite', 'psjb' );
+	}
+
+	private function has_compensation() {
+		if ( je()->settings()->job_budget_range == 1 ) {
+			return strlen( (string) $this->min_budget ) || strlen( (string) $this->max_budget );
+		}
+
+		return strlen( (string) $this->budget );
+	}
+
+	private function get_compensation_period_label() {
+		$labels = array(
+			'year'  => __( 'pro Jahr', 'psjb' ),
+			'month' => __( 'pro Monat', 'psjb' ),
+			'hour'  => __( 'pro Stunde', 'psjb' ),
+		);
+
+		return isset( $labels[ $this->compensation_period ] ) ? $labels[ $this->compensation_period ] : $labels['year'];
+	}
+
+	private function normalize_employment_fields() {
+		$this->engagement_type = in_array( $this->engagement_type, array( 'freelance', 'employment' ), true ) ? $this->engagement_type : 'freelance';
+		$this->compensation_period = in_array( $this->compensation_period, array( 'year', 'month', 'hour' ), true ) ? $this->compensation_period : 'year';
+		$this->schedule_mode = in_array( $this->schedule_mode, array( 'date', 'immediately', 'arrangement', 'custom' ), true ) ? $this->schedule_mode : 'date';
+		$this->schedule_text = function_exists( 'mb_substr' ) ? mb_substr( sanitize_text_field( (string) $this->schedule_text ), 0, 25 ) : substr( sanitize_text_field( (string) $this->schedule_text ), 0, 25 );
+		$this->external_url_type = in_array( $this->external_url_type, array( 'company', 'application' ), true ) ? $this->external_url_type : 'company';
+		$this->external_url = sanitize_text_field( (string) $this->external_url );
 	}
 
 	public function get_due_day() {

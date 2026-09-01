@@ -43,6 +43,19 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 		);
 	}
 
+	protected function get_current_user_profiles() {
+		return JE_Expert_Model::model()->find_by_attributes( array(
+			'user_id' => get_current_user_id(),
+			'status'  => array( 'publish', 'draft', 'pending', 'je-draft' )
+		), false, 'modified DESC' );
+	}
+
+	protected function get_saved_profiles( $profiles ) {
+		return array_values( array_filter( $profiles, function( $profile ) {
+			return $profile->status !== 'je-draft';
+		} ) );
+	}
+
 	function avatar_process() {
 		if ( wp_verify_nonce( je()->get( 'upload_file_nonce' ), 'hn_upload_avatar' ) ) {
 			if ( ! function_exists( 'wp_handle_upload' ) ) {
@@ -170,27 +183,41 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 			wp_localize_script( 'jobs-main', 'expert_form', $translation_array );
 
 			$slug = je()->get( 'pro', null );
+			$is_new = (int) je()->get( 'new', 0 ) === 1;
 			if ( isset( je()->global['expert_model'] ) ) {
 				$model = je()->global['expert_model'];
 			} else {
 				if ( is_null( $slug ) ) {
-					//check does this man can post new
-					if ( JE_Expert_Model::model()->count() >= je()->settings()->expert_max_records && ! current_user_can( 'manage_options' ) ) {
-						return $this->render( 'expert-form/limit', array(), false );
-					} else {
-						//check does this user has a undone profile
-						$model = JE_Expert_Model::model()->find_one_by_attributes( array(
-							'status'  => 'je-draft',
-							'user_id' => get_current_user_id()
-						) );
-						if ( ! is_object( $model ) ) {
-							$model            = new JE_Expert_Model();
-							$model->status    = 'je-draft';
-							$model->biography = '';
-							$model->user_id   = get_current_user_id();
-							$model->save();
+					$profiles = $this->get_current_user_profiles();
+					$saved_profiles = $this->get_saved_profiles( $profiles );
+					$model = ! empty( $saved_profiles ) ? $saved_profiles[0] : ( ! empty( $profiles ) ? $profiles[0] : null );
+
+					if ( $is_new ) {
+						$max_profiles = (int) je()->settings()->expert_max_records;
+						if ( count( $saved_profiles ) >= $max_profiles ) {
+							if ( $max_profiles !== 1 ) {
+								return $this->render( 'expert-form/limit', array(), false );
+							}
+						} else {
+							$draft = JE_Expert_Model::model()->find_one_by_attributes( array(
+								'status'  => 'je-draft',
+								'user_id' => get_current_user_id()
+							), 'modified DESC' );
+
+							if ( is_object( $draft ) ) {
+								$model = $draft;
+							} else {
+								$model            = new JE_Expert_Model();
+								$model->status    = 'je-draft';
+								$model->biography = '';
+								$model->user_id   = get_current_user_id();
+								$model->save();
+							}
 						}
+					} elseif ( ! is_object( $model ) ) {
+						return $this->render( 'my-expert/main', array( 'models' => array() ), false );
 					}
+
 					if ( je()->get( 'first_name', null ) != null ) {
 						$model->first_name = je()->get( 'first_name' );
 					}
@@ -205,7 +232,7 @@ class JE_Expert_Form_Shortcode_Controller extends IG_Request {
 				}
 			}
 
-			if ( is_object( $model ) ) {
+			if ( is_object( $model ) && $model->is_current_owner() ) {
 				$model->name = trim( $model->name );
 				$this->model = $model;
 				//add avatar form

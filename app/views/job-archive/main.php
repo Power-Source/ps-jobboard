@@ -79,10 +79,10 @@
                                             </div>
                                             <div class="jbp_meta">
                                                 <div class="pull-left">
-                                                    <?php _e('Bis: ', 'psjb'); ?><?php echo $model->get_end_date() ?>
+                                                    <?php echo esc_html( $model->get_schedule_label() ); ?>: <?php echo esc_html( $model->get_schedule_value() ); ?>
                                                 </div>
                                                 <div class="pull-right">
-                                                    <?php _e('Budget: ', 'psjb'); ?><?php $model->render_prices(); ?>
+                                                    <?php echo esc_html( $model->get_compensation_label() ); ?>: <?php $model->render_prices(); ?>
                                                 </div>
                                             </div>
                                         </div>

@@ -81,9 +81,9 @@ class JE_Router
             $template = locate_template(array('page.php', 'index.php'));
             $template = array('single-jbp_pro.php', 'page.php', 'index.php');
             if (is_archive('jbp_pro')) {
-                $vpost = get_post(je()->pages->page(JE_Page_Factory::JOB_LISTING));
+                $vpost = get_post(je()->pages->page(JE_Page_Factory::EXPERT_LISTING));
                 global $wp_query;
-                $wp_query->posts = array(get_post(je()->pages->page(JE_Page_Factory::EXPERT_LISTING)));
+                $wp_query->posts = array($vpost);
                 $wp_query->post_count = 1;
                 $template = array_merge(array($vpost->post_name . '-page.php'), $template);
             }
