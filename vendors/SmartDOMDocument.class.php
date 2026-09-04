@@ -10,7 +10,7 @@
 * @link http://beerpla.net
 * @link http://www.php.net/manual/en/class.domdocument.php
 */
-if(!class_exists("SmartDOMDocument")) {
+if(class_exists("DOMDocument") && !class_exists("SmartDOMDocument")) {
   class SmartDOMDocument extends DOMDocument {
 
     /**

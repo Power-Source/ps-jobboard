@@ -1,10 +1,11 @@
 === PS JobBoard ===
 Contributors: DerNerd (PSOURCE)
 Tags: jobs, experts, jobbörse, jobboard, vermittlung, freelancer, projekte
-Requires at least: 4.9
+Requires at least: 5.1
+Requires CP: 1.4
 Tested up to: 7.1
 ClassicPress: 2.7.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -143,6 +144,12 @@ Nein. Virtuelle Seiten, normale Seiten mit Jobboard-Shortcodes sowie Job- und Ex
 Weitere Dokumentation, Downloads und Support findest Du im [PS Jobboard Repository](https://github.com/cp-psource/ps-jobboard).
 
 == ChangeLog ==
+
+= 1.0.6 =
+* Fix: Jobboard-Menü, Listen und Einzelansichten laden ihre Styles und Skripte auch auf normalen Seiten, Archiven und Taxonomien rechtzeitig
+* Kompatibilität: Das Plugin startet auch ohne installierte PHP-DOM-Erweiterung, statt beim Laden mit einem Fatal Error abzubrechen
+* Verbesserung: DOM-abhängige HTML-Aufbereitung und MarketPress-Preisanreicherung werden bei fehlender PHP-DOM-Erweiterung kontrolliert übersprungen
+* Aktualisierung: Plugin-Grafik durch ein neues PS-Jobboard-Motiv ersetzt
 
 = 1.0.5 =
 * Verbesserung: Expertenformular mit zuverlässiger TinyMCE-Synchronisierung vor Validierung und Speicherung

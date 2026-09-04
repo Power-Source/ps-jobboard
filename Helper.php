@@ -89,6 +89,10 @@ class JobsExperts_Helper
 
     static function jbp_html_beautifier($html)
     {
+        if (!class_exists('DOMDocument')) {
+            return $html;
+        }
+
         require_once je()->plugin_path . 'vendors/SmartDOMDocument.class.php';
         $x = new SmartDOMDocument();
         $x->loadHTML($html);

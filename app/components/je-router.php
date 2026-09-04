@@ -13,12 +13,57 @@ class JE_Router
         add_filter('comments_number', array(&$this, 'clear_jobboard_comment_text'), 99, 2);
         add_filter('body_class', array(&$this, 'jobboard_body_class'));
         add_action('wp_head', array(&$this, 'hide_jobboard_comment_elements'));
+        add_action('wp_enqueue_scripts', array(&$this, 'enqueue_jobboard_assets'), 100);
 
         if (apply_filters('jbp_use_core_front_request', true)) {
             add_action('template_include', array(&$this, 'determine_page'));
             add_filter('the_content', array(&$this, 'je_single_content'));
             add_filter('the_title', array(&$this, 'je_single_title'));
             add_filter('get_edit_post_link', array(&$this, 'hide_edit_post_link'));
+        }
+    }
+
+    function enqueue_jobboard_assets()
+    {
+        if (is_singular('jbp_job')) {
+            je()->load_script('buttons');
+            je()->load_script('job');
+        } elseif (is_post_type_archive('jbp_job') || is_tax('jbp_category')) {
+            je()->load_script('buttons');
+            je()->load_script('jobs');
+        } elseif (is_singular('jbp_pro')) {
+            je()->load_script('buttons');
+            je()->load_script('expert');
+        } elseif (is_post_type_archive('jbp_pro') || is_tax('jbp_skills_tag')) {
+            je()->load_script('buttons');
+            je()->load_script('experts');
+        } elseif (is_page()) {
+            $post = get_post();
+            if (!$post || !$this->is_jobboard_page($post->ID)) {
+                return;
+            }
+
+            je()->load_script('buttons');
+
+            $scenarios = array(
+                'landing' => array('jbp-landing-page', 'jbp-profile-panel'),
+                'jobs' => array('jbp-job-archive-page', 'jbp-my-job-page'),
+                'experts' => array('jbp-expert-archive-page', 'jbp-my-expert-page'),
+                'job-form' => array('jbp-job-update-page'),
+                'expert-form' => array('jbp-expert-update-page'),
+                'contact' => array('jbp-job-contact-page', 'jbp-expert-contact-page'),
+                'job' => array('jbp-job-single-page'),
+                'expert' => array('jbp-job-pro-page'),
+            );
+
+            foreach ($scenarios as $scenario => $shortcodes) {
+                foreach ($shortcodes as $shortcode) {
+                    if (has_shortcode($post->post_content, $shortcode)) {
+                        je()->load_script($scenario);
+                        break;
+                    }
+                }
+            }
         }
     }
 

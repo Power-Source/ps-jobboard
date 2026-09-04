@@ -53,7 +53,7 @@ class Credit_Plan_Controller extends IG_Request {
 
 	function addition_price_info( $price_html, $post_id, $label, $price ) {
 		$plan = Credit_Plan_Model::find( $post_id );
-		if ( is_object( $plan ) && $plan->append_credits_info == 1 ) {
+		if ( is_object( $plan ) && $plan->append_credits_info == 1 && class_exists( 'SmartDOMDocument' ) && class_exists( 'DOMXPath' ) ) {
 			//we will modify the html, to append credits info
 			$dom = new SmartDOMDocument();
 			$dom->loadHTML( $price_html );

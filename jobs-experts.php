@@ -31,7 +31,7 @@ function jbp_load_languages() {
 }
 
 // Third-party
-if ( ! class_exists( 'SmartDOMDocument' ) ) {
+if ( class_exists( 'DOMDocument' ) && ! class_exists( 'SmartDOMDocument' ) ) {
 	include_once( dirname( __FILE__ ) . '/vendors/SmartDOMDocument.class.php' );
 }
 
